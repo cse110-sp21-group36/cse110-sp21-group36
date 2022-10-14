@@ -2,7 +2,7 @@
 
 # Put Logo Here
 #![](branding/logo.png)
-<img src="drawing.jpg" alt="drawing" width="200"/>
+<img src="branding/logo.png" alt="logo" width="200"/>
 
 ## List of Values
 1. Having Fun
