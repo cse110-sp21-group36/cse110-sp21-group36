@@ -33,11 +33,11 @@
 
 ## Kinson (Jiancheng) Liang (he/him) - Designer
 ### [User Page](https://github.com/KinsonLiang/CSE-110-lab1/blob/main/index.md)
-> I am a senior student who want to learn how to be a good software engineer in this class. I have worked for some software development in some companies before since I really like it. Looking forward to working with everyone this quarter.
+> I am a senior student who wants to learn how to be a good software engineer in this class. I have worked for some software development in some companies before since I really like it. Looking forward to working with everyone this quarter.
 
 ## Rappel Ricafort (they/them) - Developer
 ### [User Page](https://rappelrx.github.io/)
-> I am a third year Math-CS major interested in front-end web development. My hobbies include orchestra, pep band, and video games. In League of Legends, I main Yuumi. In the next life, I to be a cat.
+> I am a third year Math-CS major interested in front-end web development. My hobbies include orchestra, pep band, and video games. In League of Legends, I main Yuumi. In the next life, I'd like to be a cat.
 
 ## Andrew Schade (he/him) - Developer
 ### [User Page](https://github.com/andyschade/GitHub-Pages/blob/main/index.md)
