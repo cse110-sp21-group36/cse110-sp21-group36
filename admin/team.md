@@ -62,3 +62,17 @@
 ## Justin Lau (he/him) - Developer
 ### [User Page](https://justerminator.github.io/CSE-110-Week-0-1/)
 > Hi! I'm Justin - a fourth year chemistry student with a minor in CS. I look forward to applying practical skills learned in my coursework to pursuing research! During my free time, I like walking my labradoodle Bao, paddleboarding, playing piano, and walking on trails.
+
+# Github Links
+### [Duc Vo](https://github.com/duc23)
+### [Kinson Liang](https://github.com/KinsonLiang)
+### [Julia Le](https://github.com/juliale02)
+### [Miko Brown](https://github.com/mikobrown)
+### [Ettore Hidoux](https://github.com/ettoreh)
+### [Triston Babers](https://github.com/TristonBabers)
+### [Justin Lau](https://github.com/justerminator)
+### [Meron Asfaw](https://github.com/AdulisL)
+### [Thanh Phan](https://github.com/tngPhVN)
+### [Rappel Ricafort](https://github.com/rappelrx)
+### [Andy Schade](https://github.com/andyschade)
+
