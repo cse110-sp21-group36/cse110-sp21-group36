@@ -40,7 +40,7 @@
 > I am a third year Math-CS major interested in front-end web development. My hobbies include orchestra, pep band, and video games. In League of Legends, I main Yuumi. In the next life, I to be a cat.
 
 ## Andrew Schade (he/him) - Developer
-### [User Page]([https://andyschade.git](https://github.com/andyschade/GitHub-Pages/blob/main/index.md))
+### [User Page](https://github.com/andyschade/GitHub-Pages/blob/main/index.md)
 > Hello, Im Andrew Schade, a 4th year Math CS major and MechE minor. I am a Revellian and spend my free time surfing, skating, golfing and playing waterpolo. I am excited for CSE 110.
 
 ## Miko Brown (he/him) - Developer
