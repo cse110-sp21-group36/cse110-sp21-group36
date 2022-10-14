@@ -1,7 +1,7 @@
 # Code Avengers
 
 # Put Logo Here
-![](branding/logo.png)
+![](branding/logo.png = 100x100)
 
 ## List of Values
 1. Having Fun
@@ -11,8 +11,12 @@
 5. Respect
 6. Trust
    
+## Team Colors
+- Red
+- White
+- Blue
 
-> **FOR BRANDING: Branding, quotes, purpose, etc.**
+> "Inspiration for branding ideas drawn from Walt Disney Company, owners of the Marvel Avengers franchise"
 
 
 # Meet the Team!
