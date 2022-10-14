@@ -1,7 +1,7 @@
 # Code Avengers
 
 # Put Logo Here
-![](branding/logo.png = 100x100)
+![](branding/logo.png =100x100)
 
 ## List of Values
 1. Having Fun
