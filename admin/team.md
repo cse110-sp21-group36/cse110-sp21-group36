@@ -1,7 +1,7 @@
 # Code Avengers
 
 # Put Logo Here
-![](admin/branding/logo.png)
+![](branding/logo.png)
 
 ## List of Values
 1. Having Fun
