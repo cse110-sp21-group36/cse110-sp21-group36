@@ -48,6 +48,7 @@ Team member info:
 ​
 ### 8. Team Signatures 
 (Requires each team member's signature)
-Ettore Hidoux
+- Ettore Hidoux
+- 
 ​
 [^1]: This agreement was built using the template from [this source](https://ohiostate.pressbooks.pub/feptechcomm/chapter/7-project-communications/)
