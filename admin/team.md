@@ -1,7 +1,4 @@
 # Code Avengers
-
-# Put Logo Here
-
 <img src="branding/logo.png" alt="logo" width="400"/>
 
 ## List of Values
