@@ -47,4 +47,6 @@
      *Andrew and Justin on group team page due Thursday by midnight
      *Miko and Rappel on branding due Thursday midnight
      *Decide on the location for Team Bonding Activity. Suggestion by Triston: West Geisel Library 
+     
+     <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/Poll%20Results.png" width="300" height="400">
 
