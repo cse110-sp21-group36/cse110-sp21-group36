@@ -46,4 +46,5 @@
      *Duc and Thanh for meeting notes & group contract due Thursday by midnight
      *Andrew and Justin on group team page due Thursday by midnight
      *Miko and Rappel on branding due Thursday midnight
-     *Decide on the location for Team Bonding Activity. Suggestion by Tristan: West Geisel Library 
+     *Decide on the location for Team Bonding Activity. Suggestion by Triston: West Geisel Library 
+
