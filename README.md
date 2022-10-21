@@ -18,6 +18,7 @@ __Next Meeting__: Zoom Oct 23 Sunday, 7:30 PM (Link will be in general on Slack)
 - Jiancheng Liang __Designer__
 - Miko Brown __Developer__
 - Andrew Schade __Developer__
+- Rappel Ricafort __Developer__
 - Duc Vo __Developer__
 - Andrew Schade __Developer__
 - Thanh Phan __Developer__
