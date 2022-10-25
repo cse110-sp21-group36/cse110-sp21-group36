@@ -2,7 +2,7 @@
 ### Meeting Details
 **Meeting Location:** Zoom  
 **Meeting Time:** 10/23/2022, 7:30 PM (PST)  
-**Previous Meeting:** Weekly Meet-Up (10/20/2022) 
+**Previous Meeting:** [Weekly Meet-Up (10/20/2022)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/102022-Week4.md)
 
 ## Meeting Attendance
 | Role | Name | Present? |
@@ -25,11 +25,13 @@
  - Taking poll for final app idea
  - App feature brainstorming (What do we want it to do?)
  - User interface brainstorming (What do we want it to look like?)
+ - Collaboration on Miro Board (1.5 hours)
  - Final talk about where to go with our app
  - Closing
 
  ## Decisions:
  App Idea: Cooking Recipe App
+ <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/zoom%20poll%20(brainstorming).png" width="300" height="400">
  
  ## Brainstorm Meeting Notes:
 - Check in attendance (everyone attended!)
