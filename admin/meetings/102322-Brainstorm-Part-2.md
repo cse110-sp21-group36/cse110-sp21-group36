@@ -14,8 +14,8 @@
 <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/web%20page%20layout.png" width="800" height="600">
 
 ### Post-it Notes
-<img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/home%page%20features.png" width="400" height="400">
+<img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/home%20page%20features.png" width="300" height="300">
 <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/additional%20features.png" width="400" height="900">
           
 ### Final Board Screenshot
-<img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/Final%20Page.png" width="800" height="500">
+<img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/Final%20Page.png" width="900" height="500">
