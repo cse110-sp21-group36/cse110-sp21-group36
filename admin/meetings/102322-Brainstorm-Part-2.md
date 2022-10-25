@@ -8,7 +8,7 @@
 <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/issue.png" width="500" height="400">
           
 ### We addressed the issue and decided to make it link to an additional page
-<img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/colloboration.png" width="500" height="400">
+<img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/collaboration.png" width="600" height="400">
 
 ### Main Web Page Wireframe
 <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/web%20page%20layout.png" width="800" height="600">
@@ -18,4 +18,4 @@
 <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/additional%20features.png" width="400" height="900">
           
 ### Final Board Screenshot
-<img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/Final%20Page.png" width="400" height="400">
+<img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/Final%20Page.png" width="800" height="500">
