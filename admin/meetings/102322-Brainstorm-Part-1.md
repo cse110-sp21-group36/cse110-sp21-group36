@@ -30,7 +30,8 @@
  - Closing
 
  ## Decisions:
- App Idea: Cooking Recipe App
+ - App Idea: Cooking Recipe App  
+ - Many Minor Design Choices (Listed in Part 2)
  <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/Meeting%20Assets/zoom%20poll%20(brainstorming).png" width="300" height="400">
  
  ## Brainstorm Meeting Notes:
