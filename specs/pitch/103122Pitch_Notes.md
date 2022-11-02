@@ -1,4 +1,7 @@
-# Comments from Allison (T.A.)
+# Condensed Project Pitch Meeting Notes
+- The oringinal meeting notes are [here](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/103122-Project-Pitch-Meeting.md), it just doesn't include the minimum viable product specs.
+
+## Comments from Allison (T.A.)
 * We should have a Minimum Viable Product Specification, so we have an idea of the bare minimum that needs to be completed.
 * We should explore other Recipe Manager Apps to see ideas that worked well in their design and consider adding them to our own.
 * We should consider a CI/CD build pipeline for the project. e.g. What tests will we run on the website's code? Will we verify the HTML using 3-rd Party site _____? etc.
