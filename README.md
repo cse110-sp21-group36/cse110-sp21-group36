@@ -10,6 +10,7 @@ __Next Meeting__: In-Person Thursday, 5:00 PM Geisel West Library (no room booke
 
 ### Assignments:
 - Our project was approved by our T.A. on October 31st, meaning we are officially allowed to start development on the recipe app. There are a batch of GitHub Issues for the project at [this link](https://github.com/orgs/cse110-sp21-group36/projects/1/views/1). The plan for development is that each of the group members can choose to move issues from the BackLog/Priority tab into the In-Progress tab and assign the issue to their GitHub account. This way we'll have a digital record of who is completing what on the project.
+- This will be useful for developing the Javascript files: [C4 Diagram - Bottom](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/specs/brainstorm/C4%20Diagram%20Bottom%20Level.PNG)
 
 ### Team Roles:
 - Triston Babers __Team Lead__
