@@ -21,7 +21,7 @@ __Next Meeting__: In-Person Thursday, 5:00 PM Geisel West Library (no room booke
 - Andrew Schade __Developer__ [Home Page Team]
 - Rappel Ricafort __Developer__ [Recipe View Page]
 - Duc Vo __Developer__ [Home Page Team]
-- Thanh Phan __Developer__ [Recipe View Page]
+- Thanh Phan __Developer__ [Recipe Editor Page]
 - Justin Lau __Developer__ [Recipe View Page]
 - Julia Le __Planner__ [Recipe View Page]
 
