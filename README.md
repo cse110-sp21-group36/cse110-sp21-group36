@@ -21,7 +21,6 @@ __Next Meeting__: In-Person Thursday, 5:00 PM Geisel West Library (no room booke
 - Andrew Schade __Developer__
 - Rappel Ricafort __Developer__
 - Duc Vo __Developer__
-- Andrew Schade __Developer__
 - Thanh Phan __Developer__
 - Justin Lau __Developer__
 - Julia Le __Planner__
