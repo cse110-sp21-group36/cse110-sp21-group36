@@ -1,0 +1,136 @@
+<!-- 
+    Team 36 - Code Avengers
+    HTML file for EDITOR PAGE 
+    This file contains the structure of the editor page which user will do all the edits for their 
+    recipe including create, update and delete. 
+    There are 5 main sections: navigation; title and image; general info; tools, ingredients 
+    and steps; functional buttons. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <title>Code Avenger's Recipe</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" type="image/png" 
+          href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true">
+    
+    <!-- CSS and JavaScript -->
+    <link rel="stylesheet" href="editor-page-style.css">
+    <script src=""></script>
+</head>
+
+<body>
+    <!-- navigation -->
+    <header>
+        <nav class="nav-bar">
+            <div class="nav-logo">
+                <a href="./recipe_manager.html" class="nav-logo">
+                    <img 
+                        src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true" 
+                        width="150"
+                        height="100"
+                        alt="go to homepage via logo">
+                </a> 
+            </div>
+            <div class="navigation-button">
+                <!-- button for dropdown list of pages -->
+                <button type="button" class="nav-list-button"></button>
+            </div>    
+            <div class="navigation-links">
+                <a href="./recipe_manager.html" class="nav-links">Homepage</a> |
+                <a href="./recipe_viewer.html" class="nav-links">View Recipe</a>
+            </div>
+        </nav>
+    </header>
+    <!-- end navigation -->
+
+    <main>
+        <!-- form to add info for a new recipe -->
+        <form id="new-recipe">
+            <!-- title and image -->
+            <fieldset class="title-img">
+                <legend>Title and Image:</legend>
+                <div class="title">
+                    <label for="title-txt">Text:
+                        <input type="text" id="titleTxt" name="titleTxt" required>
+                    </label>
+                </div>
+
+                <div class="title">
+                    <label for="example-image">
+                        Example Image Link:
+                        <input type="text" id="imgSrc" name="imgSrc" required>
+                    </label>
+                </div>
+              </fieldset>
+        
+            <!-- difficulty, time and other info -->
+            <fieldset class="general-info">
+                <legend>General Info:</legend>
+                <div class="difficulty">
+                    <label for="difficulty">
+                        Difficulty:
+                        <input type="text" id="difficulty" name="difficulty" required>
+                    </label>
+                </div>
+
+                <div class="time">
+                    <label for="time">
+                        Estimated Time:
+                        <input type="text" id="time" name="time" required>
+                    </label>
+                </div>
+    
+                <div class="note">
+                    <label for="note">
+                        <!-- Maybe use this for the filter on homepage -->
+                        Note:
+                        <textarea id="note" name="note" cols="38" rows="2"
+                          required></textarea>
+                      </label>
+                </div>
+            </fieldset>
+            
+            <!-- tools, ingredients, steps -->
+            <fieldset class="tool-ingredient-step">
+                <legend>Tools, Ingredients and Steps:</legend>
+                <div class="tools">
+                    <label for="tools">
+                        <p>Tools:</p>
+                        <textarea name="tools" id="tools" cols="38" rows="5"
+                          required></textarea>
+                    </label>
+                </div>
+                <div class="ingredients">
+                    <label for="ingredients">
+                        <p>Ingredients:</p>
+                        <textarea name="ingredients" id="ingredients" cols="38" rows="5"
+                          required></textarea>
+                    </label>
+                </div>
+                <div class="steps">
+                    <label for="steps">
+                        <p>Steps:</p>
+                        <textarea name="steps" id="steps" cols="38" rows="5"
+                          required></textarea>
+                    </label>
+                </div>
+            </fieldset>
+        </form>
+
+        <!-- functional buttons -->
+        <div class="func-buttons">
+            <button type="submit" class="save-recipe">Save Recipe</button>
+            <button type="button" class="discard-change">Discard Changes</button>
+            <button type="button" class="delete-recipe">Delete Recipe</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>Team 36 Code Avengers @ CSE110 Fall 2022</p>
+    </footer>
+</body>
+</html>
+
