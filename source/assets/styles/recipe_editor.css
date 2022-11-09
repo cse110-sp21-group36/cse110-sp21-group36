@@ -1,0 +1,65 @@
+.nav-bar{
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+}
+
+.title-img {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: space-around;
+}
+
+.general-info {
+  display:grid;
+  grid-template-columns: 500px 500px;
+  justify-content: center;  
+  align-items: start;
+  grid-row: auto auto;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+}
+
+.tool-ingredient-step {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: space-around;
+}
+
+#imageHolder {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 5px double white;
+    background-color: orange;
+}
+
+.func-buttons{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+
+#toolLine{
+    display:grid;
+    grid-row-gap: 20px;
+}
+
+#ingredientLine{
+    display:grid;
+    grid-row-gap: 20px;
+}
+
+#stepLine{
+    display:grid;
+    grid-row-gap: 20px;
+}
+
+footer{
+    text-align: center;
+    margin: auto;
+}
