@@ -4,7 +4,7 @@
 
 **Link to Team Page:** [Team Page](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md)
 
-__Next Meeting__: In-Person/Zoom Monday, 6:00 PM After Lecture Meeting - Sprint Planning Week 7
+__Next Meeting__: Thursday 11/10, 5:00 PM Geisel West Library, In-Person
 
 **Just a Reminder**, we have daily [Standup Meetings at this link](https://app.sup.today/dashboard?timePeriod=this_week), or on Slack, and it is required that group members fill them out to meet Agile standards.
 
