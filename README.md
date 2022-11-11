@@ -4,13 +4,26 @@
 
 **Link to Team Page:** [Team Page](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md)
 
-__Next Meeting__: Thursday 11/10, 5:00 PM Geisel West Library, In-Person
-
-**Just a Reminder**, we have daily [Standup Meetings at this link](https://app.sup.today/dashboard?timePeriod=this_week), or on Slack, and it is required that group members fill them out to meet Agile standards.
+__Next Meeting__: Thursday 11/14, Sprint Planning (Week 8) 7:00 PM Zoom
 
 ### Assignments:
-- We have decided to divide into 3 teams to start working on the website more efficently. Look at the team roles to see which team you are on, you should also be in a Slack chat with your teammates. We will be doing a meeting on either Monday or Sunday based on the When2Meet results. 
+- We are developing the 3 pages in tandem, with the goal of having a working prototype done by Monday.
 - This will be useful for developing the Javascript files: [C4 Diagram - Bottom](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/specs/brainstorm/C4%20Diagram%20Bottom%20Level.PNG)
+- Here is the Recipe Object Structure:
+```
+Recipe {
+      imgSrc": "This is an absolute path on user's cpu",
+      recipeName": "",
+      "mealType": [Multiple Values],
+      "totalTime":_____,
+      "ingredients":____,
+       “steps”:____
+       "favorite": True/False
+       "tools":____
+       "difficulty":____
+       "notes":___
+}
+```
 
 ### Team Roles:
 - Triston Babers __Team Lead__ [Home Page Team]
