@@ -2,7 +2,7 @@
 ### Meeting Details
 **Meeting Location:** In-Person (Geisel West Library)  
 **Meeting Time:** 11/7/2022, 6:00-7:30 PM (PST)  
-**Previous Meeting:** [Weekly Meeting (Week 6)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/110322-Week6.md)
+**Previous Meeting:** [Sprint Planning (Week 7)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/110722-Sprint-Planning-Week7.md)
 
 
 ## Meeting Attendance
@@ -25,10 +25,9 @@
 - Discuss recipe object structure
 - Review Progress of Editor, Home, and View page teams
 
-## Recipe Object Format (Javascript
+## Recipe Object Format (Javascript)
 - Since all of our project web pages will be accessing a recipe data object in some shape or form, we wanted to come up with a definitive recipe object data type, this way our javascript will have less conflicts.
-- Using Lab 6's Recipe object as a starting point, we have decided to cut the image link form, as that will not be displayed to the user, as well as removing the title link as recipes will be created on our website.
-- This resulted in the following current format:
+- We reworked the recipe object to thist new format:
 
 ```
 Recipe {
@@ -67,8 +66,3 @@ Possibly Later Add:
 
 **Goals for next Meeting:**
 - Rework the home page to fit the previous GitHub Architecture _(read more down below_.
-
-### We broke GitHub (Ahhhh!!!!)
-- So the Home Page team didn't create a branch and made major changes to the main repo, renaming the file structure and now there are merge conflicts for the other team's branches.
-- Long story short, we spent an hour reverting the changes of the Home Page team, and then pulled in the other branches to main so we have a good backup incase it happens again.
-
