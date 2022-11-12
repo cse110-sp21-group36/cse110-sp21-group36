@@ -18,159 +18,127 @@
           href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true">
     
     <!-- CSS and JavaScript -->
-    <link rel="stylesheet" href="./assets/styles/recipe_editor.css"> 
-    <script src=""></script>
+    <link rel="stylesheet" href="./assets/styles/recipe-editor.css"> 
+    <script src="./assets/scripts/recipe-editor.js"></script> 
 </head>
 
 <body>
-    <!-- navigation -->
     <header>
+        <!-- App logo -->
+        <img 
+            src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true" 
+            width="150"
+            height="100"
+            alt="page logo">
+
+        <!-- navigation -->
         <nav class="nav-bar">
-            <div class="nav-logo">
-                <a href="./recipe_manager.html" class="nav-logo">
-                    <img 
-                        src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true" 
-                        width="150"
-                        height="100"
-                        alt="go to homepage via logo">
-                </a> 
-            </div>
-            <div class="navigation-button">
-                <!-- button for dropdown list of pages -->
-                <a href="./recipe_manager.html">
-                    <button type="button" class="nav-button">
-                        Home
-                    </button>
-                </a>
-            </div>    
+            <button type="button" class="nav-button">Home</button>
         </nav>
+        <!-- end navigation -->
     </header>
-    <!-- end navigation -->
 
     <main>
         <!-- form to add info for a new recipe -->
         <form id="new-recipe">
             <!-- title and image -->
-            <fieldset class="title-img">
-                <legend>Title and Image:</legend>
-                <div class="title">
-                    <label for="title">Recipe Name:
-                        <input type="text" id="title" name="title" required>
-                    </label>
-                </div>
+            <fieldset class="name-img-fav">
+            <legend>Name, Image and Favorite:</legend>
+        
+                <label for="nameIn">Recipe Name:
+                    <input type="text" id="nameIn" name="nameIn" required>
+                </label>
 
-                <!-- drop down the image locally instead of pasting the link of the image -->
-                <div class="example-image">
+                <!-- recipe image -->
+                <div id="recipeImage">
                     <!-- place to drag and drop image -->
                     <div id="imageHolder">
                         <h2>Drag Image Here</h2>
                         <h3>Or</h3> 
                         <button class="browse-image">Browse File</button> 
                         <!-- store the image file to localStorage -->
-                        <input type="file" hidden id="imageInput"/>
+                        <input type="file" hidden id="imageInput">
                     </div>
-                    
+                        
                     <!-- name of the image file -->
                     <div id="imageName"></div>
                 </div>
-              </fieldset>
+
+                <!-- favorite recipe -->
+               <div id="favIn">
+                <p>Favorite?</p>
+                <div>
+                    <input type="checkbox" id="favAns" name="favAns" value="Yes">
+                    <label for="favAns"> Yes </label>
+                </div>
+               </div>
+            </fieldset>
         
             <!-- difficulty, time, meal type, note -->
             <fieldset class="general-info">
-                <legend>General Info:</legend>
-                <div class="difficulty">
-                    <label for="difficulty">
-                        Difficulty:
-                        <input type="text" id="difficulty" name="difficulty" required>
-                    </label>
-                </div>
+            <legend>General Info:</legend>
+                <label for="difficultyIn">
+                    Difficulty:
+                    <input type="text" id="difficultyIn" name="difficultyIn" required>
+                </label>
 
-                <div class="time">
-                    <label for="time">
-                        Estimated Time:
-                        <input type="text" id="time" name="time" required>
-                    </label>
-                </div>
+                <label for="timeIn">
+                    Estimated Time:
+                    <input type="text" id="timeIn" name="timeIn" required>
+                </label>
 
-                <div class="meal-tag">
-                    <label for="meal-type">
-                        <p>Meal Type:</p>
-                        <select>
-                            <option value="options">Choose options</option>
-                            <option value="breakfast">Breakfast</option>
-                            <option value="lunch">Lunch</option>
-                            <option value="dinner">Dinner</option>
-                            <option value="brunch">Snack</option>
-                            <option value="custom">Custom...</option>
-                          </select>
-                    </label>
+                <div class="meal-type">
+                    Meal Type:
+                    <div id="default-type">
+                        <input type="checkbox" id="breakfast" name="breakfast">
+                        <label for="breakfast"> Breakfast </label>
+                        <input type="checkbox" id="lunch" name="lunch">
+                        <label for="lunch"> Lunch </label>
+                        <input type="checkbox" id="dinner" name="dinner">
+                        <label for="dinner"> Dinner </label>
+                        <input type="checkbox" id="snack" name="snack">
+                        <label for="snack"> Snack </label>
+                    </div>
+                
+                    <!-- add new line button -->
+                    <button class="new-type-btn">Custom</button> 
                 </div>
-
-                <div class="note">
-                    <label for="note">
-                        <p>Note:</p>
-                        <textarea id="note" name="note" cols="38" rows="3"></textarea>
-                      </label>
-                </div>
-    
+                    
+                <label for="note">
+                    Note:
+                    <textarea id="note" name="note" cols="38" rows="3"></textarea>
+                </label>
             </fieldset>
             
             <!-- tools, ingredients, steps -->
             <!-- creates multiple inputs line and a button to add extra if needed -->
             <fieldset class="tool-ingredient-step">
-                <legend>Tools, Ingredients and Steps:</legend>
-                <div class="tools">
-                    <label for="tools">
-                        <p>Tools:</p>
-                        <div id="toolLine">
-                            <input type="text" id="tools"required>
-                            <input type="text" id="tools"required>
-                            <input type="text" id="tools"required>
-                        </div>
-                        <br>
-                        <!-- add new line button -->
-                        <button class="new-line-btn">Add line</button> 
-                    </label>
+            <legend>Tools, Ingredients and Steps:</legend>
+                <div id="toolIn">
+                    <label for="tool">Tools:</label>
+                    <input type="text" id="tool" name="tool" required>
                 </div>
-                <div class="ingredients">
-                    <label for="ingredients">
-                        <p>Ingredients:</p>
-                        <div id="ingredientLine">
-                            <input type="text" id="ingredients"required>
-                            <input type="text" id="ingredients"required>
-                            <input type="text" id="ingredients"required>
-                        </div>
-                        <br>
-                        <!-- add new line button -->
-                        <button class="new-line-btn">Add line</button> 
-                    </label>
+
+                <div id="ingredientIn">
+                    <label for="ingred">Ingredients:</label>
+                    <input type="text" id="ingred" name="ingred" required>
                 </div>
-                <div class="steps">
-                    <label for="steps">
-                        <p>Steps:</p>
-                        <div id="stepLine">
-                            <input type="text" id="steps"required>
-                            <input type="text" id="steps"required>
-                            <input type="text" id="steps"required>
-                        </div>
-                        <br>
-                        <!-- add new line button -->
-                        <button class="new-line-btn">Add line</button> 
-                    </label>
+                    
+                <div id="stepsIn">
+                    <label for="step">Steps:</label>
+                    <input type="text" id="step" name="step" required>
                 </div>
+
+                 <!-- add new line button for all three sections -->
+                 <button class="new-line-btn">Add line</button> 
             </fieldset>
         </form>
         <!-- end form -->
-        <br>
+        
         <!-- functional buttons -->
         <div class="func-buttons">
-            <a href="./recipe_viewer.html">
-                <button type="submit" class="save-recipe">
-                    Save Recipe
-                </button>
-            </a>
-            <button type="button" class="discard-change">Discard Changes</button>
-            <button type="button" class="delete-recipe">Delete Recipe</button>
+            <button type="submit" class="save-recipe">Save Recipe </button>
+            <button type="button" class="discard-change">Cancel Changes</button>
         </div>
         <!-- end buttons -->
     </main>
