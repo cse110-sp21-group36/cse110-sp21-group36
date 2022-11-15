@@ -25,12 +25,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      - name: Remove files before linting
-        run: ./delete_non_lint_files.sh
-    
       # This Lints the Code for Style Errors (Uses GitHub's Super Linter)
       - name: Super-Linter
         uses: github/super-linter@v4.9.7
         env:
+          #################
+          # Rules by tags #
+          #################
+          VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          LINTER_RULES_PATH: /source/
+          VALIDATE_CSS: true
+          VALIDATE_JAVASCRIPT_ES: true
+                    
+          blank_lines: false            # Error on blank lines
+          VERBOSE: debug                # Should show less
+          SUPPRESS_POSSUM: true         # No more Mouse ASCII
+          
+          #################
+          # Rules by IDs #
+          #################
+          MD004: false                  # Unordered list style
+          MD007:
+            indent: 2                   # Unordered list indentation
+          MD013:
+            line_length: 100            # Line length 80 is far to short
+          MD026:
+            punctuation: ".,;:!。，；:"  # List of not allowed
+          MD029: false                  # Ordered list item prefix
+          MD033: false                  # Allow inline HTML
+          MD036: false                  # Emphasis used instead of a heading
