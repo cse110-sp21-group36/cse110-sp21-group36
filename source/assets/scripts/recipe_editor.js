@@ -9,6 +9,8 @@ function init() {
     initFormHandler();
     // 
     unloadHandler();
+    //
+    dragDropImageHandler();
 }
 
 
@@ -80,7 +82,8 @@ function initFormHandler() {
 
 
 /**
- * 
+ * Adds the necesarry event handlers to the form page, to prevent page exit 
+ * without saving the data
  */
 function unloadHandler() {
     window.addEventListener("beforeunload", function (e) {
@@ -90,4 +93,61 @@ function unloadHandler() {
         return warningMessage;
     });
 
+}
+
+
+/**
+ * Adds the necesarry event handlers to the drag area, to drag an image over,
+ * or not, to drop this image or to manually add it by looking into the laptop 
+ * folders
+ */
+ function dragDropImageHandler() {
+    const dropArea = document.querySelector(".drag-area");
+    const dragText = dropArea.querySelector(".drag-header");
+    const dragName = dropArea.querySelector("p")
+    let button = dropArea.querySelector("button");
+    let input = dropArea.querySelector("input");
+    let file; 
+
+    button.onclick = () => { input.click() }
+
+    input.addEventListener("change", function() {
+        file = this.files[0];
+        dropArea.classList.add("active");
+        displayFileName();
+    });
+
+    dropArea.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropArea.classList.add("active");
+        dragText.textContent = "Release to Upload File";
+    });
+
+    dropArea.addEventListener("dragleave", () => {
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    });
+
+    dropArea.addEventListener("drop", (event) => {
+        event.preventDefault();
+        file = event.dataTransfer.files[0];
+        displayFileName(); 
+    });
+
+    function displayFileName() {
+    let fileType = file.type; 
+    let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+    if(validExtensions.includes(fileType)) { 
+        let fileReader = new FileReader(); 
+        fileReader.onload = () => {
+            let fileURL = fileReader.result;
+            dragName.textContent = file.name;
+            // Add save image to locale storage 
+        }
+        fileReader.readAsDataURL(file);
+    } else {
+        alert("This is not an Image File!");
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    }}
 }
