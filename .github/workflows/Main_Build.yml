@@ -24,6 +24,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Remove files before linting
+        run: ./delete_non_lint_files.sh
     
       # This Lints the Code for Style Errors (Uses GitHub's Super Linter)
       - name: Super-Linter
