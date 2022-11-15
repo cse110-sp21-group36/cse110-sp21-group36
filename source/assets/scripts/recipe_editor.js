@@ -267,8 +267,8 @@ function unloadHandler() {
  * steps to do the recipe
  */
  function stepHandler() {
-    const main = document.querySelector("#stepsIn");
-    const step_list = main.querySelector('#steps')
+    const main = document.querySelector(".step-list");
+    const step_list = main.querySelector('div')
     createFirstStepElement();
 
     let add_step = document.createElement('button');

@@ -68,8 +68,7 @@
 
                 <!-- favorite recipe -->
                 <label for="favoriteIn">Favorite:
-                    <input type="checkbox" id="favAns" name="favAns" value="Yes" unchecked>
-                    <label for="favAns"> Yes </label>
+                    <input type="checkbox" id="favoriteIn" name="favoriteIn" value="Yes" unchecked>
                 </label><br>
             </fieldset>
         
@@ -102,46 +101,40 @@
                 </label><br>
 
                 <label for="mealTypeIn" class="meal-type">Meal Type:
-                    <div id="default-type">
-                        <!-- load dinamicly the meal type save in localStorage -->
-                        <!-- 
+                    <div id="mealTypeIn">
+                        <!-- load the meal type save in localStorage -->
+                        <!-- example: 
                         <input type="checkbox" id="breakfast" name="breakfast">
-                        <label for="breakfast"> Breakfast </label>
-                        <input type="checkbox" id="lunch" name="lunch">
-                        <label for="lunch"> Lunch </label>
-                        <input type="checkbox" id="dinner" name="dinner">
-                        <label for="dinner"> Dinner </label>
-                        <input type="checkbox" id="snack" name="snack">
-                        <label for="snack"> Snack </label> -->
+                        <label for="breakfast"> Breakfast </label> -->
                     </div>
-                    <!-- add new line button -->
                     <!-- <button class="new-type-btn">Custom Meal</button>  -->
                 </label><br>
                     
-                <label for="note">Note:
-                    <textarea id="note" name="note" cols="38" rows="3"></textarea>
+                <label for="noteIn">Note:
+                    <textarea id="noteIn" name="noteIn" cols="38" rows="3"></textarea>
                 </label><br>
             </fieldset>
             
             <!-- tools, ingredients, steps -->
-            <!-- creates multiple inputs line and a button to add extra if needed -->
+            <!-- creates multiple inputs, offer the possibility to add some 
+            more if needed for each categories -->
             <fieldset class="tool-ingredient-step">
             <legend>Tools, Ingredients and Steps:</legend>
-                <label for="toolsIn">Tools:
-                    <div id="tools">
+                <label for="toolsIn" class="tool-list">Tools:
+                    <div id="toolsIn">
                         <!-- add dinamicly the tools there -->
                     </div>
                 </label><br>
 
-                <label for="ingredientsIn", >Ingredients:
-                    <div id="ingredients">
+                <label for="ingredientsIn" class="ingredient-list", >Ingredients:
+                    <div id="ingredientsIn">
                         <!-- add dinamicly the ingredients there -->
                     </div>
                 </label><br>
                     
-                <label for="stepsIn">Steps:
-                    <div id="steps">
-                    <!-- add dinamicly the steps there -->
+                <label for="stepsIn" class="step-list">Steps:
+                    <div id="stepsIn">
+                        <!-- add dinamicly the steps there -->
                     </div>
                 </label><br>
             </fieldset>
