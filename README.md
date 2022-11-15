@@ -1,6 +1,6 @@
 # 🌐 Code Avengers ⍟
 
-## Team Agenda (Week 7)
+## Team Agenda (Week 8)
 
 **Link to Team Page:** [Team Page](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md)
 
@@ -39,4 +39,4 @@ Recipe {
 - Julia Le __Planner__ [Recipe View Page]
 
 ### Meeting Note-Taking:
-Jiancheng > Rappel > Miko > Ettore > Triston > Meron > Thanh > Andrew > Duc > Justin > Julia
+Miko > Ettore > Triston > Meron > Thanh > Andrew > Duc > Justin > Julia > Jiancheng > Rappel
