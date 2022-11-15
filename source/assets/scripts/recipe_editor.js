@@ -13,6 +13,8 @@ function init() {
     dragDropImageHandler();
     //
     mealTypeHandler();
+    //
+    stepHandler();
 }
 
 
@@ -178,7 +180,6 @@ function unloadHandler() {
      * all of the meal type found (parsed, not in string form). If
      * nothing is found in localStorage for 'mealTypes', an array with default
      * value is returned.
-     * @returns {Array<Object>} An array of meal type found in localStorage
      */
     function getMealsFromStorage() {
         const meals = JSON.parse(window.localStorage.getItem('mealTypes'));
@@ -227,9 +228,8 @@ function unloadHandler() {
     }
 
     /**
-     * Takes in an array of meal types and for each and then appends 
-     * the meal type to <.meal-type> checkbox
-     * @param {Array<Object>} meals An array of mealTypes
+     * Takes nothing, adds event listener if someone want to add a new
+     * meal type, update localStorage, and the page
      */
      function addCustomMealsToList() {
         button.addEventListener('click', () => {
@@ -261,3 +261,71 @@ function unloadHandler() {
         });
 }
 }
+
+/**
+ * Adds the necesarry event handlers and function to manage the list of 
+ * steps to do the recipe
+ */
+ function stepHandler() {
+    const main = document.querySelector("#stepsIn");
+    const step_list = main.querySelector('#steps')
+    createFirstStepElement();
+
+    let add_step = document.createElement('button');
+    add_step.classList.add('create-step');
+    add_step.textContent = "Add New Step";
+    main.appendChild(add_step);
+
+    add_step.addEventListener('click', () => {
+        createNewStepElement();
+    })
+
+
+     /**
+     * Create the first textarea to fullfil with instruction to do the recipe
+     */
+      function createFirstStepElement() {
+        const new_step = document.createElement("div");
+        let label = document.createElement('label');
+        label.htmlFor = "steps";
+        label.textContent = " - ";
+        let text = document.createElement('input');
+        text.type = "text";
+        text.id = "steps";
+        text.name = "step";
+        text.required = true;
+        new_step.appendChild(label);
+        new_step.appendChild(text);
+        step_list.appendChild(new_step);
+    };
+
+
+    /**
+     * Create the other textarea to fullfil with instruction to do the recipe 
+     * with an additional button to delete them
+     */
+    function createNewStepElement() {
+        const new_step = document.createElement("div");
+        let label = document.createElement('label');
+        label.htmlFor = "steps";
+        label.textContent = " - ";
+        let text = document.createElement('input');
+        text.type = "text";
+        text.id = "steps";
+        text.name = "step";
+        text.required = true;
+        let cancel = document.createElement('button');
+        cancel.classList.add('delete-step');
+        cancel.textContent = "Delete";
+        new_step.appendChild(label);
+        new_step.appendChild(text);
+        new_step.appendChild(cancel);
+        step_list.appendChild(new_step);
+
+        let delete_step = new_step.querySelector("button")
+        delete_step.addEventListener('click', () => {
+            step_list.removeChild(new_step);
+        })
+    };
+
+ }
