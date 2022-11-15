@@ -12,18 +12,37 @@ __Next Meeting__: Thursday 11/14, Sprint Planning (Week 8) 7:00 PM Zoom
 - Here is the Recipe Object Structure:
 ```
 Recipe {
-      imgSrc": "This is an absolute path on user's cpu",
-      recipeName": "",
-      "mealType": [Multiple Values],
-      "totalTime":_____,
-      "ingredients":____,
-       “steps”:____
-       "favorite": True/False
-       "tools":____
-       "difficulty":____
-       "notes":___
+      imgSrc": "This is an absolute path on user's cpu",    // String that needs parsed to get URL
+      recipeName": "String",                         // Single String
+      "mealType": [Multiple Values],                 // Array of Strings, but specifily limited to ["Breakfast", "Lunch", etc.], if you get passed ["Dinner"], then that is the only meal type for that specific recipe; they can also have more than one.
+      "totalTime": num#,                             // Number
+      "ingredients": [String Array],                 // An array of Strings e.g. ["Carrots", "
+       “steps”: [String Array]                       // An array of Strings e.g. ["Step 1: Add Water", "Step 2: Boil", ... ]
+       "favorite": True/False                        // Boolean
+       "tools": [String Array]                       // Tools: ["Frying Pan", "Beaker", "Blow Torch", ... ]
+       "difficulty": "String"                        // A string, under <30 Characters e.g. "Medium", "Hard", etc.
+       "notes": "String"                             // Single String, stores additional notes
 }
 ```
+// Drop Down Menu //
+
+eventlistener.(5mins) {
+      Recipe.totalTime = 5;
+}
+
+Enter Time:
+[___###____] mins
+
+
+
+[ --- Choose Time --- V]
+V 5 Mins                      
+V 10 Mins
+V 15 Mins
+V 20 Mins
+V 25 Mins
+V ... 120 Mins
+
 
 ### Team Roles:
 - Triston Babers __Team Lead__ [Home Page Team]
