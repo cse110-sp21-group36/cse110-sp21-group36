@@ -35,13 +35,12 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-          LINTER_RULES_PATH: /source/
+          
           VALIDATE_CSS: true
           VALIDATE_JAVASCRIPT_ES: true
                     
           blank_lines: false            # Error on blank lines
-          VERBOSE: debug                # Should show less
+          VERBOSE: detailed             # Should show detailed
           SUPPRESS_POSSUM: true         # No more Mouse ASCII
           
           #################
@@ -51,3 +50,8 @@ jobs:
           MD029: false                  # Ordered list item prefix
           MD033: false                  # Allow inline HTML
           MD036: false                  # Emphasis used instead of a heading
+      - name: Upload Report as an artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: linter-report
+          path: "${{ github.workspace }}/super-linter.report/"
