@@ -43,48 +43,44 @@
         <form id="new-recipe">
             <!-- title and image -->
             <fieldset class="name-img-fav">
-            <legend>Name, Image and Favorite:</legend>
-        
-                <label for="nameIn">Recipe Name:
-                    <input type="text" id="nameIn" name="nameIn" required>
-                </label>
+            <legend>Name, Author, Image and Favorite:</legend>
+                
+                <label for="titleIn">Recipe Name:
+                    <input type="text" id="titleIn" name="titleIn" required>
+                </label><br>
+
+                <label for="authorIn">Author Name:
+                    <input type="text" id="authorIn" name="authorIn" required>
+                </label><br>
 
                 <!-- recipe image -->
-                <div class="drag-area">
+                <label for="imageIn" class="drag-area">Drag Area:
                     <!-- place to drag and drop image -->
                     <div class="imageHolder"><i class="fas fa-cloud-upload-alt"></i></div>
                     <header class="drag-header" >Drag & Drop to Upload File</header>
-                    <span>OR</span>
+                    <span>or</span>
                     <button class="browse-image">Browse File</button>
-                    <p></p>
+                    <!-- name of the image file -->
+                    <p id="imageName"></p>
                     <!-- store the image file to localStorage -->
                     <input type="file" hidden>
-                  </div>
-                        
-                    <!-- name of the image file -->
-                    <div id="imageName"></div>
-                </div>
+                </label><br>
 
                 <!-- favorite recipe -->
-               <div id="favIn">
-                <p>Favorite?</p>
-                <div>
+                <label for="favoriteIn">Favorite:
                     <input type="checkbox" id="favAns" name="favAns" value="Yes" unchecked>
                     <label for="favAns"> Yes </label>
-                </div>
-               </div>
+                </label><br>
             </fieldset>
         
             <!-- difficulty, time, meal type, note -->
             <fieldset class="general-info">
             <legend>General Info:</legend>
-                <label for="difficultyIn">
-                    Difficulty:
+                <label for="difficultyIn">Difficulty:
                     <input type="text" id="difficultyIn" name="difficultyIn" required>
-                </label>
+                </label><br>
 
-                <label for="timeIn">
-                    Estimated Time:
+                <label for="timeIn">Estimated Time:
                     <select name="hours" id="hours">
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -103,14 +99,13 @@
                         <option value="30">30</option>
                         <option value="45">45</option>
                     </select> mins
+                </label><br>
 
-                </label>
-
-                <div class="meal-type">
-                    Meal Type:
+                <label for="mealTypeIn" class="meal-type">Meal Type:
                     <div id="default-type">
-
-                        <!-- <input type="checkbox" id="breakfast" name="breakfast">
+                        <!-- load dinamicly the meal type save in localStorage -->
+                        <!-- 
+                        <input type="checkbox" id="breakfast" name="breakfast">
                         <label for="breakfast"> Breakfast </label>
                         <input type="checkbox" id="lunch" name="lunch">
                         <label for="lunch"> Lunch </label>
@@ -119,37 +114,36 @@
                         <input type="checkbox" id="snack" name="snack">
                         <label for="snack"> Snack </label> -->
                     </div>
-                
                     <!-- add new line button -->
-                    <!-- <button class="new-type-btn">Custom</button>  -->
-                </div>
+                    <!-- <button class="new-type-btn">Custom Meal</button>  -->
+                </label><br>
                     
-                <label for="note">
-                    Note:
+                <label for="note">Note:
                     <textarea id="note" name="note" cols="38" rows="3"></textarea>
-                </label>
+                </label><br>
             </fieldset>
             
             <!-- tools, ingredients, steps -->
             <!-- creates multiple inputs line and a button to add extra if needed -->
             <fieldset class="tool-ingredient-step">
             <legend>Tools, Ingredients and Steps:</legend>
-                <div id="toolIn">
-                    <label for="tool">Tools:</label>
-                    <input type="text" id="tool" name="tool" required>
-                </div>
-
-                <div id="ingredientIn">
-                    <label for="ingred">Ingredients:</label>
-                    <input type="text" id="ingred" name="ingred" required>
-                </div>
-                    
-                <div id="stepsIn">
-                    Steps:
-                    <div id="steps">
-
+                <label for="toolsIn">Tools:
+                    <div id="tools">
+                        <!-- add dinamicly the tools there -->
                     </div>
-                </div>
+                </label><br>
+
+                <label for="ingredientsIn", >Ingredients:
+                    <div id="ingredients">
+                        <!-- add dinamicly the ingredients there -->
+                    </div>
+                </label><br>
+                    
+                <label for="stepsIn">Steps:
+                    <div id="steps">
+                    <!-- add dinamicly the steps there -->
+                    </div>
+                </label><br>
             </fieldset>
 
             <!-- functional buttons -->
