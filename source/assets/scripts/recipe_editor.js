@@ -11,6 +11,8 @@ function init() {
     unloadHandler();
     //
     dragDropImageHandler();
+    //
+    mealTypeHandler();
 }
 
 
@@ -150,4 +152,112 @@ function unloadHandler() {
         dropArea.classList.remove("active");
         dragText.textContent = "Drag & Drop to Upload File";
     }}
+}
+
+
+/**
+ * Adds the necesarry event handlers and function to load dinamicly the 
+ * meal types and allow the user to add some new one of his choise.
+ */
+ function mealTypeHandler() {
+
+    const mealType = document.querySelector(".meal-type");
+    const button = document.createElement('button');
+    button.classList.add("new-type-btn");
+    button.textContent = "Custom Meal";
+    const mealDiv = mealType.querySelector("div"); 
+    
+    const meals = getMealsFromStorage();
+    addMealsToDocument(meals);
+    mealType.appendChild(button);
+    addCustomMealsToList();
+    
+
+    /**
+     * Reads 'mealTypes' from localStorage and returns an array of
+     * all of the meal type found (parsed, not in string form). If
+     * nothing is found in localStorage for 'mealTypes', an array with default
+     * value is returned.
+     * @returns {Array<Object>} An array of meal type found in localStorage
+     */
+    function getMealsFromStorage() {
+        const meals = JSON.parse(window.localStorage.getItem('mealTypes'));
+        if (!meals) return ['breakfast', 'lunch', 'dinner', 'snack'];
+        return meals 
+    }
+
+    /**
+     * Takes in an array of meal types, converts it to a string, and then
+     * saves that string to 'mealTypes' in localStorage
+     * @param {Array<Object>} meals An array of meal types
+     */
+    function saveMealsToStorage(meals) {
+        localStorage.setItem('mealTypes', JSON.stringify(meals));
+    }
+
+    /**
+     * Takes a meal type, create the checkbox + label element on the html 
+     * file
+     * @param {String<Object>} meal A string of one meal type
+     */
+     function createMealTypeElement(meal) {
+        meal = meal.toLowerCase();
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = meal;
+        checkbox.name = "meal-type";
+        checkbox.value = meal;
+        let label = document.createElement('label')
+        label.htmlFor = meal;
+        label.textContent = meal[0].toUpperCase() + meal.substring(1);
+
+        mealDiv.appendChild(checkbox);
+        mealDiv.appendChild(label);
+    }
+
+    /**
+     * Takes in an array of meal types and for each and then appends 
+     * the meal type to <.meal-type> checkbox
+     * @param {Array<Object>} meals An array of mealTypes
+     */
+    function addMealsToDocument(meals) {
+        for (let i = 0; i < meals.length; i++) {
+            createMealTypeElement(meals[i]);
+        }
+    }
+
+    /**
+     * Takes in an array of meal types and for each and then appends 
+     * the meal type to <.meal-type> checkbox
+     * @param {Array<Object>} meals An array of mealTypes
+     */
+     function addCustomMealsToList() {
+        button.addEventListener('click', () => {
+            let new_textarea = document.createElement('input');
+            new_textarea.type = 'textarea';
+            new_textarea.classList.add('new-meal-type-value');
+            let new_button = document.createElement('button');
+            new_button.classList.add('new-meal-type');
+            new_button.textContent = "Add New Meal Type";
+            let new_div = document.createElement('div');
+
+            new_div.appendChild(new_textarea);
+            new_div.appendChild(new_button);
+            mealDiv.appendChild(new_div);
+            mealType.removeChild(button);
+
+            let new_meal_button = document.querySelector(".new-meal-type")
+            new_meal_button.addEventListener('click', () => {
+                let new_meal_type = mealDiv.querySelector(".new-meal-type-value").value
+                if (new_meal_type) {
+                    createMealTypeElement(new_meal_type);
+                    mealDiv.removeChild(new_div);
+                    mealType.appendChild(button);
+
+                    meals.push(new_meal_type);
+                    saveMealsToStorage(meals);
+                }
+            })
+        });
+}
 }
