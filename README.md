@@ -24,24 +24,10 @@ Recipe {
        "notes": "String"                             // Single String, stores additional notes
 }
 ```
-// Drop Down Menu //
 
-eventlistener.(5mins) {
-      Recipe.totalTime = 5;
-}
-
-Enter Time:
-[___###____] mins
-
-
-
-[ --- Choose Time --- V]
-V 5 Mins                      
-V 10 Mins
-V 15 Mins
-V 20 Mins
-V 25 Mins
-V ... 120 Mins
+This option was chosen to enter Total Time:
+            Enter Time:
+            [___###____] mins
 
 
 ### Team Roles:
