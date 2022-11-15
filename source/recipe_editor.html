@@ -69,7 +69,7 @@
                <div id="favIn">
                 <p>Favorite?</p>
                 <div>
-                    <input type="checkbox" id="favAns" name="favAns" value="Yes">
+                    <input type="checkbox" id="favAns" name="favAns" value="Yes" unchecked>
                     <label for="favAns"> Yes </label>
                 </div>
                </div>
@@ -85,7 +85,25 @@
 
                 <label for="timeIn">
                     Estimated Time:
-                    <input type="text" id="timeIn" name="timeIn" required>
+                    <select name="hours" id="hours">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select> hours
+                    <select name="mins" id="mins">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select> mins
+
                 </label>
 
                 <div class="meal-type">
