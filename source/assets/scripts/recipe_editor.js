@@ -14,7 +14,9 @@ function init() {
     //
     mealTypeHandler();
     //
-    stepHandler();
+    stepsHandler();
+    //
+    toolsHandler();
 }
 
 
@@ -180,6 +182,7 @@ function unloadHandler() {
      * all of the meal type found (parsed, not in string form). If
      * nothing is found in localStorage for 'mealTypes', an array with default
      * value is returned.
+     * @return {Array<Object>} An array of meal types
      */
     function getMealsFromStorage() {
         const meals = JSON.parse(window.localStorage.getItem('mealTypes'));
@@ -249,7 +252,7 @@ function unloadHandler() {
             let new_meal_button = document.querySelector(".new-meal-type")
             new_meal_button.addEventListener('click', () => {
                 let new_meal_type = mealDiv.querySelector(".new-meal-type-value").value
-                if (new_meal_type) {
+                if ((new_meal_type) & !(new_meal_type in meals)) {
                     createMealTypeElement(new_meal_type);
                     mealDiv.removeChild(new_div);
                     mealType.appendChild(button);
@@ -266,9 +269,9 @@ function unloadHandler() {
  * Adds the necesarry event handlers and function to manage the list of 
  * steps to do the recipe
  */
- function stepHandler() {
+ function stepsHandler() {
     const main = document.querySelector(".step-list");
-    const step_list = main.querySelector('div')
+    const step_list = main.querySelector('div');
     createFirstStepElement();
 
     let add_step = document.createElement('button');
@@ -327,5 +330,112 @@ function unloadHandler() {
             step_list.removeChild(new_step);
         })
     };
+}
 
- }
+/**
+ * Adds the necesarry event handlers and function to manage the list of 
+ * tools to do the recipe
+ */
+ function toolsHandler() {
+    const main = document.querySelector(".tool-list");
+    const tool_list = main.querySelector('div');
+    const tools = getToolsFromStorage();
+    addToolsToDocument(tools);
+
+    const button = document.createElement('button');
+    button.classList.add("new-type-btn");
+    button.textContent = "Custom Tool";
+    main.appendChild(button);
+
+    button.addEventListener('click', () => {
+        createNewTool(tools);
+    })
+
+
+    /**
+     * Reads 'tools' from localStorage and returns an array of
+     * all of the tools found (parsed, not in string form). If
+     * nothing is found in localStorage for 'tools', an array with default
+     * value is returned.
+     * @return {Array<Object>} An array of tools
+     */
+     function getToolsFromStorage() {
+        const tools = JSON.parse(window.localStorage.getItem('tools'));
+        if (!tools) return [
+            'non-stick frying pan', 'saucepan', 'stock pot', 'sheet pans', 
+            'glass baking dish', 'knives', 'measuring spoons', 
+            'measuring cups', 'wooden spoon', 'fish turner', 'peeler', 
+            'whisk', 'tongs', 'cutting board', 'colander', 'prep bowls', 
+            'can opener', 'microplane zester', 'stick blender', 'salad spinner'];
+        return tools 
+    }
+
+    /**
+     * Takes in an array of tools, converts it to a string, and then
+     * saves that string to 'tools' in localStorage
+     * @param {Array<Object>} tools An array of tools
+     */
+     function saveToolsToStorage(tools) {
+        localStorage.setItem('tools', JSON.stringify(tools));
+    }
+
+     /**
+     * Create the first textarea to fullfil with instruction to do the recipe
+     * @param {Array<Object>} tools An array of tools
+     */
+      function addToolsToDocument(tools) {
+        const select = document.createElement("select");
+        select.multiple = true;
+        select.name = 'tools';
+        select.classList.add("choosen-tool");
+        select.setAttribute('data-placeholder', "Begin typing a name to filter...");
+        //select.no_results_text = "Oops, nothing found!";
+
+        const option = document.createElement("option");
+        option.value = "";
+        select.appendChild(option);
+
+        for (let i=0; i<tools.length; i++){
+            const option = document.createElement("option");
+            option.textContent = tools[i];
+            select.appendChild(option);
+        }
+        tool_list.appendChild(select);
+    };
+
+    /**
+     * Create the other textarea to fullfil with instruction to do the recipe 
+     * with an additional button to delete them
+     * @param {Array<Object>} tools An array of tools
+     */
+    function createNewTool(tools) {
+        let new_textarea = document.createElement('input');
+        new_textarea.type = 'textarea';
+        new_textarea.classList.add('new-tool-value');
+        let new_button = document.createElement('button');
+        new_button.classList.add('new-tool');
+        new_button.textContent = "Add New Tool";
+        let new_div = document.createElement('div');
+
+        new_div.appendChild(new_textarea);
+        new_div.appendChild(new_button);
+        tool_list.appendChild(new_div);
+        main.removeChild(button);
+
+        new_button.addEventListener('click', () => {
+            let new_tool = tool_list.querySelector(".new-tool-value").value
+            if ((new_tool) & !(new_tool in tools)){
+                const option = document.createElement("option");
+                option.textContent = new_tool;
+                let select = main.querySelector('select');
+                select.appendChild(option);
+
+                tools.push(new_tool);
+                saveToolsToStorage(tools);
+
+                tool_list.removeChild(new_div);
+                main.appendChild(button);
+            }
+        })
+    };
+}
