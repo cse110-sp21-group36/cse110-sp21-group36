@@ -25,6 +25,11 @@ Recipe {
 }
 ```
 
+This option was chosen to enter Total Time:
+            Enter Time:
+            [___###____] mins
+
+
 ### Team Roles:
 - Triston Babers __Team Lead__ [Home Page Team]
 - Meron Asfaw __Team Lead__ [Recipe Editor Team]
