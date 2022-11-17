@@ -1,9 +1,10 @@
 /* Home Page Style CSS */
+/*
 h1 {
-  /* font-family: ??? */
-}
+  font-family: ???
+} */
 
-header {
+/* header {
   padding: 60px;
   text-align: center;
   background: #ec9706;
@@ -11,6 +12,10 @@ header {
   font-size: 30px;
   position: relative;
   float: center;
+} */
+
+nav {
+  background: rgba(197, 132, 58, 0.877);
 }
 
 /* Recipe CSS*/
