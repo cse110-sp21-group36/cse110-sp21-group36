@@ -74,12 +74,81 @@ function initFormHandler() {
 
     form.addEventListener('submit', (e) => {
         formSubmitted = true;
+        var recipes = getRecipesFromStorage(recipeObject);
         const formData = Object.fromEntries(new FormData(e.target).entries())
+
+        const filename = formData.filename;
+        const imagedata = formData.filedata;
+        if (filename == "") {
+            filename = "no-image.png";
+            imagedata = require("./source/assets/images/no-image.txt");
+        }
+
+        meal_types = []
+        for (let i=0; i<formData.keys().length; i++){
+            if (formData.keys()[i].slice(0,9) == "meal-type") {
+                meal_types.push(formData.keys()[i].slice(10))
+            }
+        }
+
+        tools = []
+        for (let i=0; i<formData.keys().length; i++){
+            if (formData.keys()[i].slice(0,7) == "tools-v") {
+                let id = formData.keys()[i].slice(-2)
+                tools.push({
+                    id: id,
+                    quantity: formData["tools-nb-"+id],
+                    tool: formData["tools-v-"+id]
+                })
+            }
+        }
+
+        ingredients = []
+        for (let i=0; i<formData.keys().length; i++){
+            if (formData.keys()[i].slice(0,14) == "ingredients-v") {
+                let id = formData.keys()[i].slice(-2)
+                tools.push({
+                    id: id,
+                    quantity: formData["ingredients-q-"+id],
+                    unit: formData["ingredients-u-"+id],
+                    ingredient: formData["ingredients-v-"+id]
+                })
+            }
+        }
+
+        ingredients = []
+        for (let i=0; i<formData.keys().length; i++){
+            if (formData.keys()[i].slice(0,7) == "steps-v") {
+                let id = formData.keys()[i].slice(-2)
+                tools.push({
+                    id: id,
+                    step: formData["step-v-"+id]
+                })
+            }
+        }
+
         const recipeObject = {
-        // make the recipe data structure 
+            // make the recipe data structure 
+            recipe: ("0"+(recipes.length+1)).slice(-2),
+            title: formData.title,
+            author: formData.author,
+            image: {
+                name: filename,
+                data: imagedata,
+            },
+            favorite: formData.favorite == "Yes",
 
+            difficulty: formData.difficulty,
+            time: {
+                hours: formData.hours,
+                mins: formData.mins
+            },
+            mealtype: meal_types,
+            note: formData.note,
 
-
+            tools: tools,
+            ingredients: ingredients,
+            steps: steps
         }
         var recipes = addRecipesToList(recipeObject);
         saveRecipesToStorage(recipes);
@@ -122,7 +191,7 @@ function unloadHandler() {
     input.addEventListener("change", function() {
         file = this.files[0];
         dropArea.classList.add("active");
-        displayFileName();
+        saveFileName();
     });
 
     dropArea.addEventListener("dragover", (event) => {
@@ -139,18 +208,38 @@ function unloadHandler() {
     dropArea.addEventListener("drop", (event) => {
         event.preventDefault();
         file = event.dataTransfer.files[0];
-        displayFileName(); 
+        saveFileName(); 
     });
 
-    function displayFileName() {
+    function saveFileName() {
     let fileType = file.type; 
     let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
     if(validExtensions.includes(fileType)) { 
         let fileReader = new FileReader(); 
         fileReader.onload = () => {
             let fileURL = fileReader.result;
+
             dragName.textContent = file.name;
-            // Add save image to locale storage 
+
+            let label_1 = document.createElement('label');
+            label_1.htmlFor = "filename";
+            let text_1 = document.createElement('input');
+            text_1.type = "text";
+            text_1.hidden = true;
+            text_1.name = "filename";
+            text_1.value = file.name;
+            dropArea.appendChild(label_1);
+            dropArea.appendChild(text_1);
+
+            let label_2 = document.createElement('label');
+            label_2.htmlFor = "filedata";
+            let text_2 = document.createElement('input');
+            text_2.type = "text";
+            text_2.hidden = true;
+            text_2.name = "filedata";
+            text_2.value = fileURL;
+            dropArea.appendChild(label_2);
+            dropArea.appendChild(text_2);
         }
         fileReader.readAsDataURL(file);
     } else {
@@ -176,7 +265,10 @@ function unloadHandler() {
     const meals = getMealsFromStorage();
     addMealsToDocument(meals);
     mealType.appendChild(button);
-    addCustomMealsToList();
+
+    button.addEventListener('click', () => {
+        addCustomMealsToList();
+    });
     
 
     /**
@@ -211,8 +303,8 @@ function unloadHandler() {
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = meal;
-        checkbox.name = "meal-type";
-        checkbox.value = meal;
+        checkbox.name = "meal-type-"+meal;
+        checkbox.value = "Yes";
         let label = document.createElement('label')
         label.htmlFor = meal;
         label.textContent = meal[0].toUpperCase() + meal.substring(1);
@@ -237,24 +329,23 @@ function unloadHandler() {
      * meal type, update localStorage, and the page
      */
      function addCustomMealsToList() {
-        button.addEventListener('click', () => {
-            let new_textarea = document.createElement('input');
-            new_textarea.type = 'textarea';
-            new_textarea.classList.add('new-meal-type-value');
-            let new_button = document.createElement('button');
-            new_button.classList.add('new-meal-type');
-            new_button.textContent = "Add New Meal Type";
-            let new_div = document.createElement('div');
+        let new_textarea = document.createElement('input');
+        new_textarea.type = 'textarea';
+        new_textarea.classList.add('new-meal-type-value');
+        let new_button = document.createElement('button');
+        new_button.classList.add('new-meal-type');
+        new_button.textContent = "Add New Meal Type";
+        let new_div = document.createElement('div');
 
-            new_div.appendChild(new_textarea);
-            new_div.appendChild(new_button);
-            mealDiv.appendChild(new_div);
-            mealType.removeChild(button);
+        new_div.appendChild(new_textarea);
+        new_div.appendChild(new_button);
+        mealDiv.appendChild(new_div);
+        mealType.removeChild(button);
 
-            let new_meal_button = document.querySelector(".new-meal-type")
-            new_meal_button.addEventListener('click', () => {
-                let new_meal_type = mealDiv.querySelector(".new-meal-type-value").value
-                if ((new_meal_type) & !(new_meal_type in meals)) {
+        new_button.addEventListener('click', () => {
+            let new_meal_type = mealDiv.querySelector(".new-meal-type-value").value
+            if (!(new_meal_type in meals)) {
+                if (new_meal_type) {
                     createMealTypeElement(new_meal_type);
                     mealDiv.removeChild(new_div);
                     mealType.appendChild(button);
@@ -262,9 +353,9 @@ function unloadHandler() {
                     meals.push(new_meal_type);
                     saveMealsToStorage(meals);
                 }
-            })
+            }
         });
-}
+    }
 }
 
 /**
@@ -272,6 +363,7 @@ function unloadHandler() {
  * steps to do the recipe
  */
  function stepsHandler() {
+    var step_number = 1;
     const main = document.querySelector(".step-list");
     const step_list = main.querySelector('div');
     addFirstStepElement();
@@ -293,13 +385,13 @@ function unloadHandler() {
       function createStepElement() {
         let new_step = document.createElement("div");
         let label = document.createElement('label');
-        label.htmlFor = "steps";
+        label.htmlFor = "step-v-"+("0"+step_number).slice(-2);
         label.textContent = " - ";
         let text = document.createElement('input');
         text.type = "text";
-        text.id = "steps";
-        text.name = "step";
+        text.name = "step-v-"+("0"+step_number).slice(-2);
         text.required = true;
+        step_number = step_number+1;
         return [new_step, label, text]
     }
 
@@ -343,6 +435,7 @@ function unloadHandler() {
  * tools to do the recipe
  */
  function toolsHandler() {
+    var tool_number = 1;
     const main = document.querySelector(".tool-list");
     const tool_list = main.querySelector('div');
     const tools = getToolsFromStorage();
@@ -403,7 +496,7 @@ function unloadHandler() {
         const new_div = document.createElement('div');
         const select = document.createElement("select");
         select.required = true;
-        select.name = 'tools';
+        select.name = 'tool-v-'+ ("0"+tool_number).slice(-2);
         select.classList.add("choosen-tool");
         const option = document.createElement("option");
         select.appendChild(option);
@@ -415,14 +508,15 @@ function unloadHandler() {
         }
 
         const number_select = document.createElement("select");
-        select.name = 'nb-tools';
-        select.classList.add("choosen-nb-tool");
+        number_select.name = 'tool-nb-'+("0"+tool_number).slice(-2);
+        number_select.classList.add("choosen-nb-tool");
 
         for (let i=1; i<5; i++){
             const option = document.createElement("option");
             option.textContent = i;
             number_select.appendChild(option);
         }
+        tool_number = tool_number+1;
         return [new_div, number_select, select]
     }
 
@@ -496,82 +590,13 @@ function unloadHandler() {
         })
     };
 }
-/**
- * Adds the necesarry event handlers and function to manage the list of 
- * steps to do the recipe
- */
- function stepsHandler() {
-    const main = document.querySelector(".step-list");
-    const step_list = main.querySelector('div');
-    addFirstStepElement();
-
-    let add_step = document.createElement('button');
-    add_step.classList.add('create-step');
-    add_step.textContent = "Add New Step";
-    main.appendChild(add_step);
-
-    add_step.addEventListener('click', () => {
-        addNewStepElement();
-    })
-
-
-     /**
-     * Creates the html element for step
-     * @return {Array<Object>} of html element 
-     */
-      function createStepElement() {
-        let new_step = document.createElement("div");
-        let label = document.createElement('label');
-        label.htmlFor = "steps";
-        label.textContent = " - ";
-        let text = document.createElement('input');
-        text.type = "text";
-        text.id = "steps";
-        text.name = "step";
-        text.required = true;
-        return [new_step, label, text]
-    }
-
-     /**
-     * Create the first textarea to fullfil with instruction to do the recipe
-     */
-      function addFirstStepElement() {
-        //let new_step = undefined;
-        //let label = undefined;
-        //let text = undefined;
-        [new_step, label, text] = createStepElement();
-        new_step.appendChild(label);
-        new_step.appendChild(text);
-        step_list.appendChild(new_step);
-    };
-
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     */
-    function addNewStepElement() {
-        [new_step, label, text] = createStepElement();
-        let cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
-        cancel.textContent = "Delete";
-        new_step.appendChild(label);
-        new_step.appendChild(text);
-        new_step.appendChild(cancel);
-        step_list.appendChild(new_step);
-
-        let delete_step = new_step.querySelector("button")
-        delete_step.addEventListener('click', () => {
-            step_list.removeChild(new_step);
-        })
-    };
-}
 
 /**
  * Adds the necesarry event handlers and function to manage the list of 
  * ingredients to do the recipe
  */
  function ingredientsHandler() {
+    var ingredient_number = 1;
     const main = document.querySelector(".ingredient-list");
     const ingredient_list = main.querySelector('div');
     const ingredients = getIngredientsFromStorage();
@@ -678,7 +703,7 @@ function unloadHandler() {
         const new_div = document.createElement('div');
         const select = document.createElement("select");
         select.required = true;
-        select.name = 'ingredients';
+        select.name = 'ingredients-v-'+("0"+ingredient_number).slice(-2);
         select.classList.add("choosen-ingredient");
         const option = document.createElement("option");
         select.appendChild(option);
@@ -690,7 +715,7 @@ function unloadHandler() {
         }
 
         const quantity_select = document.createElement("select");
-        quantity_select.name = 'q-ingredients';
+        quantity_select.name = 'ingredients-q-'+("0"+ingredient_number).slice(-2);
         quantity_select.classList.add("choosen-q-tool");
 
         for (let i=0; i<quantities.length; i++){
@@ -700,7 +725,7 @@ function unloadHandler() {
         }
 
         const unit_select = document.createElement("select");
-        unit_select.name = 'u-ingredients';
+        unit_select.name = 'ingredients-u-'+("0"+ingredient_number).slice(-2);
         unit_select.classList.add("choosen-u-tool");
 
         for (let i=0; i<units.length; i++){
@@ -708,6 +733,7 @@ function unloadHandler() {
             option.textContent = units[i];
             unit_select.appendChild(option);
         }
+        ingredient_number = ingredient_number+1;
         return [new_div, quantity_select, unit_select, select]
     }
 

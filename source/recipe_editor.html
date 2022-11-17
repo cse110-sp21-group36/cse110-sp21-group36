@@ -45,16 +45,16 @@
             <fieldset class="name-img-fav">
             <legend>Name, Author, Image and Favorite:</legend>
                 
-                <label for="titleIn">Recipe Name:
-                    <input type="text" id="titleIn" name="titleIn" required>
+                <label for="title">Recipe Name:
+                    <input type="text" name="title" required>
                 </label><br>
 
-                <label for="authorIn">Author Name:
-                    <input type="text" id="authorIn" name="authorIn" required>
+                <label for="author">Author Name:
+                    <input type="text" name="author" required>
                 </label><br>
 
                 <!-- recipe image -->
-                <label for="imageIn" class="drag-area">Drag Area:
+                <label for="image" class="drag-area">Drag Area:
                     <!-- place to drag and drop image -->
                     <div class="imageHolder"><i class="fas fa-cloud-upload-alt"></i></div>
                     <header class="drag-header" >Drag & Drop to Upload File</header>
@@ -67,19 +67,25 @@
                 </label><br>
 
                 <!-- favorite recipe -->
-                <label for="favoriteIn">Favorite:
-                    <input type="checkbox" id="favoriteIn" name="favoriteIn" value="Yes" unchecked>
+                <label for="favorite">Favorite:
+                    <input type="checkbox" name="favorite" value="Yes" unchecked>
                 </label><br>
             </fieldset>
         
             <!-- difficulty, time, meal type, note -->
             <fieldset class="general-info">
             <legend>General Info:</legend>
-                <label for="difficultyIn">Difficulty:
-                    <input type="text" id="difficultyIn" name="difficultyIn" required>
+                <label for="difficulty">Difficulty:
+                    <select name="difficulty" id="difficulty">
+                        <option value="very easy">very easy</option>
+                        <option value="easy">easy</option>
+                        <option value="medium">medium</option>
+                        <option value="hard">hard</option>
+                        <option value="very hard">very hard</option>
+                    </select>
                 </label><br>
 
-                <label for="timeIn">Estimated Time:
+                <label for="time" name="time">Estimated Time:
                     <select name="hours" id="hours">
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -100,8 +106,8 @@
                     </select> mins
                 </label><br>
 
-                <label for="mealTypeIn" class="meal-type">Meal Type:
-                    <div id="mealTypeIn">
+                <label for="meal-type" class="meal-type">Meal Type:
+                    <div name="meal-type">
                         <!-- load the meal type save in localStorage -->
                         <!-- example: 
                         <input type="checkbox" id="breakfast" name="breakfast">
@@ -110,8 +116,8 @@
                     <!-- <button class="new-type-btn">Custom Meal</button>  -->
                 </label><br>
                     
-                <label for="noteIn">Note:
-                    <textarea id="noteIn" name="noteIn" cols="38" rows="3"></textarea>
+                <label for="note">Note:
+                    <textarea name="note" cols="38" rows="3"></textarea>
                 </label><br>
             </fieldset>
             
@@ -120,20 +126,20 @@
             more if needed for each categories -->
             <fieldset class="tool-ingredient-step">
             <legend>Tools, Ingredients and Steps:</legend>
-                <label for="toolsIn" class="tool-list">Tools:
-                    <div id="toolsIn">
+                <label for="tools" class="tool-list">Tools:
+                    <div name="tools">
                         <!-- add dinamicly the tools there -->
                     </div>
                 </label><br>
 
-                <label for="ingredientsIn" class="ingredient-list", >Ingredients:
-                    <div id="ingredientsIn">
+                <label for="ingredients" class="ingredient-list", >Ingredients:
+                    <div name="ingredients">
                         <!-- add dinamicly the ingredients there -->
                     </div>
                 </label><br>
                     
-                <label for="stepsIn" class="step-list">Steps:
-                    <div id="stepsIn">
+                <label for="steps" class="step-list">Steps:
+                    <div name="steps">
                         <!-- add dinamicly the steps there -->
                     </div>
                 </label><br>
