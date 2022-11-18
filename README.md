@@ -4,7 +4,7 @@
 
 **Link to Team Page:** [Team Page](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md)
 
-__Next Meeting__: Thursday 11/14, Sprint Planning (Week 8) 7:00 PM Zoom
+__Next Meeting__: Thursday 11/17, Weekly Meeting (Week 8) 5:00 PM In-Person, Geisel West Library
 
 ### Assignments:
 - We are developing the 3 pages in tandem, with the goal of having a working prototype done by Monday.
