@@ -1,5 +1,5 @@
 // recipe_editor.js
-import { get_FromStorage, add_ToList, save_ToStorage } from "/localStorage.js";
+import { get_FromStorage, add_ToList, save_ToStorage } from "./localStorage.js";
 
 // Run the init() function when the page has loaded
 window.addEventListener('DOMContentLoaded', init);
@@ -33,59 +33,57 @@ function initFormHandler() {
     const form = document.querySelector('form');
     var recipes = get_FromStorage('recipes');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         const formData = Object.fromEntries(new FormData(e.target).entries())
 
-        const filename = formData.filename;
-        const imagedata = formData.filedata;
-        if (filename == "") {
+        var filename = formData.filename;
+        var imagedata = formData.filedata;
+        if (filename == undefined) {
             filename = "no-image.png";
-            imagedata = require("./source/assets/images/no-image.txt");
+            const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
+            imagedata = await response.text();
         }
 
-        meal_types = []
-        for (let i=0; i<formData.keys().length; i++){
-            if (formData.keys()[i].slice(0,9) == "meal-type") {
-                meal_types.push(formData.keys()[i].slice(10))
+        let keys = Object.keys(formData);
+
+        let meal_types = []
+        let tools = []
+        let ingredients = []
+        let steps = []
+        for (let key of keys) {
+            if (key.slice(0,9) == "meal-type") {
+                meal_types.push(key.slice(10))
             }
-        }
 
-        tools = []
-        for (let i=0; i<formData.keys().length; i++){
-            if (formData.keys()[i].slice(0,7) == "tools-v") {
-                let id = formData.keys()[i].slice(-2)
+            if (key.slice(0,6) == "tool-v") {
+                let id = key.slice(-2)
                 tools.push({
                     id: id,
-                    quantity: formData["tools-nb-"+id],
-                    tool: formData["tools-v-"+id]
+                    quantity: formData["tool-nb-"+id],
+                    tool: formData["tool-v-"+id]
                 })
             }
-        }
 
-        ingredients = []
-        for (let i=0; i<formData.keys().length; i++){
-            if (formData.keys()[i].slice(0,14) == "ingredients-v") {
-                let id = formData.keys()[i].slice(-2)
-                tools.push({
+            if (key.slice(0,13) == "ingredients-v") {
+                let id = key.slice(-2)
+                ingredients.push({
                     id: id,
                     quantity: formData["ingredients-q-"+id],
                     unit: formData["ingredients-u-"+id],
                     ingredient: formData["ingredients-v-"+id]
                 })
             }
-        }
-
-        ingredients = []
-        for (let i=0; i<formData.keys().length; i++){
-            if (formData.keys()[i].slice(0,7) == "steps-v") {
-                let id = formData.keys()[i].slice(-2)
-                tools.push({
+            
+            if (key.slice(0,7) == "step-v") {
+                let id = key.slice(-2)
+                steps.push({
                     id: id,
                     step: formData["step-v-"+id]
                 })
             }
         }
 
+        
         const recipeObject = {
             // make the recipe data structure 
             recipe: ("0"+(recipes.length+1)).slice(-2),
@@ -109,9 +107,10 @@ function initFormHandler() {
             ingredients: ingredients,
             steps: steps
         }
-        recipes = add_ToList(recipe, recipes);
+        recipes = add_ToList(recipeObject, recipes);
         save_ToStorage('recipes', recipes);
-        window.location.url('source/recipe_viewer.html');
+        save_ToStorage('current_recipe', recipeObject.recipe)
+        window.location.url('http://127.0.0.1:5500/source/recipe_viewer.html');
     });
 
 }
@@ -358,10 +357,7 @@ function unloadHandler() {
      * Create the first textarea to fullfil with instruction to do the recipe
      */
       function addFirstStepElement() {
-        //let new_step = undefined;
-        //let label = undefined;
-        //let text = undefined;
-        [new_step, label, text] = createStepElement();
+        let [new_step, label, text] = new createStepElement();
         new_step.appendChild(label);
         new_step.appendChild(text);
         step_list.appendChild(new_step);
@@ -373,7 +369,7 @@ function unloadHandler() {
      * with an additional button to delete them
      */
     function addNewStepElement() {
-        [new_step, label, text] = createStepElement();
+        let [new_step, label, text] = new createStepElement();
         let cancel = document.createElement('button');
         cancel.classList.add('delete-step');
         cancel.textContent = "Delete";
@@ -484,7 +480,7 @@ function unloadHandler() {
      * @param {Array<Object>} tools An array of tools
      */
     function addFirstToolsElement(tools) {
-        [new_div, number_select, select] = createToolElement(tools);
+        let [new_div, number_select, select] = new createToolElement(tools);
         new_div.appendChild(number_select);
         new_div.appendChild(select);
         tool_list.appendChild(new_div)
@@ -535,7 +531,7 @@ function unloadHandler() {
      */
     function addNewToolElement(tools) {
 
-        const [new_div, number_select, select] = createToolElement(tools);
+        let [new_div, number_select, select] = new createToolElement(tools);
         const cancel = document.createElement('button');
         cancel.classList.add('delete-step');
         cancel.textContent = "Delete";
@@ -703,11 +699,11 @@ function unloadHandler() {
      * @param {Array<Object>} units An array of units
      */
     function addFirstIngredientsElement(ingredients, quantities, units) {
-        [
+        let [
             new_div, 
             quantity_select,
             unit_select,
-            select] = createIngredientElement(ingredients, quantities, units);
+            select] = new createIngredientElement(ingredients, quantities, units);
         new_div.appendChild(quantity_select)
         new_div.appendChild(unit_select);
         new_div.appendChild(select);
@@ -778,11 +774,11 @@ function unloadHandler() {
      * @param {Array<Object>} units An array of units
      */
     function addNewIngredientElement(ingredients, quantities, units) {
-        [
+        let [
             new_div, 
             quantity_select,
             unit_select,
-            select] = createIngredientElement(ingredients, quantities, units);
+            select] = new createIngredientElement(ingredients, quantities, units);
         const cancel = document.createElement('button');
         cancel.classList.add('delete-step');
         cancel.textContent = "Delete";

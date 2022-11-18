@@ -1,3 +1,5 @@
+// localStorage.js
+
 /**
  * Takes a String target and reads target from localStorage and returns an
  * array of all of this object found (parsed, not in string form). If
@@ -8,11 +10,12 @@
  * @param {Object} nullObject An object to use if nothing in localStorage
  * @returns {Object} An object found in localStorage
  */
- function get_FromStorage(target, nullObject=[]) {
+function get_FromStorage(target, nullObject=[]) {
     var response = JSON.parse(window.localStorage.getItem(target));
     if (!response) return nullObject;
     return response 
 }
+export{ get_FromStorage };
 
 /**
  * Takes an object and an array, adds the new object to the array if not null
@@ -27,6 +30,7 @@ function add_ToList(value, values) {
     values.push(value);
     return values
 }
+export{ add_ToList };
 
 /**
  * Takes in string and an object, converts the object to a string, and then
@@ -38,3 +42,4 @@ function add_ToList(value, values) {
 function save_ToStorage(target, values) {
     localStorage.setItem(target, JSON.stringify(values));
 }
+export{ save_ToStorage };
