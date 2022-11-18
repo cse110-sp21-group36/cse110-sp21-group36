@@ -1,4 +1,5 @@
 // recipe_editor.js
+import { get_FromStorage, add_ToList, save_ToStorage } from "/localStorage.js";
 
 // Run the init() function when the page has loaded
 window.addEventListener('DOMContentLoaded', init);
@@ -21,47 +22,6 @@ function init() {
     ingredientsHandler();
 }
 
-
-/**
- * Reads 'recipes' from localStorage and returns an array of
- * all of the recipes found (parsed, not in string form). If
- * nothing is found in localStorage for 'recipes', an empty array
- * is returned.
- * @returns {Array<Object>} An array of recipes found in localStorage
- */
- function getRecipesFromStorage() {
-    var recipes = JSON.parse(window.localStorage.getItem('recipes'));
-    if (!recipes) return [];
-    return recipes 
-}
-
-
-/**
- * Takes in a json of a recipe and ,
- * adds the new recipes to recipes array if not null or create an array 
- * with one elemnt recipe
- * @param {JSON<Object>} recipe A json of one recipe
- * @param {Array<Object>} recieps An array of recipes
- * @returns {Array<Object>} An array of recipes
- */
-function addRecipesToList(recipe, recipes) {
-    var recipes = JSON.parse(window.localStorage.getItem('recipes'));
-    if (recipes == null) { recipes = [] }
-    recipes.push(recipe);
-    return recipes
-}
-
-
-/**
- * Takes in an array of recipes, converts it to a string, and then
- * saves that string to 'recipes' in localStorage
- * @param {Array<Object>} recipes An array of recipes
- */
-function saveRecipesToStorage(recipes) {
-    localStorage.setItem('recipes', JSON.stringify(recipes));
-}
-
-  
 /**
  * Adds the necesarry event handlers to <form>, selects the form element, 
  * adds event listener for the 'submit' event, where creates a new FormData
@@ -71,10 +31,9 @@ function saveRecipesToStorage(recipes) {
  */
 function initFormHandler() {
     const form = document.querySelector('form');
+    var recipes = get_FromStorage('recipes');
 
     form.addEventListener('submit', (e) => {
-        formSubmitted = true;
-        var recipes = getRecipesFromStorage(recipeObject);
         const formData = Object.fromEntries(new FormData(e.target).entries())
 
         const filename = formData.filename;
@@ -150,8 +109,8 @@ function initFormHandler() {
             ingredients: ingredients,
             steps: steps
         }
-        var recipes = addRecipesToList(recipeObject);
-        saveRecipesToStorage(recipes);
+        recipes = add_ToList(recipe, recipes);
+        save_ToStorage('recipes', recipes);
         window.location.url('source/recipe_viewer.html');
     });
 
@@ -552,11 +511,11 @@ function unloadHandler() {
 
         new_button.addEventListener('click', () => {
             let new_tool = tool_list.querySelector(".new-tool-value").value
-            if (!(new_tool in tools)){
+            if (!tools.includes(new_tool)){
                 if (new_tool) {
                     const option = document.createElement("option");
                     option.textContent = new_tool;
-                    let select = main.querySelector('select');
+                    let select = main.querySelector('.choosen-tool');
                     select.appendChild(option);
 
                     tools.push(new_tool);
@@ -621,7 +580,7 @@ function unloadHandler() {
     main.appendChild(button);
 
     button.addEventListener('click', () => {
-        createNewIngredients(ingredients);
+        createNewIngredient(ingredients);
     })
 
 
@@ -758,39 +717,57 @@ function unloadHandler() {
     /**
      * Create the other textarea to fullfil with instruction to do the recipe 
      * with an additional button to delete them
-     * @param {Array<Object>} tools An array of tools
+     * @param {Array<Object>} ingredients An array of ingredients
      */
-    function createNewTool(tools) {
+    function createNewIngredient(ingredients) {
         let new_textarea = document.createElement('input');
         new_textarea.type = 'textarea';
-        new_textarea.classList.add('new-tool-value');
+        new_textarea.classList.add('new-ingredient-value');
         let new_button = document.createElement('button');
-        new_button.classList.add('new-tool');
-        new_button.textContent = "Add New Tool";
+        new_button.classList.add('new-ingredient');
+        new_button.textContent = "Add New Ingredient";
         let new_div = document.createElement('div');
 
         new_div.appendChild(new_textarea);
         new_div.appendChild(new_button);
-        tool_list.appendChild(new_div);
+        ingredient_list.appendChild(new_div);
         main.removeChild(button);
 
         new_button.addEventListener('click', () => {
-            let new_tool = tool_list.querySelector(".new-tool-value").value
-            if (!(new_tool in tools)){
-                if (new_tool) {
+            let new_ingredient = ingredient_list.querySelector(".new-ingredient-value").value
+            if (!ingredients.includes(new_ingredient)){
+                if (new_ingredient) {
                     const option = document.createElement("option");
-                    option.textContent = new_tool;
-                    let select = main.querySelector('select');
+                    option.textContent = new_ingredient;
+                    let select = main.querySelector('.choosen-ingredient');
                     select.appendChild(option);
 
-                    tools.push(new_tool);
-                    saveToolsToStorage(tools);
+                    ingredients.push(new_ingredient);
+                    saveIngredientsToStorage(ingredients);
 
-                    tool_list.removeChild(new_div);
+                    ingredient_list.removeChild(new_div);
                     main.appendChild(button);
                 }
             }
         })
+    }
+
+    /**
+     * Create the other textarea to fullfil with instruction to do the recipe 
+     * with an additional button to delete them
+     * @param {Array<Object>} units An array of units
+     */
+     function createNewUnit(units) {
+        
+    }
+
+    /**
+     * Create the other textarea to fullfil with instruction to do the recipe 
+     * with an additional button to delete them
+     * @param {Array<Object>} quantities An array of quantities
+     */
+     function createNewQuantity(quantities) {
+        
     }
 
     /**
