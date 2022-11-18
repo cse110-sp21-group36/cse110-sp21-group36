@@ -1,29 +1,46 @@
 window.addEventListener('DOMContentLoaded', init);
 function init() {
-  let recipes = getRecipesFromStorage();
-  let current = getCurrentRecipe(); 
-  displayInfo(recipes, current); 
+  let current = getCurrentRecipe(); //object
+  displayInfo(current); 
   initFormHandler();
 }
 
-function displayInfo(recipes, current ) {
-    // loop through to find the correct recipe 
-    for (var i = 0; i < recipes.length ; i++){
-    }
-    // fill in the information in the template
-    
-    // title
-    var title = document.getElementByID()
-    //favorite
-    //ingredients 
-    // steps
-    //materials 
-}
+function displayInfo(current) {
+   //fill in template 
+  //TITLE
+    var title = document.getElementById(“recipe-name”); 
+    title.textContent = current.name; 
 
-function getRecipesFromStorage() {
-  var stringForm = localStorage.getItem('recipes');
-  var recipes = JSON.parse(stringForm);
-  return recipes; 
+    //favorite 
+    if(data.favorite == “true”{
+    document.getElementById(“favorite”)
+      //set image 
+    }
+
+    // time 
+    var time = document.getElementById(“time”); 
+    time.textContent(data.time)’ 
+    //INGREDIENTS 
+    var ingredientsList = document.querySelector(‘ul[id=“ingredients-list”]’)
+
+    //loop through array of strings 
+    var LSingredients = data.ingredients 
+    for (int i = 0; i < LSingredients.length; i++){
+      //create new element 
+      //append to list 
+    }
+
+
+    //DIRECTIONS
+    var directionsList = document.querySelector(‘ol[id=“directions-list”]’)
+
+
+    //MATERIALS
+    var materials List = document.querySelector(‘ul[id=“materials-list”]’)
+
+
+    //add buttons that link to the other pages 
+    
 }
 
 function getCurrentRecipe() {
