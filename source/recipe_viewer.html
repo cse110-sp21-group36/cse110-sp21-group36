@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- CSS and JavaScript -->
-    <link rel="stylesheet" href="./assets/styles/recipe_viewer.css" />
+    <link rel="stylesheet" href="/source/assets/styles/recipe_viewer.css" />
     <script src="./assets/scripts/recipe_viewer.js"></script>
 
     <title>Recipe View Page</title>
@@ -17,34 +17,47 @@
     <header>
         <nav>
             <a href="./recipe_manager.html" title="Go to homepage">Homepage</a>
-            <a href="./recipe_editor.html" title="Go to recipe editor">Edit Recipe</a>
+            
         </nav>
     </header>
     <main>
         <header>
-            <h2 id+"recipie-name">Title of Recipe Goes Here</h2>
+            <h1 id="recipe-name">Title of Recipe Goes Here</h1>
+            <h2 id="time">Time</h2>
+            <h2 id="difficulty">Difficulty</h2>
             <!-- favorite icon (specific image when found) -->
-            <input type="image" />
+            <!-- <img id="favorite" src="./assets/images/no-image.png" alt="" /> -->
         </header>
-        <img src="./assets/images/no-image.png" alt="No images selected" />
+        <img class="title-img" id="recipeImage" src="./assets/images/no-image.png" alt="" />
+        
+        
         <h3>Ingredients:</h3>
             <div class="ingredients">
-              <ul id="ingredient-list>
+              <ul id="ingredient-list">
                   <li>Ingredient item</li>
               </ul>
             </div>
-        <h3>Cooking Materials:</h3>
-            <div class="materials">
-              <ul id="materials-list">
-                  <li>Cooking material item</li>
-              </ul>
-            </div>
-        <h3>Directions:</h3>
-            <div class="directions">
-              <ol id="directions-list">
+
+        <h3>Steps:</h3>
+            <div class="steps">
+              <ol id="steps-list">
                   <li>Direction item</li>
               </ol>
             </div>
+
+        <h3>Tools:</h3>
+            <div class="sools">
+              <ul id="tools-list">
+                  <li>Tool item</li>
+              </ul>
+            </div>
+
+        <h3>Notes:</h3>
+          <div class="notes">
+            <p id="notes">
+                Tool item
+            </p>
+          </div>
     </main>
   </body>
 </html>
