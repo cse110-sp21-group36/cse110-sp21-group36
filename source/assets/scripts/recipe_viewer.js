@@ -37,9 +37,20 @@ function init() {
 
 function displayInfo(current) {
    //fill in template 
+
     //TITLE
     var title = document.getElementById('recipe-name'); 
-    title.innerText = current.recipeName; 
+    title.textContent  = current.recipeName;
+    /* if (current.mealType != null){
+      title.textContent  += " (";
+      for (let i = 0; i < current.mealType.length; i++){
+        title.textContent  += current.mealType[i];
+        if (i != current.mealType.length - 1){
+          title.textContent  += ", ";
+        }
+      }
+      title.textContent  += ")";
+    } */
 
     //FAVORITE 
     // TODO: not sure what to do for favorite
@@ -53,17 +64,26 @@ function displayInfo(current) {
     var image = document.getElementById('recipeImage');
     image.src = current.imgSrc;
 
+    //MEAL TYPE
+    var mealtype = document.getElementById('mealtype');
+    for (let i = 0; i < current.mealType.length; i++){
+      mealtype.textContent += current.mealType[i];
+      if (i != current.mealType.length - 1){
+        mealtype.textContent  += ", ";
+      }
+    }
+
     //TIME 
     var time = document.getElementById('time'); 
-    time.innerText = "Total Time: " + current.totalTime;
+    time.textContent = "Total Time: " + current.totalTime;
 
     //DIFFICULTY
     var difficulty = document.getElementById('difficulty');
-    difficulty.innerText = "Difficulty: " + current.difficulty;
+    difficulty.textContent = "Difficulty: " + current.difficulty;
 
     //NOTES
     var notes = document.getElementById('notes');
-    notes.innerText = current.notes;
+    notes.textContent = current.notes;
 
     //INGREDIENTS 
     var htmlIngredient = document.getElementById('ingredient-list');
