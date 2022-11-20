@@ -18,8 +18,9 @@ function init() {
 }
 
 /**
+ * Populates view page.
  * 
- * Recipe {
+ * Recipe Object {
       imgSrc": "This is an absolute path on user's cpu",    // String that needs parsed to get URL
       recipeName": "String",                         // Single String
       "mealType": [Multiple Values],                 // Array of Strings, but specifily limited to ["Breakfast", "Lunch", etc.], if you get passed ["Dinner"], then that is the only meal type for that specific recipe; they can also have more than one.
@@ -31,6 +32,7 @@ function init() {
        "difficulty": "String"                        // A string, under <30 Characters e.g. "Medium", "Hard", etc.
        "notes": "String"                             // Single String, stores additional notes
 }
+  * @param current - current object to populate view page
  */
 
 function displayInfo(current) {
@@ -113,6 +115,11 @@ function displayInfo(current) {
     
 }
 
+/**
+ * Gets current recipe object.
+ * 
+ * @returns currRecipe - current recipe object
+ */
 function getCurrentRecipe() {
   var stringForm = localStorage.getItem('current');
   var currRecipe = JSON.parse(stringForm);
