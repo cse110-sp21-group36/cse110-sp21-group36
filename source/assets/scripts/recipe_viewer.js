@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', init);
 function init() {
-  //let current = getCurrentRecipe(); //object
-  let current = {
+  let current = getCurrentRecipe(); //object
+  /* let current = {
     "imgSrc": "/source/assets/images/icons/goldstar.jpg",
     "recipeName": "bruh",
     "mealType": ["breakfast", "lunch"],
@@ -12,7 +12,7 @@ function init() {
     "tools": ["fork", "spoon", "bowl"],
     "difficulty": "super duper hard",
     "notes": "hahaha"
-  }
+  } */
   displayInfo(current); 
   //initFormHandler();
 }
@@ -143,5 +143,6 @@ function displayInfo(current) {
 function getCurrentRecipe() {
   var stringForm = localStorage.getItem('current');
   var currRecipe = JSON.parse(stringForm);
+  console.log(currRecipe);
   return currRecipe; 
 }
