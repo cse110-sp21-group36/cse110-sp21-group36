@@ -41,24 +41,15 @@ function displayInfo(current) {
     //TITLE
     var title = document.getElementById('recipe-name'); 
     title.textContent  = current.recipeName;
-    /* if (current.mealType != null){
-      title.textContent  += " (";
-      for (let i = 0; i < current.mealType.length; i++){
-        title.textContent  += current.mealType[i];
-        if (i != current.mealType.length - 1){
-          title.textContent  += ", ";
-        }
-      }
-      title.textContent  += ")";
-    } */
+    
 
     //FAVORITE 
     // TODO: not sure what to do for favorite
-    /* if(current.favorite == 'true'){
+    if(current.favorite == true){
       var image = document.getElementById('favorite');
       //set image 
-      //image.src = '/source/assets/images/icons/goldstar.jpg';
-    } */
+      image.src = '/source/assets/images/icons/heart.jpg';
+    }
 
     //IMAGE
     var image = document.getElementById('recipeImage');
@@ -141,7 +132,7 @@ function displayInfo(current) {
  * @returns currRecipe - current recipe object
  */
 function getCurrentRecipe() {
-  var stringForm = localStorage.getItem('current');
+  var stringForm = localStorage.getItem('currRecipe');
   var currRecipe = JSON.parse(stringForm);
   console.log(currRecipe);
   return currRecipe; 
