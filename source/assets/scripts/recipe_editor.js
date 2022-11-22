@@ -74,6 +74,13 @@ function initFormHandler() {
                 //     unit: formData["ingredients-u-"+id],
                 //     ingredient: formData["ingredients-v-"+id]
                 // })
+                // let id = key.slice(-2)
+                // ingredients.push({
+                //     id: id,
+                //     quantity: formData["ingredients-q-"+id],
+                //     unit: formData["ingredients-u-"+id],
+                //     ingredient: formData["ingredients-v-"+id]
+                // })
                 let id = key.slice(-2)
                 ingredients.push(formData["ingredients-v-"+id]+' '+formData["ingredients-q-"+id]+' '+formData["ingredients-u-"+id]);
             }
@@ -122,7 +129,6 @@ function initFormHandler() {
         save_ToStorage('currRecipe', recipeObject)
         window.location.url('./source/recipe_viewer.html');
     });
-
 }
 
 
