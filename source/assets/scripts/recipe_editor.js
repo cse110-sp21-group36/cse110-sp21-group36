@@ -78,7 +78,7 @@ function initFormHandler() {
                 ingredients.push(formData["ingredients-v-"+id]+' '+formData["ingredients-q-"+id]+' '+formData["ingredients-u-"+id]);
             }
             
-            if (key.slice(0,7) == "step-v") {
+            if (key.slice(0, 6) == "step-v") {
                 // let id = key.slice(-2);
                 // steps.push({
                 //     id: id,
@@ -104,7 +104,8 @@ function initFormHandler() {
             favorite: formData.favorite == "Yes",
 
             difficulty: formData.difficulty,
-            totalTime: formData.hours+' hours '+formData.mins+' mins',
+            totalTimeString: formData.hours+' hours '+formData.mins+' mins',
+            totalTime: formData.hours*60+formData.mins,
             time: {
                 hours: formData.hours,
                 mins: formData.mins
