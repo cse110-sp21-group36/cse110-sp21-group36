@@ -4,7 +4,10 @@
     align-content: space-around;
 }
 
+
 .title-img {
+    width: 400px;
+    height: 200px;
     display: flex;
     justify-content: space-evenly;
     align-content: space-around;
@@ -63,3 +66,4 @@ footer{
     text-align: center;
     margin: auto;
 }
+

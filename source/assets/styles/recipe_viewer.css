@@ -1,29 +1,29 @@
-* {
-    font-family: sans-serif;
+.title-img {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: space-around;
+    border: 5px solid rgb(238, 183, 4);
+    margin: auto;
 }
 
-header {
-    padding: 60px;
-    text-align: center;
-    background: #ec9706;
-    color: white;
-    font-size: 30px;
-    position: relative;
-    float: center;
+.favorite{
+    width: 100px;
+    height: 100px;
 }
 
-#nav-bar {
+h1{
+    font-size: 150px;
+    margin: auto;
+}
+
+h2{
+    font-size: 12px;
+}
+
+body {
+    background-color: rgb(230, 226, 173);
     
-}
+  }
 
-.ingredients {
-    
-}
-
-.materials {
-
-}
-
-.directions {
-
-}
