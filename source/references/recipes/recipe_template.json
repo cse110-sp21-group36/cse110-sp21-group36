@@ -1,12 +1,12 @@
 {
-    "imgSrc": "img path",
-    "recipeName": "recipe name",
-    "mealType": ["breakfast", "lunch"],
-    "totalTime": 0,                            
-    "ingredients": ["cheese", "bacon"],                 
+    "imgSrc": "/cse110-sp21-group36/source/assets/images/mac_n_cheese.jpg",
+    "recipeName": "Mac N Cheese",
+    "mealType": ["Lunch", "Dinner"],
+    "totalTime": 30,                            
+    "ingredients": ["Cheese", "Pasta"],                 
     "steps": ["step 1", "2nd step"],
-    "favorite": false,                     
-    "tools": ["tool 1", "knife"],                    
-    "difficulty": "hard",
-    "notes": "very fun recipe"
+    "favorite": true,                     
+    "tools": ["spoon", "pot"],                    
+    "difficulty": "easy",
+    "notes": "very tasty"
 }

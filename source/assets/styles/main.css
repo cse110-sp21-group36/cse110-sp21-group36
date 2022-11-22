@@ -38,7 +38,6 @@ html {
   --grey-600: #475569;
   --grey-700: #334155;
   --grey-800: #1e293b;
-  --grey-900: #0f172a;
   /* rest of the colors */
   --black: #222;
   --white: #fff;
@@ -52,8 +51,8 @@ html {
   --bodyFont: 'Nunito', sans-serif;
   --smallText: 0.7em;
   /* rest of the vars */
-  --backgroundColor: var(--grey-50);
-  --textColor: var(--grey-900);
+  --backgroundColor: var(--grey-200);
+  --textColor: var(navBarTextColor);
   --borderRadius: 0.25rem;
   --letterSpacing: 1px;
   --transition: 0.3s ease-in-out all;
@@ -271,89 +270,103 @@ Navigation bar
 ===============
 */
 .navbar {
-	margin-top: 0.5rem;
+	margin-top: 0;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-  }
-  /* Keeps the navbar in the center of screen */
-  .nav-center {
-	width: 90vw;
+}
+
+/* Keeps the navbar in the center of screen */
+.nav-center {
+	width: 30vw;
 	max-width: var(--max-width);
-  }
-  /* Position logo and navbar elements away from each other */
-  .nav-header {
+}
+
+/* Position logo and navbar elements away from each other */
+.nav-header {
 	height: 6rem;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-  }
-  /* Change size of logo */
-  .nav-header img {
+  text-align: center;
+	justify-content: flex-end;
+}
+
+/* Change size of logo */
+.nav-header img {
 	width: 200px;
-  }
-  /* Have logo be aligned with nav button */
-  .nav-logo {
+  margin-left: 10px;
+}
+
+/* Have logo be aligned with nav button */
+.nav-logo {
 	display: flex;
 	align-items: flex-end;
-  }
-  /* Change padding of nav button */
-  .nav-btn {
+  margin-right: auto;
+	margin-left: auto;
+}
+
+/* Change padding of nav button */
+.nav-btn {
 	padding: 0.15rem 0.75rem;
-  }
-  .nav-btn i {
+}
+
+.nav-btn i {
 	font-size: 1.25rem;
-  }
-  /* Display nav bar toggle for mobile screens */
-  .nav-links {
+}
+
+/* Display nav bar toggle for mobile screens */
+.nav-links {
 	height: 0;  /* hide nav links on mobile screens */
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	transition: var(--transition);  /* toggle effect */
-  }
-  .show-links {
+}
+.show-links {
 	/* Change height when adding or removing nav links */
 	height: 23.9375rem;
 	/* height: 310px; */
-  }
+}
    
-  .nav-link {
-	display: block;
+.nav-link {
+	display: flex;
 	text-align: center;
 	font-size: 1.25rem;
 	text-transform: capitalize;
-	color: var(--grey-900);
+	color: var(navBarTextColor);
 	letter-spacing: var(--letterSpacing);
 	padding: 1rem 0;
 	border-top: 1px solid var(--grey-500);
 	transition: var(--transition);
-  }
-  .nav-link:hover {
+}
+
+.nav-link:hover {
 	color: var(--primary-500);
-  }
+}
   
-  .contact-link a {
+.contact-link a {
 	padding: 0.15rem 1rem;
+} 
+
+/* For desktop screen sizes, hide nav button and format nav-bar links to display in a line */
+@media screen and (min-width: 992px) {
+
+  /* Format the display of navbar */
+  navbar {
+    height: 6 rem;
+  }
+
+  /* Set the nav links in a line */
+    .nav-center {
+      display: flex;
+      align-items: center;
+  }
+  /* Create distance between logo and nav links */
+  .nav-header {
+    padding: 0;
+    margin-right: 2rem;
+    height: auto;  /* show nav links on desktop screens */
   } 
-  /* For desktop screen sizes, hide nav button and format nav-bar links to display in a line */
-  @media screen and (min-width: 992px) {
-	/* Format the display of navbar */
-	.navbar {
-	  height: 6rem;
-	}
-	/* Set the nav links in a line */
-	.nav-center {
-	  display: flex;
-	  align-items: center;
-	}
-	/* Create distance between logo and nav links */
-	.nav-header {
-	  padding: 0;
-	  margin-right: 2rem;
-	  height: auto;  /* show nav links on desktop screens */
-	} 
-	/* Hide nav button for wider screens */
+
+/* Hide nav button for wider screens */
 	.nav-btn {
 	  display: none;
 	}
@@ -376,4 +389,4 @@ Navigation bar
 	  margin-right: 0;
 	  margin-left: auto;
 	}
-  }
+}

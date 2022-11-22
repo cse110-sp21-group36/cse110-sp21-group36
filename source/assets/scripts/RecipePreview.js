@@ -9,6 +9,18 @@ class RecipePreview extends HTMLElement {
       let shadowEl = this.attachShadow({mode:'open'});
       
       let articleEl = document.createElement('article');
+
+      articleEl.addEventListener('click', (event) => {
+        if (event.target.tagName == "A") {
+          let recipes = JSON.parse(localStorage.getItem('recipes'));
+          for (let i = 0; i < recipes.length; i++) {
+            if (recipes[i]["recipeName"] == event.target.innerHTML) {
+              localStorage.setItem('currRecipe', JSON.stringify(recipes[i]));
+            }
+          }
+        }
+      })
+      
       let styleEl = document.createElement('style');
 
       styleEl.innerHTML = `* {
@@ -120,14 +132,7 @@ class RecipePreview extends HTMLElement {
     
       articleEl.innerHTML = `<img src='${data["imgSrc"]}' alt='Recipe Image'>
                              <a href='/cse110-sp21-group36/source/recipe_viewer.html'>${data["recipeName"]}</a>
-                             <p>${data["mealType"]}</p>
-                             <p>${data["totalTime"]}</p>
-                             <p>${data["ingredients"]}</p>
-                             <p>${data["steps"]}</p>
-                             <p>${data["favorite"]}</p>
-                             <p>${data["tools"]}</p>
-                             <p>${data["difficulty"]}</p>
-                             <p>${data["notes"]}</p>`;
+                             <p>${data["totalTime"]} Minutes</p>`;
   
     }
   }
