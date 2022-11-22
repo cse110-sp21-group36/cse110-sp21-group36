@@ -56,30 +56,36 @@ function initFormHandler() {
             }
 
             if (key.slice(0,6) == "tool-v") {
+                // let id = key.slice(-2)
+                // tools.push({
+                //     id: id,
+                //     quantity: formData["tool-nb-"+id],
+                //     tool: formData["tool-v-"+id]
+                // })
                 let id = key.slice(-2)
-                tools.push({
-                    id: id,
-                    quantity: formData["tool-nb-"+id],
-                    tool: formData["tool-v-"+id]
-                })
+                tools.push(formData["tool-nb-"+id]+' '+formData["tool-v-"+id]);
             }
 
             if (key.slice(0,13) == "ingredients-v") {
+                // let id = key.slice(-2)
+                // ingredients.push({
+                //     id: id,
+                //     quantity: formData["ingredients-q-"+id],
+                //     unit: formData["ingredients-u-"+id],
+                //     ingredient: formData["ingredients-v-"+id]
+                // })
                 let id = key.slice(-2)
-                ingredients.push({
-                    id: id,
-                    quantity: formData["ingredients-q-"+id],
-                    unit: formData["ingredients-u-"+id],
-                    ingredient: formData["ingredients-v-"+id]
-                })
+                ingredients.push(formData["ingredients-v-"+id]+' '+formData["ingredients-q-"+id]+' '+formData["ingredients-u-"+id]);
             }
             
             if (key.slice(0,7) == "step-v") {
-                let id = key.slice(-2)
-                steps.push({
-                    id: id,
-                    step: formData["step-v-"+id]
-                })
+                // let id = key.slice(-2);
+                // steps.push({
+                //     id: id,
+                //     step: formData["step-v-"+id]
+                // })
+                let id = key.slice(-2);
+                steps.push(formData["step-v-"+id]);
             }
         }
 
@@ -87,20 +93,23 @@ function initFormHandler() {
         const recipeObject = {
             // make the recipe data structure 
             recipe: ("0"+(recipes.length+1)).slice(-2),
+            recipeName: formData.title,
             title: formData.title,
             author: formData.author,
             image: {
                 name: filename,
                 data: imagedata,
             },
+            imgSrc: imagedata,
             favorite: formData.favorite == "Yes",
 
             difficulty: formData.difficulty,
+            totalTime: formData.hours+' hours '+formData.mins+' mins',
             time: {
                 hours: formData.hours,
                 mins: formData.mins
             },
-            mealtype: meal_types,
+            mealType: meal_types,
             note: formData.note,
 
             tools: tools,
