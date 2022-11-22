@@ -105,13 +105,13 @@ function initFormHandler() {
 
             difficulty: formData.difficulty,
             totalTimeString: formData.hours+' hours '+formData.mins+' mins',
-            totalTime: formData.hours*60+formData.mins,
+            totalTime: Number(formData.hours)*60+Number(formData.mins),
             time: {
                 hours: formData.hours,
                 mins: formData.mins
             },
             mealType: meal_types,
-            note: formData.note,
+            notes: formData.note,
 
             tools: tools,
             ingredients: ingredients,
@@ -120,7 +120,7 @@ function initFormHandler() {
         recipes = add_ToList(recipeObject, recipes);
         save_ToStorage('recipes', recipes);
         save_ToStorage('currRecipe', recipeObject)
-        window.location.url('http://127.0.0.1:5500/source/recipe_viewer.html');
+        window.location.url('./source/recipe_viewer.html');
     });
 
 }
