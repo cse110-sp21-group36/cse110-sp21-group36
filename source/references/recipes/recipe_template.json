@@ -1,70 +1,12 @@
 {
-    "author": "author_name",
-    "email": "author_email",
-    "date": "creation_date",
-    "last_modified_date": "last_modefication_date",
-    "title": "recipe_title",
-    "image": "binary_image_file",
-    "tags": [
-        "cheese", 
-        "pasta"
-    ],
-    "meal_type": [
-        "lunch",
-        "dinner",
-        "brunch"
-    ],
-    "filters": [
-        "veggie"
-    ],
-    "informations": {
-        "dificulty": "beginner",
-        "time": 20,
-        "price": "$$", 
-        "count": 3,
-        "is_favorite": true,
-        "person_nb": null
-        
-    },
-    "ingredients": [
-        {
-            "number": 1,
-            "name": "pasta",
-            "quatity": 5,
-            "unity": "ounce"
-        },
-        {
-            "number": 2,
-            "name": "cheese",
-            "quatity": 5,
-            "unity": "grammes"
-        },
-        {
-            "number": 2,
-            "name": "butter",
-            "quatity": 4,
-            "unity": "grammes"
-        }
-    ],
-    "steps": [
-        {
-            "number": 1,
-            "name": "cook pasta",
-            "time": null
-        },
-        {
-            "number": 2,
-            "name": "add cheese and butter",
-            "time": null
-        },
-        {
-            "number": 3,
-            "name": "enjoy",
-            "time": null
-        }
-    ],
-    "comments": [
-        "this is good",
-        "you must add pepper"
-    ]
+    "imgSrc": "/cse110-sp21-group36/source/assets/images/mac_n_cheese.jpg",
+    "recipeName": "Mac N Cheese",
+    "mealType": ["Lunch", "Dinner"],
+    "totalTime": 30,                            
+    "ingredients": ["Cheese", "Pasta"],                 
+    "steps": ["step 1", "2nd step"],
+    "favorite": true,                     
+    "tools": ["spoon", "pot"],                    
+    "difficulty": "easy",
+    "notes": "very tasty"
 }
