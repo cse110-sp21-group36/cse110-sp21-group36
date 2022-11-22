@@ -1,10 +1,10 @@
 # 🌐 Code Avengers ⍟
 
-## Team Agenda (Week 7)
+## Team Agenda (Week 8)
 
 **Link to Team Page:** [Team Page](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md)
 
-__Next Meeting__: Thursday 11/14, Sprint Planning (Week 8) 7:00 PM Zoom
+__Next Meeting__: Thursday 11/17, Weekly Meeting (Week 8) 5:00 PM In-Person, Geisel West Library
 
 ### Assignments:
 - We are developing the 3 pages in tandem, with the goal of having a working prototype done by Monday.
@@ -12,18 +12,23 @@ __Next Meeting__: Thursday 11/14, Sprint Planning (Week 8) 7:00 PM Zoom
 - Here is the Recipe Object Structure:
 ```
 Recipe {
-      imgSrc": "This is an absolute path on user's cpu",
-      recipeName": "",
-      "mealType": [Multiple Values],
-      "totalTime":_____,
-      "ingredients":____,
-       “steps”:____
-       "favorite": True/False
-       "tools":____
-       "difficulty":____
-       "notes":___
+      imgSrc": "This is an absolute path on user's cpu",    // String that needs parsed to get URL
+      recipeName": "String",                         // Single String
+      "mealType": [Multiple Values],                 // Array of Strings, but specifily limited to ["Breakfast", "Lunch", etc.], if you get passed ["Dinner"], then that is the only meal type for that specific recipe; they can also have more than one.
+      "totalTime": num#,                             // Number
+      "ingredients": [String Array],                 // An array of Strings e.g. ["Carrots", "
+       “steps”: [String Array]                       // An array of Strings e.g. ["Step 1: Add Water", "Step 2: Boil", ... ]
+       "favorite": True/False                        // Boolean
+       "tools": [String Array]                       // Tools: ["Frying Pan", "Beaker", "Blow Torch", ... ]
+       "difficulty": "String"                        // A string, under <30 Characters e.g. "Medium", "Hard", etc.
+       "notes": "String"                             // Single String, stores additional notes
 }
 ```
+
+This option was chosen to enter Total Time:
+            Enter Time:
+            [___###____] mins
+
 
 ### Team Roles:
 - Triston Babers __Team Lead__ [Home Page Team]
@@ -39,4 +44,4 @@ Recipe {
 - Julia Le __Planner__ [Recipe View Page]
 
 ### Meeting Note-Taking:
-Jiancheng > Rappel > Miko > Ettore > Triston > Meron > Thanh > Andrew > Duc > Justin > Julia
+Miko > Ettore > Triston > Meron > Thanh > Andrew > Duc > Justin > Julia > Jiancheng > Rappel

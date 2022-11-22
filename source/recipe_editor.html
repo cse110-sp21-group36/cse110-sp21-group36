@@ -1,46 +1,155 @@
+<!-- 
+    Team 36 - Code Avengers
+    EDITOR PAGE - RECIPE APP 
+    Source use: Lab 6 
+    This file contains the structure of the editor page which user will do all the edits for their 
+    recipe including create, update and delete. 
+    There are 5 main sections: navigation; title and image; general info; tools, ingredients 
+    and steps; functional buttons. 
+-->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Recipe Manager</title>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <title>Code Avenger's Recipe</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" type="image/png" 
+          href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true">
+    
+    <!-- CSS and JavaScript -->
+    <link rel="stylesheet" href="./assets/styles/recipe-editor.css"> 
+    <script src="./assets/scripts/recipe_editor.js"></script> 
+</head>
 
-        <!-- Main Stylesheets & Scripts -->
-        <link rel="stylesheet" href="assets/styles/main.css" />
-        <link rel="stylesheet" href="assets/styles/recipe_editor.css" />
-        <script src="assets/scripts/recipe_editor.js" type="module"></script>
-    </head>
+<body>
+    <header>
+        <!-- App logo -->
+        <img 
+            src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true" 
+            width="150"
+            height="100"
+            alt="page logo">
 
-    <body>
-        <header>
-            <!-- Make the header of all our pages -->
+        <!-- navigation -->
+        <nav class="nav-bar">
+            <button type="button" class="nav-button">Home</button>
+        </nav>
+        <!-- end navigation -->
+    </header>
 
-        </header>
-        <main>
-            <!-- Make the main content with the form to add recipe -->
-            <form id="new-repice" action="recipe_viewer.html">
-                <!-- Make inputs for everydata we need for the recipe -->
-                <!-- Do javascript link to recipe_editor.html -->
-                <fieldset id="mandatory">
-                    <!-- Maybe one for mandatory data and one for optional-->
-                </fieldset>
-                <fieldset id="optional">
+    <main>
+        <!-- form to add info for a new recipe -->
+        <form id="new-recipe">
+            <!-- title and image -->
+            <fieldset class="name-img-fav">
+            <legend>Name, Author, Image and Favorite:</legend>
+                
+                <label for="titleIn">Recipe Name:
+                    <input type="text" id="titleIn" name="titleIn" required>
+                </label><br>
 
-                </fieldset>
+                <label for="authorIn">Author Name:
+                    <input type="text" id="authorIn" name="authorIn" required>
+                </label><br>
+
+                <!-- recipe image -->
+                <label for="imageIn" class="drag-area">Drag Area:
+                    <!-- place to drag and drop image -->
+                    <div class="imageHolder"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <header class="drag-header" >Drag & Drop to Upload File</header>
+                    <span>or</span>
+                    <button class="browse-image">Browse File</button>
+                    <!-- name of the image file -->
+                    <p id="imageName"></p>
+                    <!-- store the image file to localStorage -->
+                    <input type="file" hidden>
+                </label><br>
+
+                <!-- favorite recipe -->
+                <label for="favoriteIn">Favorite:
+                    <input type="checkbox" id="favoriteIn" name="favoriteIn" value="Yes" unchecked>
+                </label><br>
+            </fieldset>
+        
+            <!-- difficulty, time, meal type, note -->
+            <fieldset class="general-info">
+            <legend>General Info:</legend>
+                <label for="difficultyIn">Difficulty:
+                    <input type="text" id="difficultyIn" name="difficultyIn" required>
+                </label><br>
+
+                <label for="timeIn">Estimated Time:
+                    <select name="hours" id="hours">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select> hours
+                    <select name="mins" id="mins">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select> mins
+                </label><br>
+
+                <label for="mealTypeIn" class="meal-type">Meal Type:
+                    <div id="mealTypeIn">
+                        <!-- load the meal type save in localStorage -->
+                        <!-- example: 
+                        <input type="checkbox" id="breakfast" name="breakfast">
+                        <label for="breakfast"> Breakfast </label> -->
+                    </div>
+                    <!-- <button class="new-type-btn">Custom Meal</button>  -->
+                </label><br>
+                    
+                <label for="noteIn">Note:
+                    <textarea id="noteIn" name="noteIn" cols="38" rows="3"></textarea>
+                </label><br>
+            </fieldset>
             
-                <button type="submit" id="save">Save</button>
+            <!-- tools, ingredients, steps -->
+            <!-- creates multiple inputs, offer the possibility to add some 
+            more if needed for each categories -->
+            <fieldset class="tool-ingredient-step">
+            <legend>Tools, Ingredients and Steps:</legend>
+                <label for="toolsIn" class="tool-list">Tools:
+                    <div id="toolsIn">
+                        <!-- add dinamicly the tools there -->
+                    </div>
+                </label><br>
 
-            </form>
-            <!-- Do javascript recipe_editor.js to create -->
-            <!-- Do javascript link to recipe_viewer.html when recipe create -->
-            <!-- Do javascript creation message -->
-            <!-- Do javascript alert if not sqve before leqving message -->
+                <label for="ingredientsIn" class="ingredient-list", >Ingredients:
+                    <div id="ingredientsIn">
+                        <!-- add dinamicly the ingredients there -->
+                    </div>
+                </label><br>
+                    
+                <label for="stepsIn" class="step-list">Steps:
+                    <div id="stepsIn">
+                        <!-- add dinamicly the steps there -->
+                    </div>
+                </label><br>
+            </fieldset>
 
-        </main>
-        <footer>
-            <!-- Make the footer of all our pages (optional) -->
+            <!-- functional buttons -->
+            <button type="submit" class="save-recipe">Save Recipe </button>
+            <button type="button" class="discard-change">Cancel Changes</button>
+            <!-- end buttons -->
 
-        </footer>
-    </body>
+        </form>
+        <!-- end form -->
+        
+    </main>
+    <footer>
+        <p>Team 36 Code Avengers @ CSE110 Fall 2022</p>
+    </footer>
+</body>
 </html>
