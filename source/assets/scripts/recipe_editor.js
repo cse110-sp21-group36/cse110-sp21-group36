@@ -109,7 +109,7 @@ function initFormHandler() {
         }
         recipes = add_ToList(recipeObject, recipes);
         save_ToStorage('recipes', recipes);
-        save_ToStorage('current_recipe', recipeObject.recipe)
+        save_ToStorage('currRecipe', recipeObject)
         window.location.url('http://127.0.0.1:5500/source/recipe_viewer.html');
     });
 
