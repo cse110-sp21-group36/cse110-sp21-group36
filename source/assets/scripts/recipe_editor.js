@@ -1,5 +1,7 @@
 // recipe_editor.js
 import { get_FromStorage, add_ToList, save_ToStorage } from "./localStorage.js";
+import { create_Element } from "./RecipeEditorElement.js";
+import { addCustom_Element } from "./addCustomElement.js";
 
 // Run the init() function when the page has loaded
 window.addEventListener('DOMContentLoaded', init);
@@ -40,8 +42,9 @@ function initFormHandler() {
         var imagedata = formData.filedata;
         if (filename == undefined) {
             filename = "no-image.png";
-            const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
-            imagedata = await response.text();
+            imagedata = imagedata
+            // const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
+            // imagedata = await response.text();
         }
 
         let keys = Object.keys(formData);
@@ -230,62 +233,22 @@ function unloadHandler() {
  */
  function mealTypeHandler() {
 
+    const element = "mealTypes";
     const mealType = document.querySelector(".meal-type");
     const button = document.createElement('button');
     button.classList.add("new-type-btn");
     button.textContent = "Custom Meal";
     const mealDiv = mealType.querySelector("div"); 
     
-    const meals = getMealsFromStorage();
+    const meals = get_FromStorage(
+        element, ['breakfast', 'lunch', 'dinner', 'snack']);
     addMealsToDocument(meals);
     mealType.appendChild(button);
 
     button.addEventListener('click', () => {
-        addCustomMealsToList();
+        addCustom_Element(
+            element, mealDiv, mealType, button, meals, "Add New Meal Type");
     });
-    
-
-    /**
-     * Reads 'mealTypes' from localStorage and returns an array of
-     * all of the meal type found (parsed, not in string form). If
-     * nothing is found in localStorage for 'mealTypes', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of meal types
-     */
-    function getMealsFromStorage() {
-        const meals = JSON.parse(window.localStorage.getItem('mealTypes'));
-        if (!meals) return ['breakfast', 'lunch', 'dinner', 'snack'];
-        return meals 
-    }
-
-    /**
-     * Takes in an array of meal types, converts it to a string, and then
-     * saves that string to 'mealTypes' in localStorage
-     * @param {Array<Object>} meals An array of meal types
-     */
-    function saveMealsToStorage(meals) {
-        localStorage.setItem('mealTypes', JSON.stringify(meals));
-    }
-
-    /**
-     * Takes a meal type, create the checkbox + label element on the html 
-     * file
-     * @param {String<Object>} meal A string of one meal type
-     */
-     function createMealTypeElement(meal) {
-        meal = meal.toLowerCase();
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = meal;
-        checkbox.name = "meal-type-"+meal;
-        checkbox.value = "Yes";
-        let label = document.createElement('label')
-        label.htmlFor = meal;
-        label.textContent = meal[0].toUpperCase() + meal.substring(1);
-
-        mealDiv.appendChild(checkbox);
-        mealDiv.appendChild(label);
-    }
 
     /**
      * Takes in an array of meal types and for each and then appends 
@@ -294,41 +257,8 @@ function unloadHandler() {
      */
     function addMealsToDocument(meals) {
         for (let i = 0; i < meals.length; i++) {
-            createMealTypeElement(meals[i]);
+            create_Element(element, mealDiv, meals[i]);
         }
-    }
-
-    /**
-     * Takes nothing, adds event listener if someone want to add a new
-     * meal type, update localStorage, and the page
-     */
-     function addCustomMealsToList() {
-        let new_textarea = document.createElement('input');
-        new_textarea.type = 'textarea';
-        new_textarea.classList.add('new-meal-type-value');
-        let new_button = document.createElement('button');
-        new_button.classList.add('new-meal-type');
-        new_button.textContent = "Add New Meal Type";
-        let new_div = document.createElement('div');
-
-        new_div.appendChild(new_textarea);
-        new_div.appendChild(new_button);
-        mealDiv.appendChild(new_div);
-        mealType.removeChild(button);
-
-        new_button.addEventListener('click', () => {
-            let new_meal_type = mealDiv.querySelector(".new-meal-type-value").value
-            if (!(new_meal_type in meals)) {
-                if (new_meal_type) {
-                    createMealTypeElement(new_meal_type);
-                    mealDiv.removeChild(new_div);
-                    mealType.appendChild(button);
-
-                    meals.push(new_meal_type);
-                    saveMealsToStorage(meals);
-                }
-            }
-        });
     }
 }
 
@@ -337,10 +267,13 @@ function unloadHandler() {
  * steps to do the recipe
  */
  function stepsHandler() {
+
     var step_number = 1;
+    const element = "steps";
     const main = document.querySelector(".step-list");
     const step_list = main.querySelector('div');
-    addFirstStepElement();
+    create_Element(element, step_list, step_number);
+    step_number = step_number+1;
 
     let add_step = document.createElement('button');
     add_step.classList.add('create-step');
@@ -348,57 +281,9 @@ function unloadHandler() {
     main.appendChild(add_step);
 
     add_step.addEventListener('click', () => {
-        addNewStepElement();
-    })
-
-
-     /**
-     * Creates the html element for step
-     * @return {Array<Object>} of html element 
-     */
-      function createStepElement() {
-        let new_step = document.createElement("div");
-        let label = document.createElement('label');
-        label.htmlFor = "step-v-"+("0"+step_number).slice(-2);
-        label.textContent = " - ";
-        let text = document.createElement('input');
-        text.type = "text";
-        text.name = "step-v-"+("0"+step_number).slice(-2);
-        text.required = true;
+        create_Element(element, step_list, step_number);
         step_number = step_number+1;
-        return [new_step, label, text]
-    }
-
-     /**
-     * Create the first textarea to fullfil with instruction to do the recipe
-     */
-      function addFirstStepElement() {
-        let [new_step, label, text] = new createStepElement();
-        new_step.appendChild(label);
-        new_step.appendChild(text);
-        step_list.appendChild(new_step);
-    };
-
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     */
-    function addNewStepElement() {
-        let [new_step, label, text] = new createStepElement();
-        let cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
-        cancel.textContent = "Delete";
-        new_step.appendChild(label);
-        new_step.appendChild(text);
-        new_step.appendChild(cancel);
-        step_list.appendChild(new_step);
-
-        let delete_step = new_step.querySelector("button")
-        delete_step.addEventListener('click', () => {
-            step_list.removeChild(new_step);
-        })
-    };
+    })
 }
 
 /**
