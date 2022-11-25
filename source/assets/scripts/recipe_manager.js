@@ -23,7 +23,7 @@ function createNewRecipeButtonFunctionality() {
     let button = document.getElementById('createNewRecipeButton');
     button.onclick = () => {
         localStorage.setItem('currRecipe', null);
-        window.location.replace('/cse110-sp21-group36/source/recipe_editor.html');
+        window.location.replace('./recipe_editor.html');
     }
 }
 

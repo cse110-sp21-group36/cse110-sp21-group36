@@ -11,7 +11,7 @@ function init() {
     // Add the event listeners to the form elements
     initFormHandler();
     // 
-    unloadHandler();
+    // unloadHandler();
     //
     dragDropImageHandler();
     //
@@ -77,13 +77,6 @@ function initFormHandler() {
                 //     unit: formData["ingredients-u-"+id],
                 //     ingredient: formData["ingredients-v-"+id]
                 // })
-                // let id = key.slice(-2)
-                // ingredients.push({
-                //     id: id,
-                //     quantity: formData["ingredients-q-"+id],
-                //     unit: formData["ingredients-u-"+id],
-                //     ingredient: formData["ingredients-v-"+id]
-                // })
                 let id = key.slice(-2)
                 ingredients.push(formData["ingredients-v-"+id]+' '+formData["ingredients-q-"+id]+' '+formData["ingredients-u-"+id]);
             }
@@ -98,7 +91,6 @@ function initFormHandler() {
                 steps.push(formData["step-v-"+id]);
             }
         }
-
         
         const recipeObject = {
             // make the recipe data structure 
@@ -130,7 +122,6 @@ function initFormHandler() {
         recipes = add_ToList(recipeObject, recipes);
         save_ToStorage('recipes', recipes);
         save_ToStorage('currRecipe', recipeObject)
-        window.location.url('./source/recipe_viewer.html');
     });
 }
 

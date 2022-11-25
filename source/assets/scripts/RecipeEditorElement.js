@@ -172,9 +172,9 @@ function createIngredientElement(div, [quantities, units, ingredients], number) 
         let cancel = document.createElement('button');
         cancel.classList.add('delete-step');
         cancel.textContent = "Delete";
-        new_tool.appendChild(cancel);
+        new_ingredient.appendChild(cancel);
         cancel.addEventListener('click', () => {
-            div.removeChild(new_tool);
+            div.removeChild(new_ingredient);
         })
     }
 
