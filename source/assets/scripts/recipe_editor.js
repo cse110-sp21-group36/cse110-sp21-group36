@@ -41,7 +41,7 @@ function initFormHandler() {
         var filename = formData.filename;
         var imagedata = formData.filedata;
         if (filename == undefined) {
-            filename = "no-image.png";
+            filename = "./assets/images/no-image.png";
             imagedata = imagedata
             // const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
             // imagedata = await response.text();
