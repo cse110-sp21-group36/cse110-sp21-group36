@@ -20,21 +20,30 @@ function addCustom_Element(
     new_div.appendChild(new_textarea);
     new_div.appendChild(new_button);
     targetDiv.appendChild(new_div);
-    targetUpDiv.removeChild(targetButton);
+    // targetUpDiv.removeChild(targetButton);
+    targetButton.hidden = true;
 
     new_button.addEventListener('click', () => {
         let new_target = targetDiv.querySelector('.new-'+target+'-value').value
         new_target = new_target.toLowerCase();
         if (!values.includes(new_target)) {
             if (new_target) {
-                create_Element(target, targetDiv, new_target);
-                targetDiv.removeChild(new_div);
-                targetUpDiv.appendChild(targetButton);
+                if (!(target=="mealTypes")) {
+                    const select = targetDiv.querySelector(".choosen-"+target);
+                    const option = document.createElement("option");
+                    option.textContent = new_target;
+                    select.appendChild(option);
 
+                } else {
+                    create_Element(target, targetDiv, new_target);
+                }
                 values.push(new_target);
                 save_ToStorage(target, values);
             }
         }
+        targetDiv.removeChild(new_div);
+        // targetUpDiv.appendChild(targetButton);
+        targetButton.hidden = false;
     });
 }
 export{ addCustom_Element };

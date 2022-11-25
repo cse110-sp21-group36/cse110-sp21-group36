@@ -257,7 +257,7 @@ function unloadHandler() {
      */
     function addMealsToDocument(meals) {
         for (let i = 0; i < meals.length; i++) {
-            create_Element(element, mealDiv, meals[i]);
+            create_Element(element, mealDiv, meals[i], undefined);
         }
     }
 }
@@ -272,16 +272,16 @@ function unloadHandler() {
     const element = "steps";
     const main = document.querySelector(".step-list");
     const step_list = main.querySelector('div');
-    create_Element(element, step_list, step_number);
+    create_Element(element, step_list, undefined, step_number);
     step_number = step_number+1;
 
-    let add_step = document.createElement('button');
-    add_step.classList.add('create-step');
-    add_step.textContent = "Add New Step";
-    main.appendChild(add_step);
+    let add_step_button = document.createElement('button');
+    add_step_button.classList.add('create-step');
+    add_step_button.textContent = "Add New Step";
+    main.appendChild(add_step_button);
 
-    add_step.addEventListener('click', () => {
-        create_Element(element, step_list, step_number);
+    add_step_button.addEventListener('click', () => {
+        create_Element(element, step_list, undefined, step_number);
         step_number = step_number+1;
     })
 }
@@ -292,10 +292,17 @@ function unloadHandler() {
  */
  function toolsHandler() {
     var tool_number = 1;
+    const element = "tools";
     const main = document.querySelector(".tool-list");
     const tool_list = main.querySelector('div');
-    const tools = getToolsFromStorage();
-    addFirstToolsElement(tools);
+    const tools = get_FromStorage(
+        'tools', ['non-stick frying pan', 'saucepan', 'stock pot', 'sheet pans', 
+        'glass baking dish', 'knives', 'measuring spoons', 'measuring cups', 
+        'wooden spoon', 'fish turner', 'peeler', 'whisk', 'tongs', 
+        'cutting board', 'colander', 'prep bowls', 'can opener',
+        'microplane zester', 'stick blender', 'salad spinner']);
+    create_Element(element, tool_list, tools, tool_number);
+    tool_number = tool_number+1;
 
     const add_tool_button = document.createElement('button');
     add_tool_button.classList.add("new-tool-btn");
@@ -308,143 +315,13 @@ function unloadHandler() {
     main.appendChild(button);
 
     add_tool_button.addEventListener('click', () => {
-        addNewToolElement(tools);
+        create_Element(element, tool_list, tools, tool_number);
+        tool_number = tool_number+1;
     })
 
     button.addEventListener('click', () => {
-        createNewTool(tools);
+        addCustom_Element(element, tool_list, main, button, tools, "Add New Tool");
     })
-
-
-    /**
-     * Reads 'tools' from localStorage and returns an array of
-     * all of the tools found (parsed, not in string form). If
-     * nothing is found in localStorage for 'tools', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of tools
-     */
-     function getToolsFromStorage() {
-        const tools = JSON.parse(window.localStorage.getItem('tools'));
-        if (!tools) return [
-            'non-stick frying pan', 'saucepan', 'stock pot', 'sheet pans', 
-            'glass baking dish', 'knives', 'measuring spoons', 
-            'measuring cups', 'wooden spoon', 'fish turner', 'peeler', 
-            'whisk', 'tongs', 'cutting board', 'colander', 'prep bowls', 
-            'can opener', 'microplane zester', 'stick blender', 'salad spinner'];
-        return tools 
-    }
-
-    /**
-     * Takes in an array of tools, converts it to a string, and then
-     * saves that string to 'tools' in localStorage
-     * @param {Array<Object>} tools An array of tools
-     */
-     function saveToolsToStorage(tools) {
-        localStorage.setItem('tools', JSON.stringify(tools));
-    }
-
-    /**
-     * Takes in an array of tools, create the html element for tools
-     * @param {Array<Object>} tools An array of tools
-     * @return {Tuple<Object} of html element
-     */
-    function createToolElement(tools) {
-        const new_div = document.createElement('div');
-        const select = document.createElement("select");
-        select.required = true;
-        select.name = 'tool-v-'+ ("0"+tool_number).slice(-2);
-        select.classList.add("choosen-tool");
-        const option = document.createElement("option");
-        select.appendChild(option);
-
-        for (let i=0; i<tools.length; i++){
-            const option = document.createElement("option");
-            option.textContent = tools[i];
-            select.appendChild(option);
-        }
-
-        const number_select = document.createElement("select");
-        number_select.name = 'tool-nb-'+("0"+tool_number).slice(-2);
-        number_select.classList.add("choosen-nb-tool");
-
-        for (let i=1; i<5; i++){
-            const option = document.createElement("option");
-            option.textContent = i;
-            number_select.appendChild(option);
-        }
-        tool_number = tool_number+1;
-        return [new_div, number_select, select]
-    }
-
-    /**
-     * Create the first textarea to fullfil with instruction to do the recipe
-     * @param {Array<Object>} tools An array of tools
-     */
-    function addFirstToolsElement(tools) {
-        let [new_div, number_select, select] = new createToolElement(tools);
-        new_div.appendChild(number_select);
-        new_div.appendChild(select);
-        tool_list.appendChild(new_div)
-    };
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} tools An array of tools
-     */
-    function createNewTool(tools) {
-        let new_textarea = document.createElement('input');
-        new_textarea.type = 'textarea';
-        new_textarea.classList.add('new-tool-value');
-        let new_button = document.createElement('button');
-        new_button.classList.add('new-tool');
-        new_button.textContent = "Add New Tool";
-        let new_div = document.createElement('div');
-
-        new_div.appendChild(new_textarea);
-        new_div.appendChild(new_button);
-        tool_list.appendChild(new_div);
-        main.removeChild(button);
-
-        new_button.addEventListener('click', () => {
-            let new_tool = tool_list.querySelector(".new-tool-value").value
-            if (!tools.includes(new_tool)){
-                if (new_tool) {
-                    const option = document.createElement("option");
-                    option.textContent = new_tool;
-                    let select = main.querySelector('.choosen-tool');
-                    select.appendChild(option);
-
-                    tools.push(new_tool);
-                    saveToolsToStorage(tools);
-
-                    tool_list.removeChild(new_div);
-                    main.appendChild(button);
-                }
-            }
-        })
-    }
-
-    /**
-     * Create the other select option with tools to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} tools An array of tools
-     */
-    function addNewToolElement(tools) {
-
-        let [new_div, number_select, select] = new createToolElement(tools);
-        const cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
-        cancel.textContent = "Delete";
-        new_div.appendChild(number_select);
-        new_div.appendChild(select);
-        new_div.appendChild(cancel);
-        tool_list.appendChild(new_div);
-
-        cancel.addEventListener('click', () => {
-            tool_list.removeChild(new_div);
-        })
-    };
 }
 
 /**
@@ -453,250 +330,55 @@ function unloadHandler() {
  */
  function ingredientsHandler() {
     var ingredient_number = 1;
+    const element = "ingredients";
     const main = document.querySelector(".ingredient-list");
     const ingredient_list = main.querySelector('div');
-    const ingredients = getIngredientsFromStorage();
-    const quantities = getQuantitiesFromStorage();
-    const units = getUnitsFromStorage();
-    addFirstIngredientsElement(ingredients, quantities, units);
+    const ingredients = get_FromStorage(
+        'ingredients', ['chicken', 'beef', 'red peeper', 'onion', 'garlic', 'cilantro', 'tortilla']);
+    const quantities = get_FromStorage(
+        'quatitites', ['0.5', '1', '2', '3', '4', '5', '100', '200', '350']);
+    const units = get_FromStorage(
+        'units', ['oz', 'mL', 'cL', 'L', 'g', 'kg', 'lb', 'ea']);
+    create_Element(element, ingredient_list, [quantities, units, ingredients], ingredient_number);
+    ingredient_number = ingredient_number+1;
 
-    const add_ingredient_button = document.createElement('button');
-    add_ingredient_button.classList.add("new-ingredient-btn");
-    add_ingredient_button.textContent = "Add New Ingredient";
-    main.appendChild(add_ingredient_button);
-
-    add_ingredient_button.addEventListener('click', () => {
-        addNewIngredientElement(ingredients, quantities, units);
-    })
-
-
-    //
     const button = document.createElement('button');
     button.classList.add("new-custom-btn");
-    button.textContent = "Custom Ingredient";
+    button.textContent = "Add New Ingredient";
     main.appendChild(button);
 
     button.addEventListener('click', () => {
-        createNewIngredient(ingredients);
+        create_Element(element, ingredient_list, [quantities, units, ingredients], ingredient_number);
+        ingredient_number = ingredient_number+1;
     })
 
+    const quantity_button = document.createElement('button');
+    quantity_button.classList.add("new-quantity-btn");
+    quantity_button.textContent = "Custom Quantity";
+    main.appendChild(quantity_button);
 
-    /**
-     * Reads 'ingredients' from localStorage and returns an array of
-     * all of the ingredients found (parsed, not in string form). If
-     * nothing is found in localStorage for 'ingredients', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of ingredients
-     */
-     function getIngredientsFromStorage() {
-        const ingredients = JSON.parse(window.localStorage.getItem('ingredients'));
-        if (!ingredients) return [
-            'chicken', 'beef', 'red peeper', 'onion', 'garlic', 'cilantro',
-            'tortilla'];
-        return ingredients 
-    }
+    quantity_button.addEventListener('click', () => {
+        addCustom_Element(
+            "q-"+element, ingredient_list, main, quantity_button, quantities, "Add New Quantity");
+    })
 
-    /**
-     * Reads 'quantities' from localStorage and returns an array of
-     * all of the quantities found (parsed, not in string form). If
-     * nothing is found in localStorage for 'quantities', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of quantities
-     */
-     function getQuantitiesFromStorage() {
-        const quantities = JSON.parse(window.localStorage.getItem('quantities'));
-        if (!quantities) return [
-            '0.5', '1', '2', '3', '4', '5', '100', '200', '350'];
-        return quantities 
-    }
+    const unit_button = document.createElement('button');
+    unit_button.classList.add("new-units-btn");
+    unit_button.textContent = "Custom Unit";
+    main.appendChild(unit_button);
 
-    /**
-     * Reads 'units' from localStorage and returns an array of
-     * all of the units found (parsed, not in string form). If
-     * nothing is found in localStorage for 'units', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of units
-     */
-     function getUnitsFromStorage() {
-        const units = JSON.parse(window.localStorage.getItem('units'));
-        if (!units) return ['oz', 'mL', 'cL', 'L', 'g', 'kg', 'lb', 'ea'];
-        return units 
-    } 
-    
-    /**
-     * Takes in an array of ingredients, converts it to a string, and then
-     * saves that string to 'ingredients' in localStorage
-     * @param {Array<Object>} tools An array of ingredients
-     */
-     function saveIngredientsToStorage(ingredients) {
-        localStorage.setItem('ingredients', JSON.stringify(ingredients));
-    }
+    unit_button.addEventListener('click', () => {
+        addCustom_Element(
+            "u-"+element, ingredient_list, main, unit_button, units, "Add New Unit");
+    })
 
-    /**
-     * Takes in an array of quantities, converts it to a string, and then
-     * saves that string to 'quantities' in localStorage
-     * @param {Array<Object>} quantities An array of quantities
-     */
-     function saveQuantitiesToStorage(quantities) {
-        localStorage.setItem('quantities', JSON.stringify(quantities));
-    }
+    const ingredient_button = document.createElement('button');
+    ingredient_button.classList.add("new-ingredient-btn");
+    ingredient_button.textContent = "Custom Ingredient";
+    main.appendChild(ingredient_button);
 
-    /**
-     * Takes in an array of units, converts it to a string, and then
-     * saves that string to 'units' in localStorage
-     * @param {Array<Object>} tools An array of units
-     */
-     function saveUnitsToStorage(units) {
-        localStorage.setItem('units', JSON.stringify(units));
-    }
-
-    /**
-     * Takes in an array of ingredients, create the html element for ingredients
-     * @param {Array<Object>} ingredients An array of ingredients
-     * @return {Tuple<Object} of html element
-     */
-    function createIngredientElement(ingredients, quantities, units) {
-        const new_div = document.createElement('div');
-        const select = document.createElement("select");
-        select.required = true;
-        select.name = 'ingredients-v-'+("0"+ingredient_number).slice(-2);
-        select.classList.add("choosen-ingredient");
-        const option = document.createElement("option");
-        select.appendChild(option);
-
-        for (let i=0; i<ingredients.length; i++){
-            const option = document.createElement("option");
-            option.textContent = ingredients[i];
-            select.appendChild(option);
-        }
-
-        const quantity_select = document.createElement("select");
-        quantity_select.name = 'ingredients-q-'+("0"+ingredient_number).slice(-2);
-        quantity_select.classList.add("choosen-q-tool");
-
-        for (let i=0; i<quantities.length; i++){
-            const option = document.createElement("option");
-            option.textContent = quantities[i];
-            quantity_select.appendChild(option);
-        }
-
-        const unit_select = document.createElement("select");
-        unit_select.name = 'ingredients-u-'+("0"+ingredient_number).slice(-2);
-        unit_select.classList.add("choosen-u-tool");
-
-        for (let i=0; i<units.length; i++){
-            const option = document.createElement("option");
-            option.textContent = units[i];
-            unit_select.appendChild(option);
-        }
-        ingredient_number = ingredient_number+1;
-        return [new_div, quantity_select, unit_select, select]
-    }
-
-    /**
-     * Create the selevt option to add a new ingredient to the recipe
-     * @param {Array<Object>} ingredients An array of ingredients
-     * @param {Array<Object>} quantities An array of quantities
-     * @param {Array<Object>} units An array of units
-     */
-    function addFirstIngredientsElement(ingredients, quantities, units) {
-        let [
-            new_div, 
-            quantity_select,
-            unit_select,
-            select] = new createIngredientElement(ingredients, quantities, units);
-        new_div.appendChild(quantity_select)
-        new_div.appendChild(unit_select);
-        new_div.appendChild(select);
-        ingredient_list.appendChild(new_div)
-    };
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} ingredients An array of ingredients
-     */
-    function createNewIngredient(ingredients) {
-        let new_textarea = document.createElement('input');
-        new_textarea.type = 'textarea';
-        new_textarea.classList.add('new-ingredient-value');
-        let new_button = document.createElement('button');
-        new_button.classList.add('new-ingredient');
-        new_button.textContent = "Add New Ingredient";
-        let new_div = document.createElement('div');
-
-        new_div.appendChild(new_textarea);
-        new_div.appendChild(new_button);
-        ingredient_list.appendChild(new_div);
-        main.removeChild(button);
-
-        new_button.addEventListener('click', () => {
-            let new_ingredient = ingredient_list.querySelector(".new-ingredient-value").value
-            if (!ingredients.includes(new_ingredient)){
-                if (new_ingredient) {
-                    const option = document.createElement("option");
-                    option.textContent = new_ingredient;
-                    let select = main.querySelector('.choosen-ingredient');
-                    select.appendChild(option);
-
-                    ingredients.push(new_ingredient);
-                    saveIngredientsToStorage(ingredients);
-
-                    ingredient_list.removeChild(new_div);
-                    main.appendChild(button);
-                }
-            }
-        })
-    }
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} units An array of units
-     */
-     function createNewUnit(units) {
-        
-    }
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} quantities An array of quantities
-     */
-     function createNewQuantity(quantities) {
-        
-    }
-
-    /**
-     * Create the other select option with ingredients to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} ingredients An array of ingredients
-     * @param {Array<Object>} quantities An array of quantities
-     * @param {Array<Object>} units An array of units
-     */
-    function addNewIngredientElement(ingredients, quantities, units) {
-        let [
-            new_div, 
-            quantity_select,
-            unit_select,
-            select] = new createIngredientElement(ingredients, quantities, units);
-        const cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
-        cancel.textContent = "Delete";
-        
-        new_div.appendChild(quantity_select)
-        new_div.appendChild(unit_select);
-        new_div.appendChild(select);
-        new_div.appendChild(cancel);
-        ingredient_list.appendChild(new_div);
-
-        cancel.addEventListener('click', () => {
-            ingredient_list.removeChild(new_div);
-        })
-    };
-}
-    
-
-
-    
-
+    ingredient_button.addEventListener('click', () => {
+        addCustom_Element(
+            element, ingredient_list, main, ingredient_button, ingredients, "Add New Ingredient");
+    })
+ }
