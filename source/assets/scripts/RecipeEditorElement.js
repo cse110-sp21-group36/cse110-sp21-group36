@@ -99,7 +99,7 @@ function createToolElement(div, tools, number) {
 
     const number_select = document.createElement("select");
     number_select.name = 'tool-nb-'+("0"+number).slice(-2);
-    number_select.classList.add("choosen-nb-tools");
+    number_select.classList.add("choosen-toolNumber");
 
     for (let i=1; i<5; i++){
         const option = document.createElement("option");
@@ -146,7 +146,7 @@ function createIngredientElement(div, [quantities, units, ingredients], number) 
 
     const quantity_select = document.createElement("select");
     quantity_select.name = 'ingredients-q-'+("0"+number).slice(-2);
-    quantity_select.classList.add("choosen-q-ingredients");
+    quantity_select.classList.add("choosen-ingredientQuantity");
 
     for (let i=0; i<quantities.length; i++){
         const option = document.createElement("option");
@@ -156,7 +156,7 @@ function createIngredientElement(div, [quantities, units, ingredients], number) 
 
     const unit_select = document.createElement("select");
     unit_select.name = 'ingredients-u-'+("0"+number).slice(-2);
-    unit_select.classList.add("choosen-u-ingredients");
+    unit_select.classList.add("choosen-ingredientUnits");
 
     for (let i=0; i<units.length; i++){
         const option = document.createElement("option");

@@ -11,7 +11,7 @@ function init() {
     // Add the event listeners to the form elements
     initFormHandler();
     // 
-    // unloadHandler();
+    unloadHandler();
     //
     dragDropImageHandler();
     //
@@ -321,16 +321,16 @@ function unloadHandler() {
  */
  function ingredientsHandler() {
     var ingredient_number = 1;
-    const element = "ingredients";
+    const element = "ingredient";
     const main = document.querySelector(".ingredient-list");
     const ingredient_list = main.querySelector('div');
     const ingredients = get_FromStorage(
         'ingredients', ['chicken', 'beef', 'red peeper', 'onion', 'garlic', 'cilantro', 'tortilla']);
     const quantities = get_FromStorage(
-        'quatitites', ['0.5', '1', '2', '3', '4', '5', '100', '200', '350']);
+        'ingredientQuatitity', ['0.5', '1', '2', '3', '4', '5', '100', '200', '350']);
     const units = get_FromStorage(
-        'units', ['oz', 'mL', 'cL', 'L', 'g', 'kg', 'lb', 'ea']);
-    create_Element(element, ingredient_list, [quantities, units, ingredients], ingredient_number);
+        'ingredientUnits', ['oz', 'mL', 'cL', 'L', 'g', 'kg', 'lb', 'ea']);
+    create_Element(element+'s', ingredient_list, [quantities, units, ingredients], ingredient_number);
     ingredient_number = ingredient_number+1;
 
     const button = document.createElement('button');
@@ -339,7 +339,7 @@ function unloadHandler() {
     main.appendChild(button);
 
     button.addEventListener('click', () => {
-        create_Element(element, ingredient_list, [quantities, units, ingredients], ingredient_number);
+        create_Element(element+'s', ingredient_list, [quantities, units, ingredients], ingredient_number);
         ingredient_number = ingredient_number+1;
     })
 
@@ -350,7 +350,7 @@ function unloadHandler() {
 
     quantity_button.addEventListener('click', () => {
         addCustom_Element(
-            "q-"+element, ingredient_list, main, quantity_button, quantities, "Add New Quantity");
+            element+'Quantity', ingredient_list, main, quantity_button, quantities, "Add New Quantity");
     })
 
     const unit_button = document.createElement('button');
@@ -360,7 +360,7 @@ function unloadHandler() {
 
     unit_button.addEventListener('click', () => {
         addCustom_Element(
-            "u-"+element, ingredient_list, main, unit_button, units, "Add New Unit");
+            element+"Units", ingredient_list, main, unit_button, units, "Add New Unit");
     })
 
     const ingredient_button = document.createElement('button');
@@ -370,6 +370,6 @@ function unloadHandler() {
 
     ingredient_button.addEventListener('click', () => {
         addCustom_Element(
-            element, ingredient_list, main, ingredient_button, ingredients, "Add New Ingredient");
+            element+"s", ingredient_list, main, ingredient_button, ingredients, "Add New Ingredient");
     })
  }
