@@ -1,10 +1,10 @@
 # 🌐 Code Avengers ⍟
 
-## Team Agenda (Week 9)
+## Team Agenda (Week 10)
 
 **Link to Team Page:** [Team Page](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md)
 
-__Next Meeting__: Tuesday 11/29, Final Sprint (Week 10) 6:00 PM In-Person, Geisel West Library (Rm 1045)
+__Next Meeting__: Monday 11/28, Final Sprint (Week 10) 6:00 PM In-Person, Geisel West Library (Rm 1045)
 
 ### Assignments:
 - Right now, we are bug-fixing, and trying to improve the stylization of the GitHub Pages.
