@@ -1,8 +1,9 @@
-# Group 36 Project Check in (Week 8)
+# Sprint 2 Planning Meeting (Week 8)
 ### Meeting Details
 **Meeting Location:** Geisel West Library  
 **Meeting Time:** 11/17/2022, 5:00-6:00 PM (PST)  
-**Previous Meeting:** [11/14/2022 Sprint Planning (Week 8)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/111422-Sprint-Planning-Week8.md)
+**Previous Meeting:** [11/14/2022 Sprint 1 Retrospective (Week 8)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/111422-Sprint-Retrospective-01-Week8.md)
+**Meeting Slides:** [Meeting 11_17_22](../meeting%20slides/Group%2036%20Meeting%2011_17_22.pdf)
 
 ## Meeting Attendance
 | Role | Name | Present? |

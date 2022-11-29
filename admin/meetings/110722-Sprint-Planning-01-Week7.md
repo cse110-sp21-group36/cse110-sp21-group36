@@ -1,9 +1,9 @@
-# Group 36 Sprint Planning Meeting (Week 7)
+# Sprint 1 Planning Meeting (Week 7)
 ### Meeting Details
 **Meeting Location:** In-Person (Geisel West Library)  
 **Meeting Time:** 11/7/2022, 6:00-7:30 PM (PST)  
-**Previous Meeting:** [Sprint Planning (Week 7)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/110722-Sprint-Planning-Week7.md)
-
+**Previous Meeting:** [Team Meeting (Week 6)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/110322-Week6.md)
+**Meeting Slides:** N/A
 
 ## Meeting Attendance
 | Role | Name | Present? |

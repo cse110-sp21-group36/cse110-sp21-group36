@@ -1,8 +1,9 @@
-# Group 36 Project Check in (Week 9)
+# Sprint 2 Review Meeting (Week 9)
 ### Meeting Details
 **Meeting Location:** Zoom  
 **Meeting Time:** 11/21/2022, 7:00-8:15 PM (PST)  
-**Previous Meeting:** [11/17/2022 Team Meeting (Week 8)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/111722-sprint-Week8-review.md)
+**Previous Meeting:** [Sprint 2 Planning (Week 8)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/111722-Sprint-Planning-02-Week8.md)
+**Meeting Slides:** [Meeting 11_21_22](../meeting%20slides/Copy%20of%20Group%2036%20Meeting%2011_21_22.pdf)
 
 ## Meeting Attendance
 | Role | Name | Present? |

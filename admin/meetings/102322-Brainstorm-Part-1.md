@@ -3,6 +3,7 @@
 **Meeting Location:** Zoom  
 **Meeting Time:** 10/23/2022, 7:30 PM (PST)  
 **Previous Meeting:** [Weekly Meet-Up (10/20/2022)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/102022-Week4.md)
+[**Brainstorming Notes Part 2**](102322-Brainstorm-Part-2.md)
 
 ## Meeting Attendance
 | Role | Name | Present? |

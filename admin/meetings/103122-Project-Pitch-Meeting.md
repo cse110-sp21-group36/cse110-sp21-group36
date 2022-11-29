@@ -2,7 +2,9 @@
 ### Meeting Details
 **Meeting Location:** Zoom  
 **Meeting Time:** 10/31/2022, 6:30-7:14 PM (PST)  
-**Previous Meeting:** [10/27/2022 - Weekly Meeting](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/102722-Week5.md)
+**Previous Meeting:** [10/27/2022 - Weekly Meeting (Week 5)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/102722-Week5.md)
+**Project Pitch Slides:** [Pitch Slides](../../specs/pitch/Project%20Pitch.pdf)
+
 ## Meeting Attendance
 | Role | Name | Present? |
 | --- | --- | --- |
