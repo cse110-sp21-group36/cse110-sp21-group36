@@ -1,4 +1,4 @@
-# Group 36 KickOff Meeting
+# Sprint 1 Review Meeting (Week 7)
 ### Meeting Details
 **Meeting Location:** Zoom  
 **Meeting Time:** 11/10/2022, 5:00-6:00 PM (PST)  
