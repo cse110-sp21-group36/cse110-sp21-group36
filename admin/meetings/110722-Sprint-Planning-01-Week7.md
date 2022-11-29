@@ -2,7 +2,7 @@
 ### Meeting Details
 **Meeting Location:** In-Person (Geisel West Library)  
 **Meeting Time:** 11/7/2022, 6:00-7:30 PM (PST)  
-**Previous Meeting:** [Team Meeting (Week 6)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/110322-Week6.md)
+**Previous Meeting:** [Team Meeting (Week 6)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/110322-Week6.md)  
 **Meeting Slides:** N/A  
 
 ## Meeting Attendance

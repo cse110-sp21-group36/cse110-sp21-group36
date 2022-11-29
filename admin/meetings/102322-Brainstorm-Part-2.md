@@ -1,5 +1,5 @@
 # Group 36 Brainstorming Meeting
-[**Brainstorming Notes Part 1**](102322-Brainstorm-Part-2.md)  
+[**Brainstorming Notes Part 1**](102322-Brainstorm-Part-1.md)  
 
 ## Miro Board Notes:
 

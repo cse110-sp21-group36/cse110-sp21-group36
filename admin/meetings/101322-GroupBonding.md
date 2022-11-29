@@ -2,8 +2,8 @@
 ### Meeting Details
 **Meeting Location:** In-Person (Geisel West Library)  
 **Meeting Time:** 10/13/2022, 5:00-6:00 PM (PST)  
-**Previous Meeting:** [10/11/2022 - KickOff Meeting](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/101122-kickoff.md)  
-**Meeting Slides:** N/A  
+**Previous Meeting:** [10/11/2022 - KickOff Meeting](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/101122-kickoff.md)   
+**Meeting Slides:** N/A   
 
 ## Meeting Attendance
 | Role | Name | Present? |
