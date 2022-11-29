@@ -3,7 +3,7 @@
 **Meeting Location:** In-Person Geisel West Library  
 **Meeting Time:** 11/28/2022, 5:00-6:15 PM (PST)  
 **Previous Meeting:** [11/21/2022 Sprint Review 2 (Week 9)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/112122-Sprint-Review-02-Week9.md)  
-**Meeting Slides:** [Meeting 11_28_22](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meeting%20slides/Copy%20of%20Group%2036%20Meeting%2011_28_22.pdf)  
+**Meeting Slides:** [Meeting 11_28_22](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meeting%20slides/Group%2036%20Meeting%2011_28_22.pdf)  
 
 ## Meeting Attendance
 | Role | Name | Present? |
