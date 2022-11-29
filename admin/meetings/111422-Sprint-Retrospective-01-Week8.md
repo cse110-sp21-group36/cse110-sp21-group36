@@ -2,8 +2,8 @@
 ### Meeting Details
 **Meeting Location:** Zoom  
 **Meeting Time:** 11/14/2022, 7:00-8:30 PM (PST)  
-**Previous Meeting:** [11/10/2022 Sprint 1 Review (Week 7)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/111022-Sprint-Review-01-Week7.md)
-**Meeting Slides:** [Meeting 11_14_22](../meeting%20slides/Group%2036%20Meeting%2011_14_22.pdf)
+**Previous Meeting:** [11/10/2022 Sprint 1 Review (Week 7)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/111022-Sprint-Review-01-Week7.md)  
+**Meeting Slides:** [Meeting 11_14_22](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meeting%20slides/Group%2036%20Meeting%2011_14_22.pdf)  
 
 ## Meeting Attendance
 | Role | Name | Present? |

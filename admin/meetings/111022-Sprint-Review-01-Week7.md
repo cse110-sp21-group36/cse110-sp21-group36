@@ -1,9 +1,9 @@
 # Sprint 1 Review Meeting (Week 7)
 ### Meeting Details
-**Meeting Location:** Zoom  
+**Meeting Location:** In-Person Geisel West Library  
 **Meeting Time:** 11/10/2022, 5:00-6:00 PM (PST)  
-**Previous Meeting:** [Sprint 1 Planning (Week 7)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/110722-Sprint-Planning-01-Week7.md)
-**Meeting Slides:** [Meeting 11_10_22](../meeting%20slides/Group%2036%20Meeting%2011_10_22.pdf)
+**Previous Meeting:** [Sprint 1 Planning (Week 7)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/110722-Sprint-Planning-01-Week7.md)  
+**Meeting Slides:** [Meeting 11_10_22](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meeting%20slides/Group%2036%20Meeting%2011_10_22.pdf)  
 
 ## Meeting Attendance
 | Role | Name | Present? |

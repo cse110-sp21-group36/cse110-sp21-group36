@@ -1,9 +1,9 @@
 # Sprint Planning (Week 10)
 ### Meeting Details
-**Meeting Location:** In-Person Geisel West Library
+**Meeting Location:** In-Person Geisel West Library  
 **Meeting Time:** 11/28/2022, 5:00-6:15 PM (PST)  
-**Previous Meeting:** [11/28/2022 Sprint Retrospective 2 (Week 10)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/112822-Sprint-Retrospective-02-Week10.md)
-**Meeting Slides:** [Meeting 11_28_22](../meeting%20slides/Copy%20of%20Group%2036%20Meeting%2011_28_22.pdf)
+**Previous Meeting:** [11/28/2022 Sprint Retrospective 2 (Week 10)](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meetings/112822-Sprint-Retrospective-02-Week10.md)  
+**Meeting Slides:** [Meeting 11_28_22](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meeting%20slides/Copy%20of%20Group%2036%20Meeting%2011_28_22.pdf)  
 
 ## Meeting Attendance
 | Role | Name | Present? |
