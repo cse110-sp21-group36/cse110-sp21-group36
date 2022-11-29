@@ -20,6 +20,8 @@
     <!-- CSS and JavaScript -->
     <link rel="stylesheet" href="./assets/styles/recipe_editor.css"> 
     <script src="./assets/scripts/localStorage.js"></script> 
+    <script src="./assets/scripts/addCustomElement.js"></script> 
+    <script src="./assets/scripts/RecipeEditorElement.js"></script> 
     <script type="module" src="./assets/scripts/recipe_editor.js"></script> 
 </head>
 
@@ -41,7 +43,7 @@
 
     <main>
         <!-- form to add info for a new recipe -->
-        <form id="new-recipe">
+        <form id="new-recipe" action="./recipe_manager.html">
             <!-- title and image -->
             <fieldset class="name-img-fav">
             <legend>Name, Author, Image and Favorite:</legend>
