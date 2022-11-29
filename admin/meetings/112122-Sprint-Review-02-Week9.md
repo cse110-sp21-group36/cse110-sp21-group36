@@ -1,4 +1,4 @@
-# Group 36 Project Check in and Sprint Planning (Week 9)
+# Group 36 Project Check in (Week 9)
 ### Meeting Details
 **Meeting Location:** Zoom  
 **Meeting Time:** 11/21/2022, 7:00-8:15 PM (PST)  
