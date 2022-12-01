@@ -19,9 +19,14 @@ function init() {
   const element = document.getElementById("delete");
   console.log(element);
   element.addEventListener("click", ()=>{
-    
     window.localStorage.removeItem('currRecipe');
-    console.log(current);
+    let recipes = JSON.parse(localStorage.getItem('recipes'));
+    let i = 0;
+    while (i < recipes.length && recipes[i]["recipeName"] != current["recipeName"]) {
+      i++;
+    }
+    recipes.splice(i, 1);
+    window.localStorage.setItem('recipes', JSON.stringify(recipes));
     window.location.href = "./recipe_manager.html";
   });
   
@@ -66,7 +71,9 @@ function displayInfo(current) {
     if(current.favorite == true){
       var image = document.getElementById('favorite');
       //set image 
-      image.src = '/source/assets/images/icons/heart.jpg';
+      image.src = './assets/images/icons/heart.jpg';
+      image.width = 300;
+      image.height = 300;
     }
 
     //IMAGE
