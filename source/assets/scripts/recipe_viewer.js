@@ -15,7 +15,22 @@ function init() {
   } */
   displayInfo(current); 
   //initFormHandler();
+
+  const element = document.getElementById("delete");
+  console.log(element);
+  element.addEventListener("click", ()=>{
+    
+    window.localStorage.removeItem('currRecipe');
+    console.log(current);
+    window.location.href = "./recipe_manager.html";
+  });
+  
+  
 }
+
+
+
+
 
 /**
  * Populates view page.
@@ -41,6 +56,9 @@ function displayInfo(current) {
     //TITLE
     var title = document.getElementById('recipe-name'); 
     title.textContent  = current.recipeName;
+
+    
+
     
 
     //FAVORITE 
