@@ -23,7 +23,7 @@ function init() {
     // Process the ingredients used for this recipe
     ingredientsHandler();
     // 
-    if (get_FromStorage('currRecipe')) {
+    if (!(get_FromStorage('currRecipe'))) {
         document.querySelector(".edit-new").hidden = false;
         document.querySelector(".edit-new").click();
         fillValueHandler();

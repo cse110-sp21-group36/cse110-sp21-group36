@@ -134,7 +134,7 @@ function createToolElement(div, tools, number) {
     // Create a cancel changes button
     if (!(number==1)){
         let cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
+        cancel.classList.add('delete-tool');
         cancel.textContent = "Delete";
         new_tool.appendChild(cancel);
         cancel.addEventListener('click', () => {
@@ -205,7 +205,7 @@ function createIngredientElement(div, [quantities, units, ingredients], number) 
     // Create a cancel changes button
     if (!(number==1)){
         let cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
+        cancel.classList.add('delete-ingredient');
         cancel.textContent = "Delete";
         new_ingredient.appendChild(cancel);
         cancel.addEventListener('click', () => {
