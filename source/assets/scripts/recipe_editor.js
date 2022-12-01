@@ -22,6 +22,12 @@ function init() {
     toolsHandler();
     // Process the ingredients used for this recipe
     ingredientsHandler();
+    // 
+    if (get_FromStorage('currRecipe')) {
+        document.querySelector(".edit-new").hidden = false;
+        document.querySelector(".edit-new").click();
+        fillValueHandler();
+    }
 }
 
 /**
@@ -50,11 +56,14 @@ function initFormHandler() {
             // imagedata = await response.text();
         }
 
-        let keys = Object.keys(formData);   // key value from the submitted form
-        let meal_types = []                 // meal types array
-        let tools = []                      // tools array
-        let ingredients = []                // ingredients array
-        let steps = []                      // steps array
+        let keys = Object.keys(formData);    // key value from the submitted form
+        let meal_types = [];                 // meal types array
+        let tools = [];                      // tools array
+        let toolsJson = [];
+        let ingredients = [];                // ingredients array
+        let ingredientsJson = [];
+        let steps = [];                      // steps array
+        let stepsJson = [];
 
         for (let key of keys) {
             // Stores the meal type values from the form
@@ -64,37 +73,34 @@ function initFormHandler() {
 
             // Stores the tool values from the form
             if (key.slice(0,6) == "tool-v") {
-                // let id = key.slice(-2)
-                // tools.push({
-                //     id: id,
-                //     quantity: formData["tool-nb-"+id],
-                //     tool: formData["tool-v-"+id]
-                // })
                 let id = key.slice(-2)
+                toolsJson.push({
+                    id: id,
+                    quantity: formData["tool-nb-"+id],
+                    tool: formData["tool-v-"+id]
+                });
                 tools.push(formData["tool-nb-"+id]+' '+formData["tool-v-"+id]);
             }
 
             // Stores the ingredient values from the form
             if (key.slice(0,13) == "ingredients-v") {
-                // let id = key.slice(-2)
-                // ingredients.push({
-                //     id: id,
-                //     quantity: formData["ingredients-q-"+id],
-                //     unit: formData["ingredients-u-"+id],
-                //     ingredient: formData["ingredients-v-"+id]
-                // })
                 let id = key.slice(-2)
+                ingredientsJson.push({
+                    id: id,
+                    quantity: formData["ingredients-q-"+id],
+                    unit: formData["ingredients-u-"+id],
+                    ingredient: formData["ingredients-v-"+id]
+                });
                 ingredients.push(formData["ingredients-v-"+id]+' '+formData["ingredients-q-"+id]+' '+formData["ingredients-u-"+id]);
             }
             
             // Stores the step values from the form
             if (key.slice(0, 6) == "step-v") {
-                // let id = key.slice(-2);
-                // steps.push({
-                //     id: id,
-                //     step: formData["step-v-"+id]
-                // })
                 let id = key.slice(-2);
+                stepsJson.push({
+                    id: id,
+                    step: formData["step-v-"+id]
+                });
                 steps.push(formData["step-v-"+id]);
             }
         }
@@ -123,18 +129,127 @@ function initFormHandler() {
             notes: formData.note,
 
             tools: tools,
+            toolsJson: toolsJson,
             ingredients: ingredients,
-            steps: steps
+            ingredientsJson: ingredientsJson,
+            steps: steps,
+            stepsJson: stepsJson
         }
 
-        // Add the new object back to the recipe object array 
-        recipes = add_ToList(recipeObject, recipes);
-        // Save the recipes array back to localStorage
-        save_ToStorage('recipes', recipes);
-        // Save the current recipe object to localStorage
-        save_ToStorage('currRecipe', recipeObject)
+        if (formData["edit-new"]=="Yes") {
+            // Add the new object back to the recipe object array 
+            recipes = add_ToList(recipeObject, recipes);
+            // Save the recipes array back to localStorage
+            save_ToStorage('recipes', recipes);
+            // Save the current recipe object to localStorage
+            save_ToStorage('currRecipe', recipeObject)
+        } else {
+            // Remove the current recipe object you want to modify 
+            let currRecipe = get_FromStorage('currRecipe');
+            recipes.filter(function(ele){ 
+                return ele.recipe != currRecipe.recipe});
+            // Add the new object back to the recipe object array 
+            recipeObject.recipe = currRecipe.recipe;
+            recipes = add_ToList(recipeObject, recipes);
+            // Save the recipes array back to localStorage
+            save_ToStorage('recipes', recipes);
+            // Save the current recipe object to localStorage
+            save_ToStorage('currRecipe', recipeObject)
+            }
     });
 }
+
+
+/**
+ * Load the current recipe data the user wants to edit into the form 
+ */
+ function fillValueHandler() {
+    const currRecipe = get_FromStorage('currRecipe');
+    document.querySelector("input#title").value = currRecipe.title; 
+    document.querySelector("input#author").value = currRecipe.author; 
+
+    // image
+    let dropArea = document.querySelector(".drag-area"); 
+    let dragName = dropArea.querySelector("p");
+    dragName.textContent = currRecipe.image.name;
+    let label_1 = document.createElement('label');
+    label_1.htmlFor = "filename";
+    let text_1 = document.createElement('input');
+    text_1.type = "text";
+    text_1.hidden = true;
+    text_1.name = "filename";
+    text_1.value = currRecipe.image.name;
+    dropArea.appendChild(label_1);
+    dropArea.appendChild(text_1);
+
+    let label_2 = document.createElement('label');
+    label_2.htmlFor = "filedata";
+    let text_2 = document.createElement('input');
+    text_2.type = "text";
+    text_2.hidden = true;
+    text_2.name = "filedata";
+    text_2.value = currRecipe.image.data;
+    dropArea.appendChild(label_2);
+    dropArea.appendChild(text_2);
+
+
+    if (currRecipe.favorite) {
+        document.querySelector("input#favorite").checked = true; 
+    }
+
+    document.querySelector("select#difficulty").value = currRecipe.difficulty; 
+    document.querySelector("select#hours").value = currRecipe.time.hours; 
+    document.querySelector("select#mins").value = currRecipe.time.mins; 
+
+    for (let i=0; i<currRecipe.mealType.length; i++){
+        let meal = "meal-type-"+currRecipe.mealType[i];
+        document.querySelector('input[name="'+meal+'"]').checked = true;
+    }
+
+    document.querySelector("textarea#note").value = currRecipe.notes;
+
+    let firstTool = document.querySelector('select[name="tool-v-01"');
+    let firstToolQuantity = document.querySelector('select[name="tool-nb-01"');
+    firstTool.value = currRecipe.toolsJson[0].tool;
+    firstToolQuantity.value = currRecipe.toolsJson[0].quantity;
+    for (let i=1; i<currRecipe.toolsJson.length; i++){
+        document.querySelector(".create-tool").click();
+        let toolName = 'tool-v-' + ("0"+(i+1)).slice(-2);
+        let toolQuantity = 'tool-nb-' + ("0"+(i+1)).slice(-2);
+        let tool = document.querySelector('select[name="'+toolName+'"]');
+        let quantity = document.querySelector('select[name="'+toolQuantity+'"]');
+        tool.value = currRecipe.toolsJson[i].tool;
+        quantity.value = currRecipe.toolsJson[i].quantity;
+    }
+
+    let firstIngredient = document.querySelector('select[name="ingredients-v-01"');
+    let firstQuantity = document.querySelector('select[name="ingredients-q-01"');
+    let firstUnit = document.querySelector('select[name="ingredients-u-01"');
+    firstIngredient.value = currRecipe.ingredientsJson[0].ingredient;
+    firstQuantity.value = currRecipe.ingredientsJson[0].quantity;
+    firstUnit.value = currRecipe.ingredientsJson[0].unit;
+    for (let i=1; i<currRecipe.ingredientsJson.length; i++){
+        document.querySelector(".create-ingredient").click();
+        let ingredientName = 'ingredients-v-' + ("0"+(i+1)).slice(-2);
+        let ingredientQuantity = 'ingredients-q-' + ("0"+(i+1)).slice(-2);
+        let ingredientUnit = 'ingredients-u-' + ("0"+(i+1)).slice(-2);
+        let ingredient = document.querySelector('select[name="'+ingredientName+'"]');
+        let quantity = document.querySelector('select[name="'+ingredientQuantity+'"]');
+        let unit = document.querySelector('select[name="'+ingredientUnit+'"]');
+        ingredient.value = currRecipe.ingredientsJson[i].ingredient;
+        quantity.value = currRecipe.ingredientsJson[i].quantity;
+        unit.value = currRecipe.ingredientsJson[i].unit;
+    }
+
+    let firstStep = document.querySelector('input[name="step-v-01"');
+    firstStep.value = currRecipe.stepsJson[0].step;
+    for (let i=1; i<currRecipe.stepsJson.length; i++){
+        document.querySelector(".create-step").click();
+        let stepName = 'step-v-' + ("0"+(i+1)).slice(-2);
+        let step = document.querySelector('input[name="'+stepName+'"]');
+        step.value = currRecipe.stepsJson[i].step;
+    }
+ }
 
 
 /**
@@ -218,25 +333,30 @@ function unloadHandler() {
             // The image file name
             dragName.textContent = file.name;
 
-            let label_1 = document.createElement('label');
-            label_1.htmlFor = "filename";
-            let text_1 = document.createElement('input');
-            text_1.type = "text";
-            text_1.hidden = true;
-            text_1.name = "filename";
-            text_1.value = file.name;
-            dropArea.appendChild(label_1);
-            dropArea.appendChild(text_1);
+            if (dropArea.querySelector("label")) {
+                dropArea.querySelector('[name="filename"').value = file.name;
+                dropArea.querySelector('[name="filedata"').file = fileURL;
+            } else {
+                let label_1 = document.createElement('label');
+                label_1.htmlFor = "filename";
+                let text_1 = document.createElement('input');
+                text_1.type = "text";
+                text_1.hidden = true;
+                text_1.name = "filename";
+                text_1.value = file.name;
+                dropArea.appendChild(label_1);
+                dropArea.appendChild(text_1);
 
-            let label_2 = document.createElement('label');
-            label_2.htmlFor = "filedata";
-            let text_2 = document.createElement('input');
-            text_2.type = "text";
-            text_2.hidden = true;
-            text_2.name = "filedata";
-            text_2.value = fileURL;
-            dropArea.appendChild(label_2);
-            dropArea.appendChild(text_2);
+                let label_2 = document.createElement('label');
+                label_2.htmlFor = "filedata";
+                let text_2 = document.createElement('input');
+                text_2.type = "text";
+                text_2.hidden = true;
+                text_2.name = "filedata";
+                text_2.value = fileURL;
+                dropArea.appendChild(label_2);
+                dropArea.appendChild(text_2);
+            }
         }
         // Encode the file data as a string
         fileReader.readAsDataURL(file);
@@ -348,7 +468,7 @@ function unloadHandler() {
 
     // Create a "Add New Tool" button for this recipe 
     const add_tool_button = document.createElement('button');
-    add_tool_button.classList.add("new-tool-btn");
+    add_tool_button.classList.add("create-tool");
     add_tool_button.textContent = "Add New Tool";
     main.appendChild(add_tool_button);
 
@@ -396,7 +516,7 @@ function unloadHandler() {
 
     // Create a "Add New Ingredient" button for this recipe 
     const button = document.createElement('button');
-    button.classList.add("new-custom-btn");
+    button.classList.add("create-ingredient");
     button.textContent = "Add New Ingredient";
     main.appendChild(button);
 
