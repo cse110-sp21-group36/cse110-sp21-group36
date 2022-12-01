@@ -8,22 +8,39 @@
     margin: auto;
 }
 
-.favorite{
+.favorite {
     width: 100px;
     height: 100px;
 }
 
-h1{
-    font-size: 150px;
-    margin: auto;
+#recipe-name {
+    color: blue;
 }
 
-h2{
-    font-size: 12px;
+#mealtype {
+    color:blue;
 }
 
-body {
-    background-color: rgb(230, 226, 173);
-    
-  }
+#time {
+    color:blue;
+}
 
+#difficulty {
+    color:blue;
+}
+
+#ingredient-list {
+    color:blue;
+}
+
+#steps-list {
+    color:blue;
+}
+
+#tools-list {
+    color:blue
+}
+
+#notes {
+    color:blue;
+}
