@@ -15,10 +15,10 @@
     <title>Code Avenger's Recipe</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" type="image/png" 
-          href="./recipe_manager.html">
+          href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true">
     
     <!-- CSS and JavaScript -->
-    <link rel="stylesheet" href="./assets/styles/recipe-editor.css"> 
+    <link rel="stylesheet" href="./assets/styles/recipe_editor.css"> 
     <script src="./assets/scripts/localStorage.js"></script> 
     <script type="module" src="./assets/scripts/recipe_editor.js"></script>
 	<!-- Code to display navbar -->
@@ -53,52 +53,55 @@
 
     <main>
         <!-- form to add info for a new recipe -->
-        <form id="new-recipe">
+        <form id="new-recipe" action="./recipe_manager.html">
             <!-- title and image -->
             <fieldset class="name-img-fav">
             <legend>Name, Author, Image and Favorite:</legend>
                 
                 <label for="title">Recipe Name:
-                    <input type="text" name="title" required>
-                </label><br>
+                    <input type="text" id="title" name="title">
+                </label>
 
                 <label for="author">Author Name:
-                    <input type="text" name="author" required>
-                </label><br>
+                    <input type="text" id="author" name="author">
+                </label>
 
                 <!-- recipe image -->
-                <label for="image" class="drag-area">Drag Area:
-                    <!-- place to drag and drop image -->
-                    <div class="imageHolder"><i class="fas fa-cloud-upload-alt"></i></div>
-                    <header class="drag-header" >Drag & Drop to Upload File</header>
-                    <span>or</span>
-                    <button class="browse-image">Browse File</button>
-                    <!-- name of the image file -->
-                    <p id="imageName"></p>
-                    <!-- store the image file to localStorage -->
-                    <input type="file" hidden>
-                </label><br>
+                <div id="recipeImage">
+                    <label>Drag Area:</label>
+                    <div class="drag-area">
+                        <!-- place to drag and drop image -->
+                        <div class="imageHolder"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <h4 class="drag-header" >Drag & Drop to Upload</h4>
+                        <h5>or</h5>
+                        <button class="browse-image">Browse File</button>
+                        <!-- name of the image file -->
+                        <p id="imageName"></p>
+                        <!-- store the image file to localStorage -->
+                        <input type="file" hidden>
+                    </div>
+                </div>
 
                 <!-- favorite recipe -->
                 <label for="favorite">Favorite:
-                    <input type="checkbox" name="favorite" value="Yes" unchecked>
-                </label><br>
+                    <input type="checkbox" id="favorite" name="favorite" value="Yes">
+                </label>
             </fieldset>
         
             <!-- difficulty, time, meal type, note -->
             <fieldset class="general-info">
             <legend>General Info:</legend>
-                <label for="difficulty">Difficulty:
-                    <select name="difficulty" id="difficulty">
-                        <option value="very easy">very easy</option>
-                        <option value="easy">easy</option>
-                        <option value="medium">medium</option>
-                        <option value="hard">hard</option>
-                        <option value="very hard">very hard</option>
-                    </select>
-                </label><br>
+                <label for="difficulty">Difficulty:</label>
+                <select name="difficulty" id="difficulty">
+                    <option value="very easy">very easy</option>
+                    <option value="easy">easy</option>
+                    <option value="medium">medium</option>
+                    <option value="hard">hard</option>
+                    <option value="very hard">very hard</option>
+                </select>
 
-                <label for="time" name="time">Estimated Time:
+                <label>Estimated Time: </label>
+                <div id="time">
                     <select name="hours" id="hours">
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -117,21 +120,22 @@
                         <option value="30">30</option>
                         <option value="45">45</option>
                     </select> mins
-                </label><br>
+                </div>
 
-                <label for="meal-type" class="meal-type">Meal Type:
-                    <div name="meal-type">
+                <label>Meal Types:</label>
+                <div class="meal-type">
+                    <div id="meal-type">
                         <!-- load the meal type save in localStorage -->
                         <!-- example: 
                         <input type="checkbox" id="breakfast" name="breakfast">
                         <label for="breakfast"> Breakfast </label> -->
                     </div>
                     <!-- <button class="new-type-btn">Custom Meal</button>  -->
-                </label><br>
+                </div>
                     
                 <label for="note">Note:
-                    <textarea name="note" cols="38" rows="3"></textarea>
-                </label><br>
+                    <textarea id="note" name="note" cols="38" rows="3"></textarea>
+                </label>
             </fieldset>
             
             <!-- tools, ingredients, steps -->
@@ -139,28 +143,35 @@
             more if needed for each categories -->
             <fieldset class="tool-ingredient-step">
             <legend>Tools, Ingredients and Steps:</legend>
-                <label for="tools" class="tool-list">Tools:
-                    <div name="tools">
+                <label>Tools:</label>
+                <div class="tool-list">
+                    <div id="tools">
                         <!-- add dinamicly the tools there -->
                     </div>
-                </label><br>
+                </div>
 
-                <label for="ingredients" class="ingredient-list", >Ingredients:
-                    <div name="ingredients">
+                <label>Ingredients:</label>
+                <div class="ingredient-list">
+                    <div id="ingredients">
                         <!-- add dinamicly the ingredients there -->
                     </div>
-                </label><br>
+                </div>
                     
-                <label for="steps" class="step-list">Steps:
-                    <div name="steps">
+                <label>Steps:</label>
+                <div class="step-list">
+                    <div id="steps">
                         <!-- add dinamicly the steps there -->
                     </div>
-                </label><br>
+                </div>
             </fieldset>
 
             <!-- functional buttons -->
-            <button type="submit" class="save-recipe">Save Recipe </button>
-            <button type="button" class="discard-change">Cancel Changes</button>
+            <div class="func-btns">
+                <label class="edit-new" for="edit-new" hidden>Save as New Recipe:
+                    <input type="checkbox" id="edit-new" name="edit-new" value="Yes" checked>
+                </label>
+                <button type="submit" class="save-recipe">Save Recipe </button>
+            </div>
             <!-- end buttons -->
 
         </form>

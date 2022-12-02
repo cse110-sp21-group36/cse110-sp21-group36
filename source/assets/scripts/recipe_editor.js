@@ -1,5 +1,7 @@
 // recipe_editor.js
 import { get_FromStorage, add_ToList, save_ToStorage } from "./localStorage.js";
+import { create_Element } from "./RecipeEditorElement.js";
+import { addCustom_Element } from "./addCustomElement.js";
 
 // Run the init() function when the page has loaded
 window.addEventListener('DOMContentLoaded', init);
@@ -8,18 +10,24 @@ window.addEventListener('DOMContentLoaded', init);
 function init() {
     // Add the event listeners to the form elements
     initFormHandler();
-    // 
+    // Alert user before leaving the editor page without saving
     unloadHandler();
-    //
+    // Process the image used for this recipe
     dragDropImageHandler();
-    //
+    // Process the meal types for this recipe
     mealTypeHandler();
-    //
+    // Process the steps to cook for this recipe
     stepsHandler();
-    //
+    // Process the tools used for this recipe
     toolsHandler();
-    //
+    // Process the ingredients used for this recipe
     ingredientsHandler();
+    // 
+    if (!(get_FromStorage('currRecipe')==null)) {
+        document.querySelector(".edit-new").hidden = false;
+        document.querySelector(".edit-new").click();
+        fillValueHandler();
+    }
 }
 
 /**
@@ -30,68 +38,75 @@ function init() {
  * the previous
  */
 function initFormHandler() {
+    // The form to take in info for the recipe
     const form = document.querySelector('form');
+    // Retrieve the existing recipes array in localStorage, if exists
     var recipes = get_FromStorage('recipes');
 
+    // Add event listener for the form when user save the recipe
     form.addEventListener('submit', async (e) => {
         const formData = Object.fromEntries(new FormData(e.target).entries())
 
         var filename = formData.filename;
         var imagedata = formData.filedata;
         if (filename == undefined) {
-            filename = "no-image.png";
-            const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
-            imagedata = await response.text();
+            filename = "no-image.png"
+            imagedata = "./assets/images/no-image.png";
+            // const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
+            // imagedata = await response.text();
         }
 
-        let keys = Object.keys(formData);
+        let keys = Object.keys(formData);    // key value from the submitted form
+        let meal_types = [];                 // meal types array
+        let tools = [];                      // tools array
+        let toolsJson = [];
+        let ingredients = [];                // ingredients array
+        let ingredientsJson = [];
+        let steps = [];                      // steps array
+        let stepsJson = [];
 
-        let meal_types = []
-        let tools = []
-        let ingredients = []
-        let steps = []
         for (let key of keys) {
+            // Stores the meal type values from the form
             if (key.slice(0,9) == "meal-type") {
                 meal_types.push(key.slice(10))
             }
 
+            // Stores the tool values from the form
             if (key.slice(0,6) == "tool-v") {
-                // let id = key.slice(-2)
-                // tools.push({
-                //     id: id,
-                //     quantity: formData["tool-nb-"+id],
-                //     tool: formData["tool-v-"+id]
-                // })
                 let id = key.slice(-2)
+                toolsJson.push({
+                    id: id,
+                    quantity: formData["tool-nb-"+id],
+                    tool: formData["tool-v-"+id]
+                });
                 tools.push(formData["tool-nb-"+id]+' '+formData["tool-v-"+id]);
             }
 
+            // Stores the ingredient values from the form
             if (key.slice(0,13) == "ingredients-v") {
-                // let id = key.slice(-2)
-                // ingredients.push({
-                //     id: id,
-                //     quantity: formData["ingredients-q-"+id],
-                //     unit: formData["ingredients-u-"+id],
-                //     ingredient: formData["ingredients-v-"+id]
-                // })
                 let id = key.slice(-2)
+                ingredientsJson.push({
+                    id: id,
+                    quantity: formData["ingredients-q-"+id],
+                    unit: formData["ingredients-u-"+id],
+                    ingredient: formData["ingredients-v-"+id]
+                });
                 ingredients.push(formData["ingredients-v-"+id]+' '+formData["ingredients-q-"+id]+' '+formData["ingredients-u-"+id]);
             }
             
+            // Stores the step values from the form
             if (key.slice(0, 6) == "step-v") {
-                // let id = key.slice(-2);
-                // steps.push({
-                //     id: id,
-                //     step: formData["step-v-"+id]
-                // })
                 let id = key.slice(-2);
+                stepsJson.push({
+                    id: id,
+                    step: formData["step-v-"+id]
+                });
                 steps.push(formData["step-v-"+id]);
             }
         }
-
         
+        // Constrcuts the recipe object used to contain the entered info 
         const recipeObject = {
-            // make the recipe data structure 
             recipe: ("0"+(recipes.length+1)).slice(-2),
             recipeName: formData.title,
             title: formData.title,
@@ -114,20 +129,131 @@ function initFormHandler() {
             notes: formData.note,
 
             tools: tools,
+            toolsJson: toolsJson,
             ingredients: ingredients,
-            steps: steps
+            ingredientsJson: ingredientsJson,
+            steps: steps,
+            stepsJson: stepsJson
         }
-        recipes = add_ToList(recipeObject, recipes);
-        save_ToStorage('recipes', recipes);
-        save_ToStorage('currRecipe', recipeObject)
-        window.location.url('./source/recipe_viewer.html');
-    });
 
+        if (formData["edit-new"]=="Yes") {
+            // Add the new object back to the recipe object array 
+            recipes = add_ToList(recipeObject, recipes);
+            // Save the recipes array back to localStorage
+            save_ToStorage('recipes', recipes);
+            // Save the current recipe object to localStorage
+            save_ToStorage('currRecipe', recipeObject)
+        } else {
+            // Remove the current recipe object you want to modify 
+            let currRecipe = get_FromStorage('currRecipe');
+            recipes.filter(function(ele){ 
+                return ele.recipe != currRecipe.recipe});
+            // Add the new object back to the recipe object array 
+            recipeObject.recipe = currRecipe.recipe;
+            recipes = add_ToList(recipeObject, recipes);
+            // Save the recipes array back to localStorage
+            save_ToStorage('recipes', recipes);
+            // Save the current recipe object to localStorage
+            save_ToStorage('currRecipe', recipeObject)
+            }
+    });
 }
 
 
 /**
- * Adds the necesarry event handlers to the form page, to prevent page exit 
+ * Load the current recipe data the user wants to edit into the form 
+ */
+ function fillValueHandler() {
+    const currRecipe = get_FromStorage('currRecipe');
+    document.querySelector("input#title").value = currRecipe.title; 
+    document.querySelector("input#author").value = currRecipe.author; 
+
+    // image
+    let dropArea = document.querySelector(".drag-area"); 
+    let dragName = dropArea.querySelector("p");
+    dragName.textContent = currRecipe.image.name;
+    let label_1 = document.createElement('label');
+    label_1.htmlFor = "filename";
+    let text_1 = document.createElement('input');
+    text_1.type = "text";
+    text_1.hidden = true;
+    text_1.name = "filename";
+    text_1.value = currRecipe.image.name;
+    dropArea.appendChild(label_1);
+    dropArea.appendChild(text_1);
+
+    let label_2 = document.createElement('label');
+    label_2.htmlFor = "filedata";
+    let text_2 = document.createElement('input');
+    text_2.type = "text";
+    text_2.hidden = true;
+    text_2.name = "filedata";
+    text_2.value = currRecipe.image.data;
+    dropArea.appendChild(label_2);
+    dropArea.appendChild(text_2);
+
+
+    if (currRecipe.favorite) {
+        document.querySelector("input#favorite").checked = true; 
+    }
+
+    document.querySelector("select#difficulty").value = currRecipe.difficulty; 
+    document.querySelector("select#hours").value = currRecipe.time.hours; 
+    document.querySelector("select#mins").value = currRecipe.time.mins; 
+
+    for (let i=0; i<currRecipe.mealType.length; i++){
+        let meal = "meal-type-"+currRecipe.mealType[i];
+        document.querySelector('input[name="'+meal+'"]').checked = true;
+    }
+
+    document.querySelector("textarea#note").value = currRecipe.notes;
+
+    let firstTool = document.querySelector('select[name="tool-v-01"');
+    let firstToolQuantity = document.querySelector('select[name="tool-nb-01"');
+    firstTool.value = currRecipe.toolsJson[0].tool;
+    firstToolQuantity.value = currRecipe.toolsJson[0].quantity;
+    for (let i=1; i<currRecipe.toolsJson.length; i++){
+        document.querySelector(".create-tool").click();
+        let toolName = 'tool-v-' + ("0"+(i+1)).slice(-2);
+        let toolQuantity = 'tool-nb-' + ("0"+(i+1)).slice(-2);
+        let tool = document.querySelector('select[name="'+toolName+'"]');
+        let quantity = document.querySelector('select[name="'+toolQuantity+'"]');
+        tool.value = currRecipe.toolsJson[i].tool;
+        quantity.value = currRecipe.toolsJson[i].quantity;
+    }
+
+    let firstIngredient = document.querySelector('select[name="ingredients-v-01"');
+    let firstQuantity = document.querySelector('select[name="ingredients-q-01"');
+    let firstUnit = document.querySelector('select[name="ingredients-u-01"');
+    firstIngredient.value = currRecipe.ingredientsJson[0].ingredient;
+    firstQuantity.value = currRecipe.ingredientsJson[0].quantity;
+    firstUnit.value = currRecipe.ingredientsJson[0].unit;
+    for (let i=1; i<currRecipe.ingredientsJson.length; i++){
+        document.querySelector(".create-ingredient").click();
+        let ingredientName = 'ingredients-v-' + ("0"+(i+1)).slice(-2);
+        let ingredientQuantity = 'ingredients-q-' + ("0"+(i+1)).slice(-2);
+        let ingredientUnit = 'ingredients-u-' + ("0"+(i+1)).slice(-2);
+        let ingredient = document.querySelector('select[name="'+ingredientName+'"]');
+        let quantity = document.querySelector('select[name="'+ingredientQuantity+'"]');
+        let unit = document.querySelector('select[name="'+ingredientUnit+'"]');
+        ingredient.value = currRecipe.ingredientsJson[i].ingredient;
+        quantity.value = currRecipe.ingredientsJson[i].quantity;
+        unit.value = currRecipe.ingredientsJson[i].unit;
+    }
+
+    let firstStep = document.querySelector('input[name="step-v-01"');
+    firstStep.value = currRecipe.stepsJson[0].step;
+    for (let i=1; i<currRecipe.stepsJson.length; i++){
+        document.querySelector(".create-step").click();
+        let stepName = 'step-v-' + ("0"+(i+1)).slice(-2);
+        let step = document.querySelector('input[name="'+stepName+'"]');
+        step.value = currRecipe.stepsJson[i].step;
+    }
+ }
+
+
+/**
+ * Adds the necessary event handlers to the form page, to prevent page exit 
  * without saving the data
  */
 function unloadHandler() {
@@ -147,70 +273,97 @@ function unloadHandler() {
  * folders
  */
  function dragDropImageHandler() {
-    const dropArea = document.querySelector(".drag-area");
+    // Retrieve the drag image area in form
+    const dropArea = document.querySelector(".drag-area"); 
+    // The instruction header in the drag area 
     const dragText = dropArea.querySelector(".drag-header");
+    // The image file name
     const dragName = dropArea.querySelector("p")
+    // The "browse file" button 
     let button = dropArea.querySelector("button");
+    // The image file
     let input = dropArea.querySelector("input");
+    // The image file type
     let file; 
 
     button.onclick = () => { input.click() }
 
+    // Save image file when users adding through browse button 
     input.addEventListener("change", function() {
         file = this.files[0];
         dropArea.classList.add("active");
         saveFileName();
     });
 
+    // Change section header when users are dragging the image file to the area
     dropArea.addEventListener("dragover", (event) => {
         event.preventDefault();
         dropArea.classList.add("active");
         dragText.textContent = "Release to Upload File";
     });
 
+    // Change section header when users are not dragging image anymore
     dropArea.addEventListener("dragleave", () => {
         dropArea.classList.remove("active");
         dragText.textContent = "Drag & Drop to Upload File";
     });
 
+    // Save image file when users adding through directly dragging image file
     dropArea.addEventListener("drop", (event) => {
         event.preventDefault();
         file = event.dataTransfer.files[0];
         saveFileName(); 
     });
 
+    /**
+     * Process the image file put by the users and save to the recipe object
+     */
     function saveFileName() {
+    // image file type
     let fileType = file.type; 
+    // accepted image file type
     let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+
+    // If image file type matched, process the image
     if(validExtensions.includes(fileType)) { 
         let fileReader = new FileReader(); 
         fileReader.onload = () => {
+            // The image file raw data 
             let fileURL = fileReader.result;
-
+            // The image file name
             dragName.textContent = file.name;
 
-            let label_1 = document.createElement('label');
-            label_1.htmlFor = "filename";
-            let text_1 = document.createElement('input');
-            text_1.type = "text";
-            text_1.hidden = true;
-            text_1.name = "filename";
-            text_1.value = file.name;
-            dropArea.appendChild(label_1);
-            dropArea.appendChild(text_1);
+            if (dropArea.querySelector("label")) {
+                dropArea.querySelector('[name="filename"').value = file.name;
+                dropArea.querySelector('[name="filedata"').file = fileURL;
+            } else {
+                let label_1 = document.createElement('label');
+                label_1.htmlFor = "filename";
+                let text_1 = document.createElement('input');
+                text_1.type = "text";
+                text_1.hidden = true;
+                text_1.name = "filename";
+                text_1.value = file.name;
+                dropArea.appendChild(label_1);
+                dropArea.appendChild(text_1);
 
-            let label_2 = document.createElement('label');
-            label_2.htmlFor = "filedata";
-            let text_2 = document.createElement('input');
-            text_2.type = "text";
-            text_2.hidden = true;
-            text_2.name = "filedata";
-            text_2.value = fileURL;
-            dropArea.appendChild(label_2);
-            dropArea.appendChild(text_2);
+                let label_2 = document.createElement('label');
+                label_2.htmlFor = "filedata";
+                let text_2 = document.createElement('input');
+                text_2.type = "text";
+                text_2.hidden = true;
+                text_2.name = "filedata";
+                text_2.value = fileURL;
+                dropArea.appendChild(label_2);
+                dropArea.appendChild(text_2);
+            }
         }
+        // Encode the file data as a string
         fileReader.readAsDataURL(file);
-    } else {
+    } 
+    // If not matched the acceptable image file type, 
+    // ask user to use different file 
+    else {
         alert("This is not an Image File!");
         dropArea.classList.remove("active");
         dragText.textContent = "Drag & Drop to Upload File";
@@ -223,63 +376,28 @@ function unloadHandler() {
  * meal types and allow the user to add some new one of his choise.
  */
  function mealTypeHandler() {
-
+    // The meal type key associated in the recipe object 
+    const element = "mealTypes";
+    // Retrieve the meal type element from the form 
     const mealType = document.querySelector(".meal-type");
+    // Retrieve the meal type div from the form
+    const mealDiv = mealType.querySelector("div"); 
+    // The custom meal type button 
     const button = document.createElement('button');
     button.classList.add("new-type-btn");
     button.textContent = "Custom Meal";
-    const mealDiv = mealType.querySelector("div"); 
     
-    const meals = getMealsFromStorage();
+    // Retrive the existing meal type array in localStorage
+    const meals = get_FromStorage(
+        element, ['breakfast', 'lunch', 'dinner', 'snack']);
     addMealsToDocument(meals);
     mealType.appendChild(button);
 
+    // Save entered custom meal type 
     button.addEventListener('click', () => {
-        addCustomMealsToList();
+        addCustom_Element(
+            element, mealDiv, mealType, button, meals, "Add New Meal Type");
     });
-    
-
-    /**
-     * Reads 'mealTypes' from localStorage and returns an array of
-     * all of the meal type found (parsed, not in string form). If
-     * nothing is found in localStorage for 'mealTypes', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of meal types
-     */
-    function getMealsFromStorage() {
-        const meals = JSON.parse(window.localStorage.getItem('mealTypes'));
-        if (!meals) return ['breakfast', 'lunch', 'dinner', 'snack'];
-        return meals 
-    }
-
-    /**
-     * Takes in an array of meal types, converts it to a string, and then
-     * saves that string to 'mealTypes' in localStorage
-     * @param {Array<Object>} meals An array of meal types
-     */
-    function saveMealsToStorage(meals) {
-        localStorage.setItem('mealTypes', JSON.stringify(meals));
-    }
-
-    /**
-     * Takes a meal type, create the checkbox + label element on the html 
-     * file
-     * @param {String<Object>} meal A string of one meal type
-     */
-     function createMealTypeElement(meal) {
-        meal = meal.toLowerCase();
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = meal;
-        checkbox.name = "meal-type-"+meal;
-        checkbox.value = "Yes";
-        let label = document.createElement('label')
-        label.htmlFor = meal;
-        label.textContent = meal[0].toUpperCase() + meal.substring(1);
-
-        mealDiv.appendChild(checkbox);
-        mealDiv.appendChild(label);
-    }
 
     /**
      * Takes in an array of meal types and for each and then appends 
@@ -288,41 +406,8 @@ function unloadHandler() {
      */
     function addMealsToDocument(meals) {
         for (let i = 0; i < meals.length; i++) {
-            createMealTypeElement(meals[i]);
+            create_Element(element, mealDiv, meals[i], undefined);
         }
-    }
-
-    /**
-     * Takes nothing, adds event listener if someone want to add a new
-     * meal type, update localStorage, and the page
-     */
-     function addCustomMealsToList() {
-        let new_textarea = document.createElement('input');
-        new_textarea.type = 'textarea';
-        new_textarea.classList.add('new-meal-type-value');
-        let new_button = document.createElement('button');
-        new_button.classList.add('new-meal-type');
-        new_button.textContent = "Add New Meal Type";
-        let new_div = document.createElement('div');
-
-        new_div.appendChild(new_textarea);
-        new_div.appendChild(new_button);
-        mealDiv.appendChild(new_div);
-        mealType.removeChild(button);
-
-        new_button.addEventListener('click', () => {
-            let new_meal_type = mealDiv.querySelector(".new-meal-type-value").value
-            if (!(new_meal_type in meals)) {
-                if (new_meal_type) {
-                    createMealTypeElement(new_meal_type);
-                    mealDiv.removeChild(new_div);
-                    mealType.appendChild(button);
-
-                    meals.push(new_meal_type);
-                    saveMealsToStorage(meals);
-                }
-            }
-        });
     }
 }
 
@@ -331,68 +416,30 @@ function unloadHandler() {
  * steps to do the recipe
  */
  function stepsHandler() {
+    // Track how many steps are there
     var step_number = 1;
+      // Identifier to create a new step for the recipe object
+    const element = "steps";
+    // Retrieve the targeted step section from the form 
     const main = document.querySelector(".step-list");
     const step_list = main.querySelector('div');
-    addFirstStepElement();
 
-    let add_step = document.createElement('button');
-    add_step.classList.add('create-step');
-    add_step.textContent = "Add New Step";
-    main.appendChild(add_step);
+    // Create a new step element 
+    create_Element(element, step_list, undefined, step_number);
+    step_number = step_number+1;
 
-    add_step.addEventListener('click', () => {
-        addNewStepElement();
-    })
+    // Create a "Add New Step" button for this recipe
+    let add_step_button = document.createElement('button');
+    add_step_button.classList.add('create-step');
+    add_step_button.textContent = "Add New Step";
 
+    // Attach the button to the step section 
+    main.appendChild(add_step_button);
 
-     /**
-     * Creates the html element for step
-     * @return {Array<Object>} of html element 
-     */
-      function createStepElement() {
-        let new_step = document.createElement("div");
-        let label = document.createElement('label');
-        label.htmlFor = "step-v-"+("0"+step_number).slice(-2);
-        label.textContent = " - ";
-        let text = document.createElement('input');
-        text.type = "text";
-        text.name = "step-v-"+("0"+step_number).slice(-2);
-        text.required = true;
+    add_step_button.addEventListener('click', () => {
+        create_Element(element, step_list, undefined, step_number);
         step_number = step_number+1;
-        return [new_step, label, text]
-    }
-
-     /**
-     * Create the first textarea to fullfil with instruction to do the recipe
-     */
-      function addFirstStepElement() {
-        let [new_step, label, text] = new createStepElement();
-        new_step.appendChild(label);
-        new_step.appendChild(text);
-        step_list.appendChild(new_step);
-    };
-
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     */
-    function addNewStepElement() {
-        let [new_step, label, text] = new createStepElement();
-        let cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
-        cancel.textContent = "Delete";
-        new_step.appendChild(label);
-        new_step.appendChild(text);
-        new_step.appendChild(cancel);
-        step_list.appendChild(new_step);
-
-        let delete_step = new_step.querySelector("button")
-        delete_step.addEventListener('click', () => {
-            step_list.removeChild(new_step);
-        })
-    };
+    })
 }
 
 /**
@@ -400,160 +447,45 @@ function unloadHandler() {
  * tools to do the recipe
  */
  function toolsHandler() {
+    // Track how many tools are there
     var tool_number = 1;
+    // Identifier to create a new tool for the recipe object
+    const element = "tools";
+    // Retrieve the targeted tool section from the form 
     const main = document.querySelector(".tool-list");
     const tool_list = main.querySelector('div');
-    const tools = getToolsFromStorage();
-    addFirstToolsElement(tools);
+    // Retrieve the existing tool array from localStorage
+    const tools = get_FromStorage(
+        'tools', ['non-stick frying pan', 'saucepan', 'stock pot', 'sheet pans', 
+        'glass baking dish', 'knives', 'measuring spoons', 'measuring cups', 
+        'wooden spoon', 'fish turner', 'peeler', 'whisk', 'tongs', 
+        'cutting board', 'colander', 'prep bowls', 'can opener',
+        'microplane zester', 'stick blender', 'salad spinner']);
 
+    // Create a new tool for this recipe object 
+    create_Element(element, tool_list, tools, tool_number);
+    tool_number = tool_number+1;
+
+    // Create a "Add New Tool" button for this recipe 
     const add_tool_button = document.createElement('button');
-    add_tool_button.classList.add("new-tool-btn");
+    add_tool_button.classList.add("create-tool");
     add_tool_button.textContent = "Add New Tool";
     main.appendChild(add_tool_button);
+
+    add_tool_button.addEventListener('click', () => {
+        create_Element(element, tool_list, tools, tool_number);
+        tool_number = tool_number+1;
+    })
     
+    // Create a "Custom Tool" button when users want to add new type of tool
     const button = document.createElement('button');
     button.classList.add("new-custom-btn");
     button.textContent = "Custom Tool";
     main.appendChild(button);
 
-    add_tool_button.addEventListener('click', () => {
-        addNewToolElement(tools);
-    })
-
     button.addEventListener('click', () => {
-        createNewTool(tools);
+        addCustom_Element(element, tool_list, main, button, tools, "Add New Tool");
     })
-
-
-    /**
-     * Reads 'tools' from localStorage and returns an array of
-     * all of the tools found (parsed, not in string form). If
-     * nothing is found in localStorage for 'tools', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of tools
-     */
-     function getToolsFromStorage() {
-        const tools = JSON.parse(window.localStorage.getItem('tools'));
-        if (!tools) return [
-            'non-stick frying pan', 'saucepan', 'stock pot', 'sheet pans', 
-            'glass baking dish', 'knives', 'measuring spoons', 
-            'measuring cups', 'wooden spoon', 'fish turner', 'peeler', 
-            'whisk', 'tongs', 'cutting board', 'colander', 'prep bowls', 
-            'can opener', 'microplane zester', 'stick blender', 'salad spinner'];
-        return tools 
-    }
-
-    /**
-     * Takes in an array of tools, converts it to a string, and then
-     * saves that string to 'tools' in localStorage
-     * @param {Array<Object>} tools An array of tools
-     */
-     function saveToolsToStorage(tools) {
-        localStorage.setItem('tools', JSON.stringify(tools));
-    }
-
-    /**
-     * Takes in an array of tools, create the html element for tools
-     * @param {Array<Object>} tools An array of tools
-     * @return {Tuple<Object} of html element
-     */
-    function createToolElement(tools) {
-        const new_div = document.createElement('div');
-        const select = document.createElement("select");
-        select.required = true;
-        select.name = 'tool-v-'+ ("0"+tool_number).slice(-2);
-        select.classList.add("choosen-tool");
-        const option = document.createElement("option");
-        select.appendChild(option);
-
-        for (let i=0; i<tools.length; i++){
-            const option = document.createElement("option");
-            option.textContent = tools[i];
-            select.appendChild(option);
-        }
-
-        const number_select = document.createElement("select");
-        number_select.name = 'tool-nb-'+("0"+tool_number).slice(-2);
-        number_select.classList.add("choosen-nb-tool");
-
-        for (let i=1; i<5; i++){
-            const option = document.createElement("option");
-            option.textContent = i;
-            number_select.appendChild(option);
-        }
-        tool_number = tool_number+1;
-        return [new_div, number_select, select]
-    }
-
-    /**
-     * Create the first textarea to fullfil with instruction to do the recipe
-     * @param {Array<Object>} tools An array of tools
-     */
-    function addFirstToolsElement(tools) {
-        let [new_div, number_select, select] = new createToolElement(tools);
-        new_div.appendChild(number_select);
-        new_div.appendChild(select);
-        tool_list.appendChild(new_div)
-    };
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} tools An array of tools
-     */
-    function createNewTool(tools) {
-        let new_textarea = document.createElement('input');
-        new_textarea.type = 'textarea';
-        new_textarea.classList.add('new-tool-value');
-        let new_button = document.createElement('button');
-        new_button.classList.add('new-tool');
-        new_button.textContent = "Add New Tool";
-        let new_div = document.createElement('div');
-
-        new_div.appendChild(new_textarea);
-        new_div.appendChild(new_button);
-        tool_list.appendChild(new_div);
-        main.removeChild(button);
-
-        new_button.addEventListener('click', () => {
-            let new_tool = tool_list.querySelector(".new-tool-value").value
-            if (!tools.includes(new_tool)){
-                if (new_tool) {
-                    const option = document.createElement("option");
-                    option.textContent = new_tool;
-                    let select = main.querySelector('.choosen-tool');
-                    select.appendChild(option);
-
-                    tools.push(new_tool);
-                    saveToolsToStorage(tools);
-
-                    tool_list.removeChild(new_div);
-                    main.appendChild(button);
-                }
-            }
-        })
-    }
-
-    /**
-     * Create the other select option with tools to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} tools An array of tools
-     */
-    function addNewToolElement(tools) {
-
-        let [new_div, number_select, select] = new createToolElement(tools);
-        const cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
-        cancel.textContent = "Delete";
-        new_div.appendChild(number_select);
-        new_div.appendChild(select);
-        new_div.appendChild(cancel);
-        tool_list.appendChild(new_div);
-
-        cancel.addEventListener('click', () => {
-            tool_list.removeChild(new_div);
-        })
-    };
 }
 
 /**
@@ -561,251 +493,68 @@ function unloadHandler() {
  * ingredients to do the recipe
  */
  function ingredientsHandler() {
+    // Track how many ingredients are there
     var ingredient_number = 1;
+    // Identifier to create a new ingredient for the recipe object
+    const element = "ingredient";
+    // Retrieve the targeted ingredient section from the form 
     const main = document.querySelector(".ingredient-list");
     const ingredient_list = main.querySelector('div');
-    const ingredients = getIngredientsFromStorage();
-    const quantities = getQuantitiesFromStorage();
-    const units = getUnitsFromStorage();
-    addFirstIngredientsElement(ingredients, quantities, units);
+    // Retrieve the existing ingredient name array from localStorage
+    const ingredients = get_FromStorage(
+        'ingredients', ['chicken', 'beef', 'red peeper', 'onion', 'garlic', 'cilantro', 'tortilla']);
+    // Retrieve the existing ingredient quantity array from localStorage
+    const quantities = get_FromStorage(
+        'ingredientQuatitity', ['0.5', '1', '2', '3', '4', '5', '100', '200', '350']);
+     // Retrieve the existing ingredient unit array from localStorage
+    const units = get_FromStorage(
+        'ingredientUnits', ['oz', 'mL', 'cL', 'L', 'g', 'kg', 'lb', 'ea']);
 
-    const add_ingredient_button = document.createElement('button');
-    add_ingredient_button.classList.add("new-ingredient-btn");
-    add_ingredient_button.textContent = "Add New Ingredient";
-    main.appendChild(add_ingredient_button);
+    // Create a new ingredient for this recipe object 
+    create_Element(element+'s', ingredient_list, [quantities, units, ingredients], ingredient_number);
+    ingredient_number = ingredient_number+1;
 
-    add_ingredient_button.addEventListener('click', () => {
-        addNewIngredientElement(ingredients, quantities, units);
-    })
-
-
-    //
+    // Create a "Add New Ingredient" button for this recipe 
     const button = document.createElement('button');
-    button.classList.add("new-custom-btn");
-    button.textContent = "Custom Ingredient";
+    button.classList.add("create-ingredient");
+    button.textContent = "Add New Ingredient";
     main.appendChild(button);
 
     button.addEventListener('click', () => {
-        createNewIngredient(ingredients);
+        create_Element(element+'s', ingredient_list, [quantities, units, ingredients], ingredient_number);
+        ingredient_number = ingredient_number+1;
     })
 
+    // Create a "Custom Quantity" button when users want to add new type of ingredient quantity
+    const quantity_button = document.createElement('button');
+    quantity_button.classList.add("new-quantity-btn");
+    quantity_button.textContent = "Custom Quantity";
+    main.appendChild(quantity_button);
 
-    /**
-     * Reads 'ingredients' from localStorage and returns an array of
-     * all of the ingredients found (parsed, not in string form). If
-     * nothing is found in localStorage for 'ingredients', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of ingredients
-     */
-     function getIngredientsFromStorage() {
-        const ingredients = JSON.parse(window.localStorage.getItem('ingredients'));
-        if (!ingredients) return [
-            'chicken', 'beef', 'red peeper', 'onion', 'garlic', 'cilantro',
-            'tortilla'];
-        return ingredients 
-    }
+    quantity_button.addEventListener('click', () => {
+        addCustom_Element(
+            element+'Quantity', ingredient_list, main, quantity_button, quantities, "Add New Quantity");
+    })
 
-    /**
-     * Reads 'quantities' from localStorage and returns an array of
-     * all of the quantities found (parsed, not in string form). If
-     * nothing is found in localStorage for 'quantities', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of quantities
-     */
-     function getQuantitiesFromStorage() {
-        const quantities = JSON.parse(window.localStorage.getItem('quantities'));
-        if (!quantities) return [
-            '0.5', '1', '2', '3', '4', '5', '100', '200', '350'];
-        return quantities 
-    }
+    // Create a "Custom Unit" button when users want to add new type of ingredient unit
+    const unit_button = document.createElement('button');
+    unit_button.classList.add("new-units-btn");
+    unit_button.textContent = "Custom Unit";
+    main.appendChild(unit_button);
 
-    /**
-     * Reads 'units' from localStorage and returns an array of
-     * all of the units found (parsed, not in string form). If
-     * nothing is found in localStorage for 'units', an array with default
-     * value is returned.
-     * @return {Array<Object>} An array of units
-     */
-     function getUnitsFromStorage() {
-        const units = JSON.parse(window.localStorage.getItem('units'));
-        if (!units) return ['oz', 'mL', 'cL', 'L', 'g', 'kg', 'lb', 'ea'];
-        return units 
-    } 
-    
-    /**
-     * Takes in an array of ingredients, converts it to a string, and then
-     * saves that string to 'ingredients' in localStorage
-     * @param {Array<Object>} tools An array of ingredients
-     */
-     function saveIngredientsToStorage(ingredients) {
-        localStorage.setItem('ingredients', JSON.stringify(ingredients));
-    }
+    unit_button.addEventListener('click', () => {
+        addCustom_Element(
+            element+"Units", ingredient_list, main, unit_button, units, "Add New Unit");
+    })
 
-    /**
-     * Takes in an array of quantities, converts it to a string, and then
-     * saves that string to 'quantities' in localStorage
-     * @param {Array<Object>} quantities An array of quantities
-     */
-     function saveQuantitiesToStorage(quantities) {
-        localStorage.setItem('quantities', JSON.stringify(quantities));
-    }
+    // Create a "Custom Ingredient" button when users want to add new type of ingredient name
+    const ingredient_button = document.createElement('button');
+    ingredient_button.classList.add("new-ingredient-btn");
+    ingredient_button.textContent = "Custom Ingredient";
+    main.appendChild(ingredient_button);
 
-    /**
-     * Takes in an array of units, converts it to a string, and then
-     * saves that string to 'units' in localStorage
-     * @param {Array<Object>} tools An array of units
-     */
-     function saveUnitsToStorage(units) {
-        localStorage.setItem('units', JSON.stringify(units));
-    }
-
-    /**
-     * Takes in an array of ingredients, create the html element for ingredients
-     * @param {Array<Object>} ingredients An array of ingredients
-     * @return {Tuple<Object} of html element
-     */
-    function createIngredientElement(ingredients, quantities, units) {
-        const new_div = document.createElement('div');
-        const select = document.createElement("select");
-        select.required = true;
-        select.name = 'ingredients-v-'+("0"+ingredient_number).slice(-2);
-        select.classList.add("choosen-ingredient");
-        const option = document.createElement("option");
-        select.appendChild(option);
-
-        for (let i=0; i<ingredients.length; i++){
-            const option = document.createElement("option");
-            option.textContent = ingredients[i];
-            select.appendChild(option);
-        }
-
-        const quantity_select = document.createElement("select");
-        quantity_select.name = 'ingredients-q-'+("0"+ingredient_number).slice(-2);
-        quantity_select.classList.add("choosen-q-tool");
-
-        for (let i=0; i<quantities.length; i++){
-            const option = document.createElement("option");
-            option.textContent = quantities[i];
-            quantity_select.appendChild(option);
-        }
-
-        const unit_select = document.createElement("select");
-        unit_select.name = 'ingredients-u-'+("0"+ingredient_number).slice(-2);
-        unit_select.classList.add("choosen-u-tool");
-
-        for (let i=0; i<units.length; i++){
-            const option = document.createElement("option");
-            option.textContent = units[i];
-            unit_select.appendChild(option);
-        }
-        ingredient_number = ingredient_number+1;
-        return [new_div, quantity_select, unit_select, select]
-    }
-
-    /**
-     * Create the selevt option to add a new ingredient to the recipe
-     * @param {Array<Object>} ingredients An array of ingredients
-     * @param {Array<Object>} quantities An array of quantities
-     * @param {Array<Object>} units An array of units
-     */
-    function addFirstIngredientsElement(ingredients, quantities, units) {
-        let [
-            new_div, 
-            quantity_select,
-            unit_select,
-            select] = new createIngredientElement(ingredients, quantities, units);
-        new_div.appendChild(quantity_select)
-        new_div.appendChild(unit_select);
-        new_div.appendChild(select);
-        ingredient_list.appendChild(new_div)
-    };
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} ingredients An array of ingredients
-     */
-    function createNewIngredient(ingredients) {
-        let new_textarea = document.createElement('input');
-        new_textarea.type = 'textarea';
-        new_textarea.classList.add('new-ingredient-value');
-        let new_button = document.createElement('button');
-        new_button.classList.add('new-ingredient');
-        new_button.textContent = "Add New Ingredient";
-        let new_div = document.createElement('div');
-
-        new_div.appendChild(new_textarea);
-        new_div.appendChild(new_button);
-        ingredient_list.appendChild(new_div);
-        main.removeChild(button);
-
-        new_button.addEventListener('click', () => {
-            let new_ingredient = ingredient_list.querySelector(".new-ingredient-value").value
-            if (!ingredients.includes(new_ingredient)){
-                if (new_ingredient) {
-                    const option = document.createElement("option");
-                    option.textContent = new_ingredient;
-                    let select = main.querySelector('.choosen-ingredient');
-                    select.appendChild(option);
-
-                    ingredients.push(new_ingredient);
-                    saveIngredientsToStorage(ingredients);
-
-                    ingredient_list.removeChild(new_div);
-                    main.appendChild(button);
-                }
-            }
-        })
-    }
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} units An array of units
-     */
-     function createNewUnit(units) {
-        
-    }
-
-    /**
-     * Create the other textarea to fullfil with instruction to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} quantities An array of quantities
-     */
-     function createNewQuantity(quantities) {
-        
-    }
-
-    /**
-     * Create the other select option with ingredients to do the recipe 
-     * with an additional button to delete them
-     * @param {Array<Object>} ingredients An array of ingredients
-     * @param {Array<Object>} quantities An array of quantities
-     * @param {Array<Object>} units An array of units
-     */
-    function addNewIngredientElement(ingredients, quantities, units) {
-        let [
-            new_div, 
-            quantity_select,
-            unit_select,
-            select] = new createIngredientElement(ingredients, quantities, units);
-        const cancel = document.createElement('button');
-        cancel.classList.add('delete-step');
-        cancel.textContent = "Delete";
-        
-        new_div.appendChild(quantity_select)
-        new_div.appendChild(unit_select);
-        new_div.appendChild(select);
-        new_div.appendChild(cancel);
-        ingredient_list.appendChild(new_div);
-
-        cancel.addEventListener('click', () => {
-            ingredient_list.removeChild(new_div);
-        })
-    };
-}
-    
-
-
-    
-
+    ingredient_button.addEventListener('click', () => {
+        addCustom_Element(
+            element+"s", ingredient_list, main, ingredient_button, ingredients, "Add New Ingredient");
+    })
+ }
