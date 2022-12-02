@@ -131,7 +131,7 @@ class RecipePreview extends HTMLElement {
       let articleEl = this.shadowRoot.children[0];
     
       articleEl.innerHTML = `<img src='${data["imgSrc"]}' alt='Recipe Image'>
-                             <a href='/cse110-sp21-group36/source/recipe_viewer.html'>${data["recipeName"]}</a>
+                             <a href='./recipe_viewer.html'>${data["recipeName"]}</a>
                              <p>${data["totalTime"]} Minutes</p>`;
   
     }
