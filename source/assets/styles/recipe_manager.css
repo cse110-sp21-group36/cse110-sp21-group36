@@ -14,16 +14,11 @@ h1 {
   float: center;
 } */
 
-nav {
-  background: rgba(197, 132, 58, 0.877);
-}
-
 /* Recipe CSS*/
 * {
   /* This sets font for everything to be sans serif */
   font-family: sans-serif;
 }
-
 
 body {
   height: 100%;

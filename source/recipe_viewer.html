@@ -8,14 +8,26 @@
 
 
     <!-- CSS and JavaScript -->
-    <link rel="stylesheet" href="/source/assets/styles/recipe_viewer.css" /> 
-    <!-- Icon, CSS, and JavaScript -->
-
+    <link rel="stylesheet" href="/source/assets/styles/recipe_viewer.css" />
+    <script src="./assets/scripts/recipe_viewer.js"></script>
+	<!-- Code to display navbar -->
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <title>Recipe View Page</title>
   </head>
 
   <body>
-    <header>
+	<!--Navigation bar-->
+	<div id="nav-placeholder">
+	</div>
+
+	<script>
+		$(function(){
+		  $("#nav-placeholder").load("navbar.html");
+		});
+	</script>
+	<!--end of Navigation bar-->
+    
+	<header>
         <!-- App logo -->
         <img 
             src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true" 
