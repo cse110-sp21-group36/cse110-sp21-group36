@@ -1,35 +1,24 @@
-.nav-bar{
-    display: flex;
-    flex-direction: row;
-    align-content: space-around;
+* {
+    position: relative;
+    font-family: "Times New Roman", Times, serif;
 }
 
-
-.title-img {
-    width: 400px;
-    height: 200px;
+header{
     display: flex;
-    justify-content: space-evenly;
-    align-content: space-around;
+    justify-content: left;
 }
 
-.general-info {
+.general-info,.name-img-fav,.tool-ingredient-step  {
   display:grid;
-  grid-template-columns: 500px 500px;
+  grid-template-columns: 500px 500px; 
   justify-content: center;  
   align-items: start;
   grid-row: auto auto;
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
 }
 
-.tool-ingredient-step {
-    display: flex;
-    justify-content: space-evenly;
-    align-content: space-around;
-}
-
-#imageHolder {
+.drag-area {
     width: 400px;
     height: 200px;
     display: flex;
@@ -40,30 +29,67 @@
     background-color: orange;
 }
 
-.func-buttons{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
-}
-
-#toolLine{
-    display:grid;
-    grid-row-gap: 20px;
-}
-
-#ingredientLine{
-    display:grid;
-    grid-row-gap: 20px;
-}
-
-#stepLine{
-    display:grid;
-    grid-row-gap: 20px;
-}
-
 footer{
     text-align: center;
     margin: auto;
 }
 
+body{
+    background-color: rgb(230, 226, 173);
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    margin-right: 5vw;
+    margin-left: 5vw;
+}
+
+.func-btns{
+    margin-right: 30vw;
+    margin-left: 34vw;
+    padding: 5mm;
+    display:grid;
+    align-items: center;
+    grid-template-columns: 20vw; 
+}
+
+#difficulty,#note{
+    margin-right: 20vw;
+}
+
+#meal-type{
+    padding: 5mm;
+    display:grid;
+    grid-template-columns: 10vw 10vw; 
+    grid-row: auto auto;
+}
+
+@media (max-width: 900px) {
+    .general-info,.name-img-fav,.tool-ingredient-step  {
+        display:grid;
+        grid-template-columns: 300px; 
+        justify-content: center;  
+        align-items: start;
+        grid-row: auto;
+        grid-row-gap: 10px;
+      }
+
+      .drag-area {
+        padding: 1.5cm;
+        width: 30vw;
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 5px double white;
+        background-color: orange;
+    }
+
+    #meal-type{
+        padding: 5mm;
+        display:grid;
+        grid-template-columns: 10vw 10vw; 
+        grid-row: auto auto;
+        grid-column-gap: 5vw;
+        grid-row-gap: 1vw;
+    }
+  }  
