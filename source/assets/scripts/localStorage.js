@@ -10,7 +10,7 @@
  * @param {Object} nullObject An object to use if nothing in localStorage
  * @returns {Object} An object found in localStorage
  */
-function get_FromStorage(target, nullObject=[]) {
+function get_FromStorage(target, nullObject=null) {
     var response = JSON.parse(window.localStorage.getItem(target));
     if (!response) return nullObject;
     return response 

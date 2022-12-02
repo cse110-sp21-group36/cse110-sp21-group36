@@ -41,7 +41,7 @@ function initFormHandler() {
     // The form to take in info for the recipe
     const form = document.querySelector('form');
     // Retrieve the existing recipes array in localStorage, if exists
-    var recipes = get_FromStorage('recipes');
+    var recipes = get_FromStorage('recipes', []);
 
     // Add event listener for the form when user save the recipe
     form.addEventListener('submit', async (e) => {
@@ -136,7 +136,8 @@ function initFormHandler() {
             stepsJson: stepsJson
         }
 
-        if (formData["edit-new"]=="Yes") {
+        console.log(formData["edit-new"] == "Yes");
+        if (formData["edit-new"] == "Yes") {
             // Add the new object back to the recipe object array 
             recipes = add_ToList(recipeObject, recipes);
             // Save the recipes array back to localStorage
@@ -146,13 +147,19 @@ function initFormHandler() {
         } else {
             // Remove the current recipe object you want to modify 
             let currRecipe = get_FromStorage('currRecipe');
-            recipes.filter(function(ele){ 
-                return ele.recipe != currRecipe.recipe});
-            // Add the new object back to the recipe object array 
-            recipeObject.recipe = currRecipe.recipe;
-            recipes = add_ToList(recipeObject, recipes);
+            let newRecipes = []
+            for (let i = 0; i<recipes.length; i++) {
+                let newA = recipes[i].recipe;
+                let old = currRecipe.recipe;
+                if (recipes[i].recipe == currRecipe.recipe) {
+                    recipeObject.recipe = currRecipe.recipe;
+                    newRecipes.push(recipeObject);
+                } else {
+                    newRecipes.push(recipes[i]);
+                }
+            }
             // Save the recipes array back to localStorage
-            save_ToStorage('recipes', recipes);
+            save_ToStorage('recipes', newRecipes);
             // Save the current recipe object to localStorage
             save_ToStorage('currRecipe', recipeObject)
             }
