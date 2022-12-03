@@ -20,8 +20,11 @@
   <body>
 	<!--Navigation bar-->
 	<div id="nav-placeholder">
+    
 	</div>
 
+  <a href="./recipe_editor.html" title="Go to editor">Edit Recipe</a>
+  <button class="delete" id="delete">Delete</button>
 	<script>
 		$(function(){
 		  $("#nav-placeholder").load("navbar.html");
@@ -36,15 +39,13 @@
             width="150"
             height="100"
             alt="page logo">
-        <!-- Navbar -->
-        <nav id="nav-bar">
-            <a href="./recipe_manager.html" title="Go to homepage">Homepage</a>
-            <a href="./recipe_editor.html" title="Go to editor">Editor Page</a>
-        </nav>
+        
     </header>
     <main>
         <header>
             <h1 id="recipe-name">Title of Recipe Goes Here</h1>
+            <div class='heart' id="favHeart"></div>
+
             <h2 id="mealtype"></h2>
             <h2 id="time">Time</h2>
             <h2 id="difficulty">Difficulty</h2>
@@ -53,8 +54,8 @@
             <!-- favorite icon (specific image when found) -->
             <!-- <img id="favorite" src="./assets/images/no-image.png" alt="" /> -->
         </header>
-        <button id="delete">Delete</button>
-        <img class="favorite" id="favorite" src="./assets/images/no-image.png" alt="" />
+        
+        
         <img class="title-img" id="recipeImage" src="./assets/images/no-image.png" alt="" />
         
         
