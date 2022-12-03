@@ -17,7 +17,6 @@ function init() {
   //initFormHandler();
 
   const element = document.getElementById("delete");
-  console.log(element);
 
   // Initiates deletion of a recipe, returns to home page
   element.addEventListener("click", ()=>{
@@ -34,10 +33,6 @@ function init() {
   
   
 }
-
-
-
-
 
 /**
  * Populates view page.
@@ -164,6 +159,5 @@ function displayInfo(current) {
 function getCurrentRecipe() {
   var stringForm = localStorage.getItem('currRecipe');
   var currRecipe = JSON.parse(stringForm);
-  console.log(currRecipe);
   return currRecipe; 
 }
