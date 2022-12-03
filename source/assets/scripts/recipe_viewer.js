@@ -93,7 +93,7 @@ function displayInfo(current) {
 
     //TIME 
     var time = document.getElementById('time'); 
-    time.textContent = "Total Time: " + current.totalTime;
+    time.textContent = "Total Minutes: " + current.totalTime;
 
     //DIFFICULTY
     var difficulty = document.getElementById('difficulty');
