@@ -136,7 +136,6 @@ function initFormHandler() {
             stepsJson: stepsJson
         }
 
-        console.log(formData["edit-new"] == "Yes");
         if (formData["edit-new"] == "Yes") {
             // Add the new object back to the recipe object array 
             recipes = add_ToList(recipeObject, recipes);
