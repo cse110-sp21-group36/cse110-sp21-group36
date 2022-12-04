@@ -4,43 +4,71 @@
     display: flex;
     justify-content: space-evenly;
     align-content: space-around;
-    border: 5px solid rgb(238, 183, 4);
+    border: 10px solid rgba(197, 132, 58, 0.877);
     margin: auto;
 }
 
-.favorite {
-    width: 100px;
-    height: 100px;
+main {
+    padding-left: 5%;
+}
+
+#ingredients-header {
+    padding-top: 100px;
+}
+
+#delete {
+    background-color: #cbd5e1;
+}
+
+#delete:hover {
+    color: red;
+    border-color: red;
+}
+
+#favorite h1 {
+    float: left;
+}
+
+#favorite img {
+    position: relative;
 }
 
 #recipe-name {
-    color: blue;
+    color: #141233;
 }
 
 #mealtype {
-    color:blue;
+    color:#141233;
+    padding-top: 30px;
 }
 
 #time {
-    color:blue;
+    color:#141233;
 }
 
 #difficulty {
-    color:blue;
+    color:#141233;
 }
 
 #ingredient-list {
-    color:blue;
+    color:#141233;
+    text-indent: 20px;
+    padding-bottom: 30px;
 }
 
 #steps-list {
-    color:blue;
+    color:#141233;
+    padding-bottom: 30px;
 }
 
 #tools-list {
-    color:blue
+    color:#141233;
+    text-indent: 20px;
+    padding-bottom: 30px;
 }
 
 #notes {
-    color:blue;
+    color:#141233;
+    text-indent: 20px;
+    padding-bottom: 30px;
 }

@@ -16,6 +16,19 @@ function init() {
   displayInfo(current); 
   //initFormHandler();
 
+  // TO-DO: Add links to navbar
+  /* var links = document.querySelector("nav-links");
+  let homeLink = document.createElement("a");
+  let editorLink = document.createElement("a");
+  homeLink.href = "./recipe_manager.html" ;
+  editorLink.href = "./recipe_editor.html";
+  homeLink.title = "Go to homepage";
+  editorLink.title = "Go to editor";
+  homeLink.innerHTML = "Home";
+  editorLink.innerHTML = "Edit";
+  links.appendChild(homeLink);
+  links.appendChild(editorLink); */
+
   const element = document.getElementById("delete");
   console.log(element);
   element.addEventListener("click", ()=>{
@@ -28,7 +41,7 @@ function init() {
     recipes.splice(i, 1);
     window.localStorage.setItem('recipes', JSON.stringify(recipes));
     window.location.href = "./recipe_manager.html";
-  });
+ });
   
   
 }
@@ -68,12 +81,14 @@ function displayInfo(current) {
 
     //FAVORITE 
     // TODO: not sure what to do for favorite
-    if(current.favorite == true){
+    if(current.favorite == false){
       var image = document.getElementById('favorite');
+      let imgElement = document.createElement('img');
       //set image 
-      image.src = './assets/images/icons/heart.jpg';
-      image.width = 300;
-      image.height = 300;
+      imgElement.src = './assets/images/icons/heart.png';
+      imgElement.width = 50;
+      imgElement.height = 50;
+      image.appendChild(imgElement);
     }
 
     //IMAGE
@@ -82,6 +97,7 @@ function displayInfo(current) {
 
     //MEAL TYPE
     var mealtype = document.getElementById('mealtype');
+    //console.log(current.mealType.length);
     for (let i = 0; i < current.mealType.length; i++){
       mealtype.textContent += current.mealType[i];
       if (i != current.mealType.length - 1){
@@ -91,7 +107,7 @@ function displayInfo(current) {
 
     //TIME 
     var time = document.getElementById('time'); 
-    time.textContent = "Total Time: " + current.totalTime;
+    time.textContent = "Total Time: " + current.totalTime + " minutes";
 
     //DIFFICULTY
     var difficulty = document.getElementById('difficulty');
