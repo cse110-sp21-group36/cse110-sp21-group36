@@ -16,6 +16,19 @@ function init() {
   displayInfo(current); 
   //initFormHandler();
 
+  // TO-DO: Add links to navbar
+  /* var links = document.querySelector("nav-links");
+  let homeLink = document.createElement("a");
+  let editorLink = document.createElement("a");
+  homeLink.href = "./recipe_manager.html" ;
+  editorLink.href = "./recipe_editor.html";
+  homeLink.title = "Go to homepage";
+  editorLink.title = "Go to editor";
+  homeLink.innerHTML = "Home";
+  editorLink.innerHTML = "Edit";
+  links.appendChild(homeLink);
+  links.appendChild(editorLink); */
+
   const element = document.getElementById("delete");
 
   // Initiates deletion of a recipe, returns to home page
@@ -29,7 +42,7 @@ function init() {
     recipes.splice(i, 1);
     window.localStorage.setItem('recipes', JSON.stringify(recipes));
     window.location.href = "./recipe_manager.html";
-  });
+ });
   
   
 }
@@ -61,14 +74,14 @@ function displayInfo(current) {
 
     //FAVORITE 
     // TODO: not sure what to do for favorite
-    var favIcon = document.getElementById('favHeart');
-    if(current.favorite != true){
-
-      favIcon.classList = "none";
-      
-    }
-    else{
-      favIcon.classList = "heart";
+    if(current.favorite == true){
+      var image = document.getElementById('favorite');
+      let imgElement = document.createElement('img');
+      //set image 
+      imgElement.src = './assets/images/icons/heart.png';
+      imgElement.width = 50;
+      imgElement.height = 50;
+      image.appendChild(imgElement);
     }
 
     //IMAGE
@@ -88,7 +101,7 @@ function displayInfo(current) {
 
     //TIME 
     var time = document.getElementById('time'); 
-    time.textContent = "Total Minutes: " + current.totalTime;
+    time.textContent = "Total Time: " + current.totalTime + " minutes";
 
     //DIFFICULTY
     var difficulty = document.getElementById('difficulty');
