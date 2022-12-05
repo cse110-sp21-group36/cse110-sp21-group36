@@ -11,7 +11,7 @@ nav {
 
 /* Keeps the navbar in the center of screen */
 .nav-center {
-	width: 30vw;
+	width: 60vw;
 	max-width: var(--max-width);
 }
 
@@ -57,19 +57,19 @@ nav {
 .show-links {
 	/* Change height when adding or removing nav links */
 	height: 23.9375rem;
-	/* height: 310px; */
 }
    
+/* Customization for each link */
 .nav-link {
-	display: flex;
-	text-align: center;
-	font-size: 1.25rem;
-	text-transform: capitalize;
-	color: var(navBarTextColor);
-	letter-spacing: var(--letterSpacing);
-	padding: 1rem 0;
-	border-top: 1px solid var(--grey-500);
-	transition: var(--transition);
+	display: block;
+  	text-align: center;
+  	font-size: 1.25rem;
+  	text-transform: capitalize;
+  	color: var(--grey-900);
+  	letter-spacing: var(--letterSpacing);
+  	padding: 1rem 0;
+ 	border-top: 1px solid var(--grey-500);
+  	transition: var(--transition);
 }
 
 .nav-link:hover {
@@ -84,7 +84,7 @@ nav {
 @media screen and (min-width: 992px) {
 
   /* Format the display of navbar */
-  navbar {
+  .navbar {
     height: 6 rem;
   }
 
@@ -106,7 +106,7 @@ nav {
 	}
 	/* Format the nav links to be in center */
 	.nav-links {
-	  height: auto !important;
+	  height: auto !important;;
 	  flex-direction: row;
 	  align-items: center;
 	  width: 100%;
@@ -134,10 +134,11 @@ nav {
 			</a>
 			<!-- Create navbar button using the icon from font-awesome -->
 			<button class="nav-btn btn">
-			<i class="fas fa-align-justify"></i>
+				<i class="fas fa-align-justify"></i>
 			</button>
 		</div>
 		<div class="nav-links">
+			<a href="./recipe_editor.html" title="Edit Recipe" class="nav-link">Edit</a>
 			<a href="about.html" class="nav-link">about</a>
 			<a href="contact.html" class="nav-link">contact</a>
 		</div>
