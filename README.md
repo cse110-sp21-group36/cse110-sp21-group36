@@ -2,6 +2,7 @@
 
 ## Team Agenda (Week 10)
 
+**Website:** [Link](https://cse110-sp21-group36.github.io/cse110-sp21-group36/)
 **Link to Team Page:** [Team Page](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md)
 
 __Next Meeting__: Thursday 12/1, Sprint 3 Review (Week 10) 5:00 PM In-Person, Geisel West Library
