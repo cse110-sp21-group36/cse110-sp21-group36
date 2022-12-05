@@ -17,7 +17,8 @@ function init() {
   //initFormHandler();
 
   const element = document.getElementById("delete");
-  console.log(element);
+
+  // Initiates deletion of a recipe, returns to home page
   element.addEventListener("click", ()=>{
     window.localStorage.removeItem('currRecipe');
     let recipes = JSON.parse(localStorage.getItem('recipes'));
@@ -32,10 +33,6 @@ function init() {
   
   
 }
-
-
-
-
 
 /**
  * Populates view page.
@@ -62,18 +59,16 @@ function displayInfo(current) {
     var title = document.getElementById('recipe-name'); 
     title.textContent  = current.recipeName;
 
-    
-
-    
-
     //FAVORITE 
     // TODO: not sure what to do for favorite
-    if(current.favorite == true){
-      var image = document.getElementById('favorite');
-      //set image 
-      image.src = './assets/images/icons/heart.jpg';
-      image.width = 300;
-      image.height = 300;
+    var favIcon = document.getElementById('favHeart');
+    if(current.favorite != true){
+
+      favIcon.classList = "none";
+      
+    }
+    else{
+      favIcon.classList = "heart";
     }
 
     //IMAGE
@@ -82,16 +77,18 @@ function displayInfo(current) {
 
     //MEAL TYPE
     var mealtype = document.getElementById('mealtype');
+    mealtype.textContent = "";
     for (let i = 0; i < current.mealType.length; i++){
       mealtype.textContent += current.mealType[i];
       if (i != current.mealType.length - 1){
         mealtype.textContent  += ", ";
       }
     }
+    
 
     //TIME 
     var time = document.getElementById('time'); 
-    time.textContent = "Total Time: " + current.totalTime;
+    time.textContent = "Total Minutes: " + current.totalTime;
 
     //DIFFICULTY
     var difficulty = document.getElementById('difficulty');
@@ -103,6 +100,7 @@ function displayInfo(current) {
 
     //INGREDIENTS 
     var htmlIngredient = document.getElementById('ingredient-list');
+    htmlIngredient.innerHTML = "";
 
     //loop through array of strings 
     var listIngredients = current.ingredients 
@@ -118,6 +116,7 @@ function displayInfo(current) {
 
     //STEPS
     var htmlStep = document.getElementById('steps-list');
+    htmlStep.innerHTML = "";
 
     var listStep = current.steps;
     for (var x = 0; x < listStep.length; x++){
@@ -133,6 +132,7 @@ function displayInfo(current) {
 
     //MATERIALS
     var htmlTools = document.getElementById('tools-list');
+    htmlTools.innerHTML = "";
 
     var listTools = current.tools;
     for (var x = 0; x < listTools.length; x++){
@@ -159,6 +159,5 @@ function displayInfo(current) {
 function getCurrentRecipe() {
   var stringForm = localStorage.getItem('currRecipe');
   var currRecipe = JSON.parse(stringForm);
-  console.log(currRecipe);
   return currRecipe; 
 }
