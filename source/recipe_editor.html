@@ -27,23 +27,161 @@
 </head>
 
 <body>
-	<!--Navigation bar-->
-	<div id="nav-placeholder">
-	</div>
-
-	<script>
-		$(function(){
-		  $("#nav-placeholder").load("navbar.html");
-		});
-	</script>
-	<!--end of Navigation bar-->
     <header>
         <!-- App logo -->
-        <img 
-            src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true" 
-            width="150"
-            height="100"
-            alt="page logo">
+        <!-- <img  -->
+            <!-- src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true"  -->
+            <!-- width="150" -->
+            <!-- height="100" -->
+            <!-- alt="page logo"> -->
+
+        <!--Navigation bar-->
+	    <style>
+            nav {
+              background: rgba(197, 132, 58, 0.877);
+            }
+                
+            .navbar {
+                margin-top: 0;
+                display: flex;
+                align-items: center;
+            }
+            
+            /* Keeps the navbar in the center of screen */
+            .nav-center {
+                width: 30vw;
+                max-width: var(--max-width);
+            }
+            
+            /* Position logo and navbar elements away from each other */
+            .nav-header {
+                height: 6rem;
+                display: flex;
+              text-align: center;
+                justify-content: flex-end;
+            }
+            
+            /* Change size of logo */
+            .nav-header img {
+                width: 200px;
+              margin-left: 10px;
+            }
+            
+            /* Have logo be aligned with nav button */
+            .nav-logo {
+                display: flex;
+                align-items: flex-end;
+              margin-right: auto;
+                margin-left: auto;
+            }
+            
+            /* Change padding of nav button */
+            .nav-btn {
+                padding: 0.15rem 0.75rem;
+            }
+            
+            .nav-btn i {
+                font-size: 1.25rem;
+            }
+            
+            /* Display nav bar toggle for mobile screens */
+            .nav-links {
+                height: 0;  /* hide nav links on mobile screens */
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                transition: var(--transition);  /* toggle effect */
+            }
+            .show-links {
+                /* Change height when adding or removing nav links */
+                height: 23.9375rem;
+                /* height: 310px; */
+            }
+               
+            .nav-link {
+                display: flex;
+                text-align: center;
+                font-size: 1.25rem;
+                text-transform: capitalize;
+                color: var(navBarTextColor);
+                letter-spacing: var(--letterSpacing);
+                padding: 1rem 0;
+                border-top: 1px solid var(--grey-500);
+                transition: var(--transition);
+            }
+            
+            .nav-link:hover {
+                color: var(--primary-500);
+            }
+              
+            .contact-link a {
+                padding: 0.15rem 1rem;
+            } 
+            
+            /* For desktop screen sizes, hide nav button and format nav-bar links to display in a line */
+            @media screen and (min-width: 992px) {
+            
+              /* Format the display of navbar */
+              navbar {
+                height: 6 rem;
+              }
+            
+              /* Set the nav links in a line */
+                .nav-center {
+                  display: flex;
+                  align-items: center;
+              }
+              /* Create distance between logo and nav links */
+              .nav-header {
+                padding: 0;
+                margin-right: 2rem;
+                height: auto;  /* show nav links on desktop screens */
+              } 
+            
+            /* Hide nav button for wider screens */
+                .nav-btn {
+                  display: none;
+                }
+                /* Format the nav links to be in center */
+                .nav-links {
+                  height: auto !important;
+                  flex-direction: row;
+                  align-items: center;
+                  width: 100%;
+                }
+                /* Distancing the nav links from each other */
+                .nav-link {
+                  padding: 0;
+                  border-top: none;
+                  margin-right: 1rem;
+                  font-size: 1rem;
+                }
+                /* Move contact link to RHS */
+                .contact-link {
+                  margin-right: 0;
+                  margin-left: auto;
+                }
+            }
+            </style>
+            
+            <nav class="navbar">
+                <div class="nav-center">
+                    <div class="nav-header">
+                        <a href="recipe_manager.html" class="nav-logo">
+                        <img src="./assets/images/my-recipes-logo.svg" alt="my-recipes" />
+                        </a>
+                        <!-- Create navbar button using the icon from font-awesome -->
+                        <button class="nav-btn btn">
+                        <i class="fas fa-align-justify"></i>
+                        </button>
+                    </div>
+                    <div class="nav-links">
+                        <a href="about.html" class="nav-link">about</a>
+                        <a href="contact.html" class="nav-link">contact</a>
+                    </div>
+                </div>
+            </nav>
+	<!--end of Navigation bar-->
     </header>
 
     <main>
@@ -141,21 +279,21 @@
                 <label>Tools:</label>
                 <div class="tool-list">
                     <div id="tools">
-                        <!-- add dinamicly the tools there -->
+                        <!-- add dinamically the tools there -->
                     </div>
                 </div>
 
                 <label>Ingredients:</label>
                 <div class="ingredient-list">
                     <div id="ingredients">
-                        <!-- add dinamicly the ingredients there -->
+                        <!-- add dinamically the ingredients there -->
                     </div>
                 </div>
                     
                 <label>Steps:</label>
                 <div class="step-list">
                     <div id="steps">
-                        <!-- add dinamicly the steps there -->
+                        <!-- add dinamically the steps there -->
                     </div>
                 </div>
             </fieldset>
@@ -171,10 +309,6 @@
 
         </form>
         <!-- end form -->
-        
     </main>
-    <footer>
-        <p>Team 36 Code Avengers @ CSE110 Fall 2022</p>
-    </footer>
 </body>
 </html>
