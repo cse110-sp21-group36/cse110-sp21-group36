@@ -81,7 +81,7 @@ function displayInfo(current) {
 
     //FAVORITE 
     // TODO: not sure what to do for favorite
-    if(current.favorite == false){
+    if(current.favorite == true){
       var image = document.getElementById('favorite');
       let imgElement = document.createElement('img');
       //set image 
