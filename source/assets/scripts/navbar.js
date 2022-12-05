@@ -1,8 +1,6 @@
 /** 
- * Enable the toggle function in the nav bar for mobile screens and 
- * display date in footer. 
+ * Enable the toggle function in the nav bar for mobile screens.
  */
-
 
 /* Function to see if a class element exists or not. If not, throw error. */
 const getElement = (selector) => {
