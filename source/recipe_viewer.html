@@ -20,69 +20,26 @@
   <body>
 	<!--Navigation bar-->
 	<div id="nav-placeholder">
+    
 	</div>
 
+  <a href="./recipe_editor.html" title="Go to editor">Edit Recipe</a>
+  <button class="delete" id="delete">Delete</button>
 	<script>
 		$(function(){
 		  $("#nav-placeholder").load("navbar.html");
 		});
 	</script>
-	<!--end of Navigation bar-->
-    
-	<header>
-        <!-- App logo -->
-        <img 
-            src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true" 
-            width="150"
-            height="100"
-            alt="page logo">
-        <!-- Navbar -->
-        <!--<nav id="nav-bar">
-            <a href="./recipe_manager.html" title="Go to homepage">Homepage</a>
-            <a href="./recipe_editor.html" title="Go to editor">Editor Page</a>
-        </nav>-->
-
-<<<<<<< HEAD
-=======
-        <nav class="navbar">
-          <div class="nav-center">
-            <div class="nav-header">
-              <a href="recipe_manager.html" class="nav-logo">
-              <img src="./assets/images/my-recipes-logo.svg" alt="my-recipes" />
-              </a>
-              <!-- Create navbar button using the icon from font-awesome -->
-              <button class="nav-btn btn">
-              <i class="fas fa-align-justify"></i>
-              </button>
-            </div>
-            <div class="nav-links">
-              <a href="about.html" class="nav-link">about</a>
-              <a href="contact.html" class="nav-link">contact</a>
-              <a href="./recipe_manager.html" title="Go to homepage" class="nav-link">Homepage</a>
-              <a href="./recipe_editor.html" title="Go to editor" class="nav-link">Editor Page</a>
-            </div>
-          </div>
-        </nav>
-
->>>>>>> f321a7eebb19de019dbaf0ce2436f0f6bc117b0e
-    </header>
     <main>
         <header>
             <div id="favorite">
-              <h1 id="recipe-name">Title of Recipe Goes Here</h1>
-            
-              <!--<img class="favorite" id="favorite" src="./assets/images/no-image.png" alt="" />-->
+            <h1 id="recipe-name">Title of Recipe Goes Here</h1>
             </div><br>
             <h4 id="mealtype"></h4>
             <h4 id="time">Time</h4>
             <h4 id="difficulty">Difficulty</h4>
-
-            
-            <!-- favorite icon (specific image when found) -->
-            <!-- <img id="favorite" src="./assets/images/no-image.png" alt="" /> -->
         </header>
         <button id="delete">Delete</button>
-        <!--<img class="favorite" id="favorite" src="./assets/images/no-image.png" alt="" />-->
         <img class="title-img" id="recipeImage" src="./assets/images/no-image.png" alt="" />
         
         
@@ -115,6 +72,5 @@
             </p>
           </div>
     </main>
-    <!--<script src="./assets/scripts/recipe_viewer.js"></script>-->
   </body>
 </html>
