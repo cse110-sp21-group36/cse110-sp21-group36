@@ -390,7 +390,7 @@ function unloadHandler() {
     const mealDiv = mealType.querySelector("div"); 
     // The custom meal type button 
     const button = document.createElement('button');
-    button.classList.add("edit-btn");
+    button.classList.add("btn");
     button.textContent = "Custom Meal";
     
     // Retrive the existing meal type array in localStorage
@@ -436,7 +436,7 @@ function unloadHandler() {
 
     // Create a "Add New Step" button for this recipe
     let add_step_button = document.createElement('button');
-    add_step_button.classList.add("edit-btn");
+    add_step_button.classList.add('btn');
     add_step_button.textContent = "Add New Step";
 
     // Attach the button to the step section 
@@ -474,7 +474,7 @@ function unloadHandler() {
 
     // Create a "Add New Tool" button for this recipe 
     const add_tool_button = document.createElement('button');
-    add_tool_button.classList.add("edit-btn");
+    add_tool_button.classList.add("btn");
     add_tool_button.textContent = "Add New Tool";
     main.appendChild(add_tool_button);
 
@@ -485,7 +485,7 @@ function unloadHandler() {
     
     // Create a "Custom Tool" button when users want to add new type of tool
     const button = document.createElement('button');
-    button.classList.add("edit-btn");
+    button.classList.add("btn");
     button.textContent = "Custom Tool";
     main.appendChild(button);
 
@@ -522,7 +522,7 @@ function unloadHandler() {
 
     // Create a "Add New Ingredient" button for this recipe 
     const button = document.createElement('button');
-    button.classList.add("edit-btn");
+    button.classList.add("btn");
     button.textContent = "Add New Ingredient";
     main.appendChild(button);
 
@@ -533,7 +533,7 @@ function unloadHandler() {
 
     // Create a "Custom Quantity" button when users want to add new type of ingredient quantity
     const quantity_button = document.createElement('button');
-    quantity_button.classList.add("edit-btn");
+    quantity_button.classList.add("btn");
     quantity_button.textContent = "Custom Quantity";
     main.appendChild(quantity_button);
 
@@ -544,7 +544,7 @@ function unloadHandler() {
 
     // Create a "Custom Unit" button when users want to add new type of ingredient unit
     const unit_button = document.createElement('button');
-    unit_button.classList.add("edit-btn");
+    unit_button.classList.add("btn");
     unit_button.textContent = "Custom Unit";
     main.appendChild(unit_button);
 
@@ -555,7 +555,7 @@ function unloadHandler() {
 
     // Create a "Custom Ingredient" button when users want to add new type of ingredient name
     const ingredient_button = document.createElement('button');
-    ingredient_button.classList.add("edit-btn");
+    ingredient_button.classList.add("btn");
     ingredient_button.textContent = "Custom Ingredient";
     main.appendChild(ingredient_button);
 
