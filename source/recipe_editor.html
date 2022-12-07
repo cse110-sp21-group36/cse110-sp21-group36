@@ -51,7 +51,7 @@
                 </div>
                 <div class="nav-links">
                     <a href="favorites.html" class="nav-link">favorites</a>
-					<a href="about.html" class="nav-link">about</a>
+					<a href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md" class="nav-link">about</a>
                     <a href="contact.html" class="nav-link">contact</a>
                 </div>
             </div>
@@ -61,7 +61,7 @@
 
     <main>
         <!-- form to add info for a new recipe -->
-        <form id="new-recipe" action="./recipe_manager.html">
+        <form id="new-recipe" action="./recipe_manager.html?">
             <!-- title and image -->
             <fieldset class="name-img-fav">
             <legend>Name, Author, Image and Favorite:</legend>
@@ -173,13 +173,16 @@
                 </div>
             </fieldset>
 
-            <!-- functional buttons -->
-            <div class="func-btns">
+            <fieldset class="save-edit">
+                <legend>Functional button:</legend>
                 <label class="edit-new" for="edit-new" hidden>Save as New Recipe:
                     <input type="checkbox" id="edit-new" name="edit-new" value="Yes" checked>
                 </label>
-                <button type="submit" class="edit-btn" role="button">Save Recipe </button>
-            </div>
+            </fieldset>
+
+            <button type="submit" class="edit-btn" role="button">Save Recipe </button>
+
+            
             <!-- end buttons -->
 
         </form>

@@ -46,8 +46,13 @@ function init() {
       window.location.href = "./recipe_manager.html";
     }
  });
-  
-  
+
+ const editElement = document.getElementById("edit");
+
+ editElement.addEventListener("click", ()=>{
+    window.location.href = "./recipe_editor.html";
+  });
+
 }
 
 /**
