@@ -1,11 +1,5 @@
 * {
     position: relative;
-    font-family: "Times New Roman", Times, serif;
-}
-
-header{
-    display: flex;
-    justify-content: left;
 }
 
 .general-info,.name-img-fav,.tool-ingredient-step  {
@@ -16,6 +10,7 @@ header{
   grid-row: auto auto;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
+  margin-top: 1rem;
 }
 
 .drag-area {
@@ -27,19 +22,6 @@ header{
     flex-direction: column;
     border: 5px double white;
     background-color: orange;
-}
-
-footer{
-    text-align: center;
-    margin: auto;
-}
-
-body{
-    background-color: rgb(230, 226, 173);
-    margin-top: 1vw;
-    margin-bottom: 1vw;
-    margin-right: 5vw;
-    margin-left: 5vw;
 }
 
 .func-btns{

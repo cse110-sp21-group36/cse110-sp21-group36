@@ -16,26 +16,39 @@ function init() {
   displayInfo(current); 
   //initFormHandler();
 
+  // TO-DO: Add links to navbar
+  /* var links = document.querySelector("nav-links");
+  let homeLink = document.createElement("a");
+  let editorLink = document.createElement("a");
+  homeLink.href = "./recipe_manager.html" ;
+  editorLink.href = "./recipe_editor.html";
+  homeLink.title = "Go to homepage";
+  editorLink.title = "Go to editor";
+  homeLink.innerHTML = "Home";
+  editorLink.innerHTML = "Edit";
+  links.appendChild(homeLink);
+  links.appendChild(editorLink); */
+
   const element = document.getElementById("delete");
-  console.log(element);
+
+  // Initiates deletion of a recipe, returns to home page
   element.addEventListener("click", ()=>{
-    window.localStorage.removeItem('currRecipe');
-    let recipes = JSON.parse(localStorage.getItem('recipes'));
-    let i = 0;
-    while (i < recipes.length && recipes[i]["recipeName"] != current["recipeName"]) {
-      i++;
+    let confirmDeletion = confirm("Are you sure you want to delete this recipe?");
+    if (confirmDeletion) {
+      window.localStorage.removeItem('currRecipe');
+      let recipes = JSON.parse(localStorage.getItem('recipes'));
+      let i = 0;
+      while (i < recipes.length && recipes[i]["recipeName"] != current["recipeName"]) {
+        i++;
+      }
+      recipes.splice(i, 1);
+      window.localStorage.setItem('recipes', JSON.stringify(recipes));
+      window.location.href = "./recipe_manager.html";
     }
-    recipes.splice(i, 1);
-    window.localStorage.setItem('recipes', JSON.stringify(recipes));
-    window.location.href = "./recipe_manager.html";
-  });
+ });
   
   
 }
-
-
-
-
 
 /**
  * Populates view page.
@@ -58,40 +71,46 @@ function init() {
 function displayInfo(current) {
    //fill in template 
 
-    //TITLE
+    //TITLE - title of recipe
     var title = document.getElementById('recipe-name'); 
-    title.textContent  = current.recipeName;
+    title.textContent = current.recipeName;
 
-    
-
-    
-
-    //FAVORITE 
-    // TODO: not sure what to do for favorite
+    //FAVORITE - adds heart icon next to recipe title if recipe is favorited
     if(current.favorite == true){
-      var image = document.getElementById('favorite');
+      let recipeTitle = document.getElementById('recipe-name');
+      let imgElement = document.createElement('img');
       //set image 
-      image.src = './assets/images/icons/heart.jpg';
-      image.width = 300;
-      image.height = 300;
+      imgElement.src = './assets/images/icons/heart.png';
+      imgElement.width = 50;
+      imgElement.height = 50;
+      recipeTitle.appendChild(imgElement);
     }
 
     //IMAGE
-    var image = document.getElementById('recipeImage');
+    var image = document.getElementById('recipe-image');
     image.src = current.imgSrc;
 
     //MEAL TYPE
     var mealtype = document.getElementById('mealtype');
+    mealtype.textContent = "";
     for (let i = 0; i < current.mealType.length; i++){
       mealtype.textContent += current.mealType[i];
       if (i != current.mealType.length - 1){
         mealtype.textContent  += ", ";
       }
     }
+    
 
     //TIME 
     var time = document.getElementById('time'); 
-    time.textContent = "Total Time: " + current.totalTime;
+    if (current.totalTime >= 60) {
+      let hours = Math.floor(current.totalTime / 60);
+      let minutes = current.totalTime % 60;
+      time.textContent = "Total Time: " + hours + " hours, " + minutes + " minutes";
+    }
+    else {
+      time.textContent = "Total Time: " + current.totalTime + " minutes";
+    }
 
     //DIFFICULTY
     var difficulty = document.getElementById('difficulty');
@@ -103,6 +122,7 @@ function displayInfo(current) {
 
     //INGREDIENTS 
     var htmlIngredient = document.getElementById('ingredient-list');
+    htmlIngredient.innerHTML = "";
 
     //loop through array of strings 
     var listIngredients = current.ingredients 
@@ -118,6 +138,7 @@ function displayInfo(current) {
 
     //STEPS
     var htmlStep = document.getElementById('steps-list');
+    htmlStep.innerHTML = "";
 
     var listStep = current.steps;
     for (var x = 0; x < listStep.length; x++){
@@ -133,6 +154,7 @@ function displayInfo(current) {
 
     //MATERIALS
     var htmlTools = document.getElementById('tools-list');
+    htmlTools.innerHTML = "";
 
     var listTools = current.tools;
     for (var x = 0; x < listTools.length; x++){
@@ -159,6 +181,5 @@ function displayInfo(current) {
 function getCurrentRecipe() {
   var stringForm = localStorage.getItem('currRecipe');
   var currRecipe = JSON.parse(stringForm);
-  console.log(currRecipe);
   return currRecipe; 
 }
