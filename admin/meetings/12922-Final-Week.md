@@ -26,14 +26,14 @@
 
 ## Project
 - fixed the formatting issuses for viewpage
-- 
-- 
-- 
-- 
+- able to access the favorite page
+- the image on the homepage does not show up
+- te implementation of the jest
+- optimize the button of the recipe editor page
 
 ### Plan Ahead 
-- Submit the final version of the group project
+- Submit the final version of the group project and the project video
 
 ### Decisions:
-- 
+- Everyone need to have a 30s video to introduce the functions and provide it to Triston as soon as possible
 
