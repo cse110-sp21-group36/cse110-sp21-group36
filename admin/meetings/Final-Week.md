@@ -25,15 +25,15 @@
 - Final merge and fixes
 
 ## Project
-- Andy and Triston having trouble with local host webpage
-- Unable to implement yet
-- Merging recent complete branches
-- Create favicon for website
-- Fix live server by disabling cache
+- 
+- 
+- 
+- 
+- 
 
 ### Plan Ahead 
 - Submit the final version of the group project
 
 ### Decisions:
-- We seem to be on track for finishing the project on time, so we will meet again before the project is due on Sunday to work on writing some test cases to ensure that our project has fulfilled its minimum goals.
+- 
 
