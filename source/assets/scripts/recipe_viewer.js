@@ -33,15 +33,18 @@ function init() {
 
   // Initiates deletion of a recipe, returns to home page
   element.addEventListener("click", ()=>{
-    window.localStorage.removeItem('currRecipe');
-    let recipes = JSON.parse(localStorage.getItem('recipes'));
-    let i = 0;
-    while (i < recipes.length && recipes[i]["recipeName"] != current["recipeName"]) {
-      i++;
+    let confirmDeletion = confirm("Are you sure you want to delete this recipe?");
+    if (confirmDeletion) {
+      window.localStorage.removeItem('currRecipe');
+      let recipes = JSON.parse(localStorage.getItem('recipes'));
+      let i = 0;
+      while (i < recipes.length && recipes[i]["recipeName"] != current["recipeName"]) {
+        i++;
+      }
+      recipes.splice(i, 1);
+      window.localStorage.setItem('recipes', JSON.stringify(recipes));
+      window.location.href = "./recipe_manager.html";
     }
-    recipes.splice(i, 1);
-    window.localStorage.setItem('recipes', JSON.stringify(recipes));
-    window.location.href = "./recipe_manager.html";
  });
   
   
@@ -68,24 +71,23 @@ function init() {
 function displayInfo(current) {
    //fill in template 
 
-    //TITLE
+    //TITLE - title of recipe
     var title = document.getElementById('recipe-name'); 
-    title.textContent  = current.recipeName;
+    title.textContent = current.recipeName;
 
-    //FAVORITE 
-    // TODO: not sure what to do for favorite
+    //FAVORITE - adds heart icon next to recipe title if recipe is favorited
     if(current.favorite == true){
-      var image = document.getElementById('favorite');
+      let recipeTitle = document.getElementById('recipe-name');
       let imgElement = document.createElement('img');
       //set image 
       imgElement.src = './assets/images/icons/heart.png';
       imgElement.width = 50;
       imgElement.height = 50;
-      image.appendChild(imgElement);
+      recipeTitle.appendChild(imgElement);
     }
 
     //IMAGE
-    var image = document.getElementById('recipeImage');
+    var image = document.getElementById('recipe-image');
     image.src = current.imgSrc;
 
     //MEAL TYPE
@@ -101,7 +103,14 @@ function displayInfo(current) {
 
     //TIME 
     var time = document.getElementById('time'); 
-    time.textContent = "Total Time: " + current.totalTime + " minutes";
+    if (current.totalTime >= 60) {
+      let hours = Math.floor(current.totalTime / 60);
+      let minutes = current.totalTime % 60;
+      time.textContent = "Total Time: " + hours + " hours, " + minutes + " minutes";
+    }
+    else {
+      time.textContent = "Total Time: " + current.totalTime + " minutes";
+    }
 
     //DIFFICULTY
     var difficulty = document.getElementById('difficulty');
