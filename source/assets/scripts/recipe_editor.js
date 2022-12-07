@@ -24,7 +24,7 @@ function init() {
     ingredientsHandler();
     // 
     if (!(get_FromStorage('currRecipe')==null)) {
-        document.querySelector(".edit-new").hidden = false;
+        document.querySelector(".save-edit").hidden = false;
         document.querySelector(".edit-new").click();
         fillValueHandler();
     }
