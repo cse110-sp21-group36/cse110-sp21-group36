@@ -24,7 +24,7 @@ function init() {
     ingredientsHandler();
     // 
     if (!(get_FromStorage('currRecipe')==null)) {
-        document.querySelector(".save-edit").hidden = false;
+        document.querySelector(".edit-new").hidden = false;
         document.querySelector(".edit-new").click();
         fillValueHandler();
     }
@@ -51,7 +51,7 @@ function initFormHandler() {
         var imagedata = formData.filedata;
         if (filename == undefined) {
             filename = "no-image.png"
-            "./assets/images/no-image.png";
+            imagedata = "./assets/images/no-image.png";
             // const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
             // imagedata = await response.text();
         }
@@ -135,6 +135,7 @@ function initFormHandler() {
             steps: steps,
             stepsJson: stepsJson
         }
+
         if (formData["edit-new"] == "Yes") {
             // Add the new object back to the recipe object array 
             recipes = add_ToList(recipeObject, recipes);
@@ -358,7 +359,7 @@ function unloadHandler() {
                 text_2.type = "text";
                 text_2.hidden = true;
                 text_2.name = "filedata";
-                text_2.value = "fileURL";
+                text_2.value = fileURL;
                 dropArea.appendChild(label_2);
                 dropArea.appendChild(text_2);
             }
