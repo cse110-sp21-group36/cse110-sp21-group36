@@ -61,7 +61,7 @@
 
     <main>
         <!-- form to add info for a new recipe -->
-        <form id="new-recipe" action="./recipe_manager.html">
+        <form id="new-recipe" action="./recipe_manager.html?">
             <!-- title and image -->
             <fieldset class="name-img-fav">
             <legend>Name, Author, Image and Favorite:</legend>
@@ -173,12 +173,17 @@
                 </div>
             </fieldset>
 
-            <!-- functional buttons -->
-            <div class="func-btns">
+
+            <fieldset class="save-edit">
+                <legend>Functional button:</legend>
                 <label class="edit-new" for="edit-new" hidden>Save as New Recipe:
                     <input type="checkbox" id="edit-new" name="edit-new" value="Yes" checked>
                 </label>
-                <button type="submit" class="edit-btn" role="button">Save Recipe </button>
+            </fieldset>
+
+            <!-- functional buttons -->
+            <div class="func-btns">
+                <button type="submit" class="save-recipe">Save Recipe </button>
             </div>
             <!-- end buttons -->
 
