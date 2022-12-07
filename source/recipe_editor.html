@@ -12,7 +12,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
-    <title>Code Avenger's Recipe</title>
+    <title>Recipe Edit Page</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" type="image/png" 
           href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true">
@@ -20,10 +20,12 @@
     <!-- CSS and JavaScript -->
     <link rel="stylesheet" href="assets/styles/main.css" />
     <link rel="stylesheet" href="./assets/styles/recipe_editor.css"> 
+	
     <script src="./assets/scripts/localStorage.js"></script> 
     <script type="module" src="./assets/scripts/recipe_editor.js"></script>
-	<!-- Code to display navbar -->
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script> 
+	
+	<!-- font-awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
 </head>
 
 <body>
@@ -40,7 +42,7 @@
             <div class="nav-center">
                 <div class="nav-header">
                     <a href="recipe_manager.html" class="nav-logo">
-                    <img src="./assets/images/my-recipes-logo.svg" alt="my-recipes" />
+                    	<img src="./assets/images/my-recipes-logo.svg" alt="my-recipes" />
                     </a>
                     <!-- Create navbar button using the icon from font-awesome -->
                     <button class="nav-btn btn">
@@ -48,13 +50,13 @@
                     </button>
                 </div>
                 <div class="nav-links">
-                    <a href="about.html" class="nav-link">about</a>
                     <a href="favorites.html" class="nav-link">favorites</a>
+					<a href="about.html" class="nav-link">about</a>
                     <a href="contact.html" class="nav-link">contact</a>
                 </div>
             </div>
         </nav>
-	<!--end of Navigation bar-->
+		<!--end of Navigation bar-->
     </header>
 
     <main>
@@ -80,7 +82,7 @@
                         <div class="imageHolder"><i class="fas fa-cloud-upload-alt"></i></div>
                         <h4 class="drag-header" >Drag & Drop to Upload</h4>
                         <h5>or</h5>
-                        <button class="browse-image">Browse File</button>
+                        <button class="edit-btn" role="button" >Browse File</button>
                         <!-- name of the image file -->
                         <p id="imageName"></p>
                         <!-- store the image file to localStorage -->
@@ -99,11 +101,11 @@
             <legend>General Info:</legend>
                 <label for="difficulty">Difficulty:</label>
                 <select name="difficulty" id="difficulty">
-                    <option value="very easy">very easy</option>
-                    <option value="easy">easy</option>
-                    <option value="medium">medium</option>
-                    <option value="hard">hard</option>
-                    <option value="very hard">very hard</option>
+                    <option value="very easy">Very Easy</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="very hard">Very Hard</option>
                 </select>
 
                 <label>Estimated Time: </label>
@@ -148,25 +150,25 @@
             <!-- creates multiple inputs, offer the possibility to add some 
             more if needed for each categories -->
             <fieldset class="tool-ingredient-step">
-            <legend>Tools, Ingredients and Steps:</legend>
+            <legend>Tools, Ingredients, and Steps:</legend>
                 <label>Tools:</label>
                 <div class="tool-list">
                     <div id="tools">
-                        <!-- add dinamically the tools there -->
+                        <!-- add dynamically the tools there -->
                     </div>
                 </div>
 
                 <label>Ingredients:</label>
                 <div class="ingredient-list">
                     <div id="ingredients">
-                        <!-- add dinamically the ingredients there -->
+                        <!-- add dynamically the ingredients there -->
                     </div>
                 </div>
                     
                 <label>Steps:</label>
                 <div class="step-list">
                     <div id="steps">
-                        <!-- add dinamically the steps there -->
+                        <!-- add dynamically the steps there -->
                     </div>
                 </div>
             </fieldset>
@@ -176,12 +178,14 @@
                 <label class="edit-new" for="edit-new" hidden>Save as New Recipe:
                     <input type="checkbox" id="edit-new" name="edit-new" value="Yes" checked>
                 </label>
-                <button type="submit" class="save-recipe">Save Recipe </button>
+                <button type="submit" class="edit-btn" role="button">Save Recipe </button>
             </div>
             <!-- end buttons -->
 
         </form>
         <!-- end form -->
     </main>
+	<!-- End of main --> 
+	<script src="/source/assets/scripts/navbar.js"></script>
 </body>
 </html>
