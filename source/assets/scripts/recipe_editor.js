@@ -51,15 +51,7 @@ function initFormHandler() {
         var imagedata = formData.filedata;
         if (filename == undefined) {
             filename = "no-image.png"
-            imagedata = "image-no-image";
-            if (get_FromStorage(imagedata)==null) {
-                // TODO 
-                // read data from no-image.txt
-                let text = fetch("./source/assets/images/no-image.txt").then(
-                    
-                );
-                save_ToStorage("image-no-image", text)
-            }
+            "./assets/images/no-image.png";
             // const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
             // imagedata = await response.text();
         }
@@ -143,11 +135,6 @@ function initFormHandler() {
             steps: steps,
             stepsJson: stepsJson
         }
-
-<<<<<<< HEAD
-=======
-        console.log(formData["edit-new"] == "Yes");
->>>>>>> f3b26a3 (fix new or modify recipe)
         if (formData["edit-new"] == "Yes") {
             // Add the new object back to the recipe object array 
             recipes = add_ToList(recipeObject, recipes);
@@ -347,7 +334,6 @@ function unloadHandler() {
         let fileReader = new FileReader(); 
         fileReader.onload = () => {
             // The image file raw data 
-            console.log()
             let fileURL = fileReader.result;
             // The image file name
             dragName.textContent = file.name;
@@ -372,9 +358,7 @@ function unloadHandler() {
                 text_2.type = "text";
                 text_2.hidden = true;
                 text_2.name = "filedata";
-                const imagePath = 'image-'+(Math.random() + 1).toString(36).substring(2);
-                save_ToStorage(imagePath, fileURL);
-                text_2.value = imagePath;
+                text_2.value = "fileURL";
                 dropArea.appendChild(label_2);
                 dropArea.appendChild(text_2);
             }
