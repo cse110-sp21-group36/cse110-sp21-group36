@@ -130,7 +130,12 @@ class RecipePreview extends HTMLElement {
   
       let articleEl = this.shadowRoot.children[0];
 
-      articleEl.innerHTML = `<img src='${data["imgSrc"]}' alt='Recipe Image'>
+      let imageData = data["imgSrc"];
+
+      //let imageData = localStorage.getItem(imageName)
+
+
+      articleEl.innerHTML = `<img src='${imageData}' alt='Recipe Image'>
                              <a href='./recipe_viewer.html'>${data["recipeName"]}</a>`;
       if (data["totalTime"] >= 60) {
         articleEl.innerHTML += `<p>${Math.floor(data["totalTime"] / 60)} hours, 

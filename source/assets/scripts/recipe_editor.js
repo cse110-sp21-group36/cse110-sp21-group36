@@ -53,11 +53,7 @@ async function initFormHandler() {
             filename = "no-image.png"
             imagedata = "image-no-image";
             if (get_FromStorage(imagedata)==null) {
-                // TODO 
-                // read data from no-image.txt
                 const response = await fetch('./assets/images/no-image.txt');
-                let text = await response.text();
-                console.log(text);
                 save_ToStorage("image-no-image", text);
             }
         }
@@ -167,7 +163,7 @@ async function initFormHandler() {
             save_ToStorage('recipes', newRecipes);
             // Save the current recipe object to localStorage
             save_ToStorage('currRecipe', recipeObject)
-            }
+        }
     });
 }
 
@@ -340,16 +336,43 @@ function unloadHandler() {
     // If image file type matched, process the image
     if(validExtensions.includes(fileType)) { 
         let fileReader = new FileReader(); 
-        fileReader.onload = () => {
+        fileReader.onload = async () => {
             // The image file raw data 
-            console.log()
             let fileURL = fileReader.result;
             // The image file name
             dragName.textContent = file.name;
 
+            // Create a temporary image so that we can compute the height of the downscaled image.
+            let image;
+            const imageLoadPromise = new Promise(resolve => {
+                image = new Image();
+                image.onload = resolve;
+                image.src = fileURL;
+            });
+
+            await imageLoadPromise;
+            console.log("image loaded")
+
+            let newWidth = 50;
+            let imageType = fileType;
+            let imageArguments = 0.7;
+            let oldWidth = image.width;
+            let oldHeight = image.height;
+            let newHeight = Math.floor(oldHeight / oldWidth * newWidth)
+    
+            // Create a temporary canvas to draw the downscaled image on.
+            let canvas = document.createElement("canvas");
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+    
+            // Draw the downscaled image on the canvas and return the new data URL.
+            let ctx = canvas.getContext("2d");
+            ctx.drawImage(image, 0, 0, newWidth, newHeight);
+            var newDataUrl = canvas.toDataURL(imageType, imageArguments);
+
             if (dropArea.querySelector("label")) {
                 dropArea.querySelector('[name="filename"').value = file.name;
-                dropArea.querySelector('[name="filedata"').file = fileURL;
+                dropArea.querySelector('[name="filedata"').file = newDataUrl;
             } else {
                 let label_1 = document.createElement('label');
                 label_1.htmlFor = "filename";
@@ -367,8 +390,8 @@ function unloadHandler() {
                 text_2.type = "text";
                 text_2.hidden = true;
                 text_2.name = "filedata";
-                save_ToStorage(imagePath, fileURL);
-                text_2.value = imagePath;
+                // save_ToStorage(imagePath, newDataUrl);
+                text_2.value = newDataUrl;
                 dropArea.appendChild(label_2);
                 dropArea.appendChild(text_2);
             }
@@ -384,7 +407,7 @@ function unloadHandler() {
         dragText.textContent = "Drag & Drop to Upload File";
     }}
 }
-
+    
 
 /**
  * Adds the necesarry event handlers and function to load dinamicly the 
