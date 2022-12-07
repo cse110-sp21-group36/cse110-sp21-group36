@@ -24,7 +24,7 @@ function addCustom_Element(
 
     // Create a button to add this new info 
     let new_button = document.createElement('button');
-    new_button.classList.add('new-'+target);
+    new_button.classList.add('btn');
     new_button.textContent = text;
 
     // Create a new div for this new custom element
