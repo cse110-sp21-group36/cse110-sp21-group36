@@ -1,6 +1,5 @@
 * {
     position: relative;
-    font-family: "Times New Roman", Times, serif;
 }
 
 .general-info,.name-img-fav,.tool-ingredient-step  {
@@ -11,6 +10,7 @@
   grid-row: auto auto;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
+  margin-top: 1rem;
 }
 
 .drag-area {
