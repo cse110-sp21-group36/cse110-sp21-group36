@@ -24,7 +24,7 @@ function init() {
     ingredientsHandler();
     // 
     if (!(get_FromStorage('currRecipe')==null)) {
-        document.querySelector(".edit-new").hidden = false;
+        document.querySelector(".save-edit").hidden = false;
         document.querySelector(".edit-new").click();
         fillValueHandler();
     }
@@ -37,7 +37,7 @@ function init() {
  * recipes array and save the new recipes array in localStorage inplace of
  * the previous
  */
-function initFormHandler() {
+async function initFormHandler() {
     // The form to take in info for the recipe
     const form = document.querySelector('form');
     // Retrieve the existing recipes array in localStorage, if exists
@@ -55,13 +55,11 @@ function initFormHandler() {
             if (get_FromStorage(imagedata)==null) {
                 // TODO 
                 // read data from no-image.txt
-                let text = fetch("./source/assets/images/no-image.txt").then(
-                    
-                );
-                save_ToStorage("image-no-image", text)
+                const response = await fetch('./assets/images/no-image.txt');
+                let text = await response.text();
+                console.log(text);
+                save_ToStorage("image-no-image", text);
             }
-            // const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
-            // imagedata = await response.text();
         }
 
         let keys = Object.keys(formData);    // key value from the submitted form
@@ -144,10 +142,6 @@ function initFormHandler() {
             stepsJson: stepsJson
         }
 
-<<<<<<< HEAD
-=======
-        console.log(formData["edit-new"] == "Yes");
->>>>>>> f3b26a3 (fix new or modify recipe)
         if (formData["edit-new"] == "Yes") {
             // Add the new object back to the recipe object array 
             recipes = add_ToList(recipeObject, recipes);
@@ -302,6 +296,7 @@ function unloadHandler() {
     // The image file
     let input = dropArea.querySelector("input");
     // The image file type
+    const imagePath = 'image-'+(Math.random() + 1).toString(36).substring(2);
     let file; 
 
     button.onclick = () => { input.click() }
@@ -372,7 +367,6 @@ function unloadHandler() {
                 text_2.type = "text";
                 text_2.hidden = true;
                 text_2.name = "filedata";
-                const imagePath = 'image-'+(Math.random() + 1).toString(36).substring(2);
                 save_ToStorage(imagePath, fileURL);
                 text_2.value = imagePath;
                 dropArea.appendChild(label_2);
