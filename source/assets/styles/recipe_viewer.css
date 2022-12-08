@@ -1,0 +1,67 @@
+.recipe-info {
+    float: left;
+    margin-left: 10px;
+}
+
+#recipe-image {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 20px;
+    border: 10px solid rgb(255, 188, 81);
+}
+
+main {
+    padding-left: 5%;
+	margin-top: 1rem;
+}
+
+#ingredients-header {
+    padding-top: 70px;
+}
+
+/* Red color - warns user before deleting recipe */
+#delete:hover {
+    color: var(--red-light) !important;
+    background: red !important;
+}
+
+#recipe-name {
+    color: #141233;
+}
+
+#mealtype {
+    color:#141233;
+}
+
+#time {
+    color:#141233;
+}
+
+#difficulty {
+    color:#141233;
+}
+
+#ingredient-list {
+    color:#141233;
+    text-indent: 20px;
+    padding-bottom: 30px;
+}
+
+#steps-list {
+    color:#141233;
+    padding-bottom: 30px;
+}
+
+#tools-list {
+    color:#141233;
+    text-indent: 20px;
+    padding-bottom: 30px;
+}
+
+#notes {
+    color:#141233;
+    text-indent: 20px;
+    padding-bottom: 30px;
+}

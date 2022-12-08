@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Recipe Manager</title>
+
+        <!-- Recipe Preview Custom Element -->
+        <script src="assets/scripts/RecipePreview.js" type="module"></script>
+
+        <!-- Main Stylesheets & Scripts -->
+		<link rel="icon" type="image/png" 
+          href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true">
+        <link rel="stylesheet" href="assets/styles/main.css" />
+		<link rel="stylesheet" href="assets/styles/contact.css"/>
+	</head>
+	<body>
+	<!--Navigation bar-->
+	<nav class="navbar">
+		<div class="nav-center">
+			<div class="nav-header">
+				<a href="recipe_manager.html" class="nav-logo">
+					<img src="./assets/images/my-recipes-logo.svg" alt="my-recipes" />
+				</a>
+				<!-- Create navbar button using the icon from font-awesome -->
+				<button class="nav-btn btn">
+				<i class="fas fa-align-justify"></i>
+				</button>
+			</div>
+			<div class="nav-links">
+				<a href="favorites.html" class="nav-link">favorites</a>
+				<a href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md" class="nav-link">about</a>
+				<a href="contact.html" class="nav-link">contact</a>
+			</div>
+		</div>
+	</nav>
+	<!-- end of Navigation bar-->
+	<div class="container">
+  		<div style="text-align:center">
+    		<h2>Contact Us</h2>
+    		<p>For any inquiries, send us a message below:</p>
+  		</div>
+  		<div class="row">
+    		<div class="column">
+      			<img src="./assets/images/contact_pic.jpg" alt="cooking-image" style="width:95%">
+    		</div>
+    		<div class="column">
+      			<!-- <form onSubmit="alert('Thanks for your submission!');"> -->
+				<form action="https://formsubmit.co/tbabers@ucsd.edu" method="POST">
+					<!-- Honeypot -->
+					<input type="text" name="_honey" style="display: none;">
+
+					<!-- Disable Captcha -->
+					<input type="hidden" name="_captcha" value="false">
+
+					<!-- Success message link -->
+					<input type="hidden" name="_next" value="https://cse110-sp21-group36.github.io/cse110-sp21-group36/source/success.html">
+					
+        			<label for="fname">First Name</label>
+        			<input type="text" id="fname" name="First&nbsp; Name" placeholder="First name" required>
+        			<label for="lname">Last Name</label>
+        			<input type="text" id="lname" name="Last&nbsp; Name" placeholder="Last name" required>
+					<label for="emailaddress">Email Address</label>
+					<br>
+        			<input type="email" id="emailaddress" name="Email" placeholder="Email Address" required>
+				<div class="msgBox">
+        			<label for="Message">Message</label>
+        			<textarea id="Message" name="Message" placeholder="Your message here . . ." style="height:170px" required></textarea>
+				</div>
+        			<input type="submit" value="Submit">
+      			</form>
+    		</div>
+  		</div>
+		</div>
+	</body>
+</html>

@@ -1,4 +1,6 @@
 # Group 36 Brainstorming Meeting
+[**Brainstorming Notes Part 1**](102322-Brainstorm-Part-1.md)  
+
 ## Miro Board Notes:
 
 ### We Just started Working on the General Layout

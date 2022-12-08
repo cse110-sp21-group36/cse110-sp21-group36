@@ -1,0 +1,195 @@
+<!-- 
+    Team 36 - Code Avengers
+    EDITOR PAGE - RECIPE APP 
+    Source use: Lab 6 
+    This file contains the structure of the editor page which user will do all the edits for their 
+    recipe including create, update and delete. 
+    There are 5 main sections: navigation; title and image; general info; tools, ingredients 
+    and steps; functional buttons. 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <title>Recipe Edit Page</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" type="image/png" 
+          href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true">
+
+    <!-- CSS and JavaScript -->
+    <link rel="stylesheet" href="assets/styles/main.css" />
+    <link rel="stylesheet" href="./assets/styles/recipe_editor.css"> 
+	
+    <script src="./assets/scripts/localStorage.js"></script> 
+    <script type="module" src="./assets/scripts/recipe_editor.js"></script>
+	
+	<!-- font-awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+</head>
+
+<body>
+    <header>
+        <!-- App logo -->
+        <!-- <img  -->
+            <!-- src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/branding/logo.png?raw=true"  -->
+            <!-- width="150" -->
+            <!-- height="100" -->
+            <!-- alt="page logo"> -->
+
+        <!--Navigation bar-->
+        <nav class="navbar">
+            <div class="nav-center">
+                <div class="nav-header">
+                    <a href="recipe_manager.html" class="nav-logo">
+                    	<img src="./assets/images/my-recipes-logo.svg" alt="my-recipes" />
+                    </a>
+                    <!-- Create navbar button using the icon from font-awesome -->
+                    <button class="nav-btn btn">
+                    <i class="fas fa-align-justify"></i>
+                    </button>
+                </div>
+                <div class="nav-links">
+                    <a href="favorites.html" class="nav-link">favorites</a>
+					<a href="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md" class="nav-link">about</a>
+                    <a href="contact.html" class="nav-link">contact</a>
+                </div>
+            </div>
+        </nav>
+		<!--end of Navigation bar-->
+    </header>
+
+    <main>
+        <!-- form to add info for a new recipe -->
+        <form id="new-recipe" action="./recipe_manager.html?">
+            <!-- title and image -->
+            <fieldset class="name-img-fav">
+            <legend>Name, Author, Image and Favorite:</legend>
+                
+                <label for="title">Recipe Name:
+                    <input type="text" id="title" name="title">
+                </label>
+
+                <label for="author">Author Name:
+                    <input type="text" id="author" name="author">
+                </label>
+
+                <!-- recipe image -->
+                <div id="recipeImage">
+                    <label>Drag Area:</label>
+                    <div class="drag-area">
+                        <!-- place to drag and drop image -->
+                        <div class="imageHolder"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <h4 class="drag-header" >Drag & Drop to Upload</h4>
+                        <h5>or</h5>
+                        <button class="btn" role="button" >Browse File</button>
+                        <!-- name of the image file -->
+                        <p id="imageName"></p>
+                        <!-- store the image file to localStorage -->
+                        <input type="file" hidden>
+                    </div>
+                </div>
+
+                <!-- favorite recipe -->
+                <label for="favorite">Favorite:
+                    <input type="checkbox" id="favorite" name="favorite" value="Yes">
+                </label>
+            </fieldset>
+        
+            <!-- difficulty, time, meal type, note -->
+            <fieldset class="general-info">
+            <legend>General Info:</legend>
+                <label for="difficulty">Difficulty:</label>
+                <select name="difficulty" id="difficulty">
+                    <option value="very easy">Very Easy</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="very hard">Very Hard</option>
+                </select>
+
+                <label>Estimated Time: </label>
+                <div id="time">
+                    <select name="hours" id="hours">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select> hours
+                    <select name="mins" id="mins">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select> mins
+                </div>
+
+                <label>Meal Types:</label>
+                <div class="meal-type">
+                    <div id="meal-type">
+                        <!-- load the meal type save in localStorage -->
+                        <!-- example: 
+                        <input type="checkbox" id="breakfast" name="breakfast">
+                        <label for="breakfast"> Breakfast </label> -->
+                    </div>
+                    <!-- <button class="new-type-btn">Custom Meal</button>  -->
+                </div>
+                    
+                <label for="note">Note:
+                    <textarea id="note" name="note" cols="38" rows="3"></textarea>
+                </label>
+            </fieldset>
+            
+            <!-- tools, ingredients, steps -->
+            <!-- creates multiple inputs, offer the possibility to add some 
+            more if needed for each categories -->
+            <fieldset class="tool-ingredient-step">
+            <legend>Tools, Ingredients, and Steps:</legend>
+                <label>Tools:</label>
+                <div class="tool-list">
+                    <div id="tools">
+                        <!-- add dynamically the tools there -->
+                    </div>
+                </div>
+
+                <label>Ingredients:</label>
+                <div class="ingredient-list">
+                    <div id="ingredients">
+                        <!-- add dynamically the ingredients there -->
+                    </div>
+                </div>
+                    
+                <label>Steps:</label>
+                <div class="step-list">
+                    <div id="steps">
+                        <!-- add dynamically the steps there -->
+                    </div>
+                </div>
+            </fieldset>
+            
+            <fieldset class="save-edit" hidden>
+                <legend>Functional button:</legend>
+                <label class="edit-new" for="edit-new">Save as New Recipe:
+                    <input type="checkbox" id="edit-new" name="edit-new" value="Yes" checked>
+                </label>
+            </fieldset>
+
+            <div class="func-btns">
+                <button type="submit" class="edit-btn" role="button">Save Recipe </button>
+            </div>
+            
+            <!-- end buttons -->
+
+        </form>
+        <!-- end form -->
+    </main>
+	<!-- End of main --> 
+	<script src="/source/assets/scripts/navbar.js"></script>
+</body>
+</html>

@@ -3,6 +3,7 @@
 **Meeting Location:** Zoom  
 **Meeting Time:** 10/11/2022, 3:00-4:10 PM (PST)  
 **Previous Meeting:** None (first meeting)  
+**Meeting Slides:** [Meeting 10_11_22](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/meeting%20slides/Group%2036%20Meeting%2010_11_22.pdf)  
 
 ## Meeting Attendance
 | Role | Name | Present? |

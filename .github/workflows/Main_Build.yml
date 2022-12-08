@@ -1,0 +1,70 @@
+name: CI for Main Branch
+
+# Triggers the workflow on push or pull request events but for the "main" and "Live-Deployment" Branches
+on:
+  push:
+    branches:
+      - main
+      - Live-Deployment
+      - 'source/**'
+    
+jobs:
+  # -~-~-~-~-~-~-~- [ Build ] -~-~-~-~-~-~-~- #
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+  
+  # -~-~-~-~-~-~-~- [ Lint ] -~-~-~-~-~-~-~- #
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      # This Lints the Code for Style Errors (Uses GitHub's Super Linter)
+      - name: ⭐ Super Linter ⭐
+        uses: github/super-linter@v4.9.7
+        env:
+          #################
+          # Rules by tags #
+          #################
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+          VALIDATE_CSS: true
+          VALIDATE_JAVASCRIPT_ES: true
+                    
+          blank_lines: false            # Error on blank lines
+          VERBOSE: detailed             # Should show detailed
+          SUPPRESS_POSSUM: true         # No more Mouse ASCII
+          
+          #################
+          # Rules by IDs #
+          #################
+          MD004: false                  # Unordered list style
+          MD029: false                  # Ordered list item prefix
+          MD033: false                  # Allow inline HTML
+          MD036: false                  # Emphasis used instead of a heading
+  
+  # -~-~-~-~-~-~-~- [ Validate ] -~-~-~-~-~-~-~- #
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      # This is an HTML 5 Validator I found on GitHub, it seems to have very
+      # similar output logging to the W3 Validator we used in Lab 2, but it
+      # does not look as pretty in terms of coloring.
+      - name: 🟥 HTML5 Validator 🟥
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: ./source/
+          blacklist: invalid

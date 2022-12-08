@@ -1,0 +1,120 @@
+/* Home Page Style CSS */
+/* DEBUG // DELETE // TODO // FIXME
+h1 {
+  font-family: ???
+} */
+
+/* header {
+  padding: 60px;
+  text-align: center;
+  background: #ec9706;
+  color: white;
+  font-size: 30px;
+  position: relative;
+  float: center;
+} */
+
+/* Recipe CSS*/
+* {
+  /* This sets font for everything to be sans serif */
+  font-family: sans-serif;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin:0;
+  position: relative;
+}
+
+fieldset {
+  border: 2px solid rgb(214, 214, 214);
+  box-sizing: border-box;
+  display: block;
+  width: max-content;
+}
+
+form button {
+  display: block;
+  margin-top: 0px;
+}
+
+
+label[for="ingredients"] p {
+  margin: 0;
+}
+
+/*
+label[for="numRatings"] {
+  margin: 10px 0 0 0;
+}
+
+label[for^="rating"] {
+  padding-right: 10px;
+}
+
+label:not([for^="rating"]) {
+  display: block;
+  margin-bottom: 5px;
+}
+ ^^ DELETE LATER
+*/
+
+main {
+  column-gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  row-gap: 10px;
+  width: 100%;
+}
+
+.danger {
+  background-color: rgb(254, 171, 171);
+  border-color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/*
+=============== 
+top-header
+===============
+*/
+
+/* Set dimensions and margin of banner image */
+.banner {
+	object-fit: cover;
+	height: 50vh;
+	margin-bottom: 1rem;
+	position: relative;
+	border-radius: var(--borderRadius);
+}
+
+  
+  /* Change font size and margin for a small screen */
+@media only screen and (min-width: 768px) {
+	.top-header-text h1 {
+	  font-size: 4rem;
+	  margin-bottom: 0;
+	}
+}
+
+
+/*
+=========
+main-page
+=========
+*/
+
+/* Set the dimension for which the main page content fits within */
+.main-page {
+	width: 90vw;
+	max-width: 1240px;
+	margin: 0 auto;
+	padding-top: 2rem;
+	min-height: calc(100vh - (6rem + 4rem));
+  }
