@@ -12,7 +12,7 @@ This is the first Release of the Recipe Creator Application. Almost all of the p
 Our Documentation for the web app can be found on the [JS Docs Page Here](https://cse110-sp21-group36.github.io/cse110-sp21-group36/source/out/).
 
 ## Current Website Look
- <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/Live-Deployment/Live-Deployment%20Assets/Poll%20Results.png" width="600" height="400">
+ <img src="https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/Live-Deployment/Live-Deployment%20Assets/v%201.0.png" width="700" height="400">
 
 ## Known Bugs
 - There is currently an issue where if an image is uploaded to the page and the image size is too large, when clicking the save button instead of redirecting back to the Home Page, there will be an error like url-too-long or I/O error. **This does not affect functionality** if you manually click the back arrow and go to recipe-manager.html all changes should be saved on there.
