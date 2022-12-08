@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: addCustomElement.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: addCustomElement.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// addCustomElement.js
+import { save_ToStorage } from "./localStorage.js";
+import { create_Element } from "./RecipeEditorElement.js";
+
+
+/**
+ * Template function to create a new element when users want to create custom element for their 
+ * recipe such as ingredients, tools, meal type, and so on. 
+ * 
+ * @param target        - the target element to create custom for
+ * @param targetDiv     - the div that this new custom element belongs
+ * @param targetUpDiv   - the wrapper div for targetDiv
+ * @param targetButton  - the custom button  
+ * @param values        - the object array associated with this custom element
+ * @param text          - the text appears on the custom button
+ */
+function addCustom_Element(
+    target, targetDiv, targetUpDiv, targetButton, values=[], text="Add New") {
+
+    // Create a blank text area for user to input the info 
+    let new_textarea = document.createElement('input');
+    new_textarea.type = 'textarea';
+    new_textarea.classList.add('new-'+target+'-value');
+
+    // Create a button to add this new info 
+    let new_button = document.createElement('button');
+    new_button.classList.add('btn');
+    new_button.textContent = text;
+
+    // Create a new div for this new custom element
+    let new_div = document.createElement('div');
+    new_div.appendChild(new_textarea);
+    new_div.appendChild(new_button);
+    targetDiv.appendChild(new_div);
+    // targetUpDiv.removeChild(targetButton);
+    targetButton.hidden = true;
+
+    // Add event for the "add new custom" button 
+    new_button.addEventListener('click', () => {
+        let new_target = targetDiv.querySelector('.new-'+target+'-value').value
+        new_target = new_target.toLowerCase();
+        if (!values.includes(new_target)) {
+            if (new_target) {
+                if (!(target=="mealTypes")) {
+                    const select = targetDiv.querySelector(".choosen-"+target);
+                    const option = document.createElement("option");
+                    option.textContent = new_target;
+                    select.appendChild(option);
+
+                } else {
+                    create_Element(target, targetDiv, new_target);
+                }
+                values.push(new_target);
+                save_ToStorage(target, values);
+            }
+        }
+        targetDiv.removeChild(new_div);
+        // targetUpDiv.appendChild(targetButton);
+        targetButton.hidden = false;
+    });
+}
+export{ addCustom_Element };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCustom_Element">addCustom_Element</a></li><li><a href="global.html#addRecipesToDocument">addRecipesToDocument</a></li><li><a href="global.html#add_ToList">add_ToList</a></li><li><a href="global.html#createIngredientElement">createIngredientElement</a></li><li><a href="global.html#createMealTypeElement">createMealTypeElement</a></li><li><a href="global.html#createStepElement">createStepElement</a></li><li><a href="global.html#createToolElement">createToolElement</a></li><li><a href="global.html#create_Element">create_Element</a></li><li><a href="global.html#displayInfo">displayInfo</a></li><li><a href="global.html#dragDropImageHandler">dragDropImageHandler</a></li><li><a href="global.html#fillValueHandler">fillValueHandler</a></li><li><a href="global.html#getCurrentRecipe">getCurrentRecipe</a></li><li><a href="global.html#getElement">getElement</a></li><li><a href="global.html#getRecipesFromStorage">getRecipesFromStorage</a></li><li><a href="global.html#get_FromStorage">get_FromStorage</a></li><li><a href="global.html#ingredientsHandler">ingredientsHandler</a></li><li><a href="global.html#initFormHandler">initFormHandler</a></li><li><a href="global.html#links">links</a></li><li><a href="global.html#mealTypeHandler">mealTypeHandler</a></li><li><a href="global.html#saveRecipesToStorage">saveRecipesToStorage</a></li><li><a href="global.html#save_ToStorage">save_ToStorage</a></li><li><a href="global.html#stepsHandler">stepsHandler</a></li><li><a href="global.html#toolsHandler">toolsHandler</a></li><li><a href="global.html#unloadHandler">unloadHandler</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Thu Dec 08 2022 01:39:02 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
