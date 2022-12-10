@@ -1,24 +1,24 @@
-# 🌐 Code Avengers ⍟
+# 🌐 Code Avengers ⍟  - Main Branch
 
 ## Team Agenda (Week 10)
 
-**Website:** [Link](https://cse110-sp21-group36.github.io/cse110-sp21-group36/)
+## Website: [My Recipe App](https://cse110-sp21-group36.github.io/cse110-sp21-group36/source/recipe_manager.html)  
 **Link to Team Page:** [Team Page](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/admin/team.md)
 
-__Next Meeting__: Tuesday 12/6, Final Meeting (Week 10) 5:00 PM In-Person, Geisel West Library
+**Note**: The "[Live-Deployment](https://github.com/cse110-sp21-group36/cse110-sp21-group36/tree/Live-Deployment)" Branch is the "official" branch for users to access and where the pages are deployed from, but main is the one with all of the commit history.
+
+__Next Meeting__: ???
 
 ### Assignments:
 - [Current Project Diagram](https://github.com/cse110-sp21-group36/cse110-sp21-group36/blob/main/specs/Project%20Structure%20Diagram.PNG)
-+ We are focusing on completing the last features to meet our Minimum Viable Product Requirements:
-  + View Page: Add a Recipe Delete Option (Miko, Justin)
-  + Home Page: Add an option to Sort by Favorites (Andy, Triston)
-  + Home Page: Get Navbar working on all other pages (Duc)
-  + Edit Page: Fill Text fields with the currRecipe data (Edit Page Team: Ettore, Thanh, Kinson, Meron)
++ Completing the last features to meet our Minimum Viable Product Requirements: [✅]
+  + ~~View Page: Add a Recipe Delete Option (Miko, Justin)~~
+  + ~~Home Page: Add an option to Sort by Favorites (Andy, Triston)~~
+  + ~~Home Page: Get Navbar working on all other pages (Duc)~~
+  + ~~Edit Page: Fill Text fields with the currRecipe data (Edit Page Team: Ettore, Thanh, Kinson, Meron)~~
   + ~~Edit Page: Make it so that when Save Recipe is clicked, the button will redirect back to the Home Page. Should be a one-line (Ettore already)~~
-
-  + CSS Styling: Make the website look as pretty as possible (Julia, Rappel). 
-      + Note: Styling doesn’t need to be completely done, just make progress by Thursday meeting
-Use Raw Data method for image storing
+  + ~~CSS Styling: Make the website look as pretty as possible (Julia, Rappel).~~
+    + ~~Note: Styling doesn’t need to be completely done, just make progress by Thursday meeting~~
 
 ### Recipe Object Structure:
 ```
