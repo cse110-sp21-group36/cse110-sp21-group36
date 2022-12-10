@@ -1,4 +1,4 @@
-# 🌐 Code Avengers ⍟
+# 🌐 Code Avengers ⍟ - Live Deployment
 
 ### [View the Website Here](https://cse110-sp21-group36.github.io/cse110-sp21-group36/source/recipe_manager.html).
 
