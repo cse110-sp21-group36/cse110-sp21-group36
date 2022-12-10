@@ -24,7 +24,7 @@ function init() {
     ingredientsHandler();
     // 
     if (!(get_FromStorage('currRecipe')==null)) {
-        document.querySelector(".edit-new").hidden = false;
+        document.querySelector(".save-edit").hidden = false;
         document.querySelector(".edit-new").click();
         fillValueHandler();
     }
@@ -37,7 +37,7 @@ function init() {
  * recipes array and save the new recipes array in localStorage inplace of
  * the previous
  */
-function initFormHandler() {
+async function initFormHandler() {
     // The form to take in info for the recipe
     const form = document.querySelector('form');
     // Retrieve the existing recipes array in localStorage, if exists
@@ -51,9 +51,11 @@ function initFormHandler() {
         var imagedata = formData.filedata;
         if (filename == undefined) {
             filename = "no-image.png"
-            imagedata = "./assets/images/no-image.png";
-            // const response = await fetch('http://127.0.0.1:5500/source/assets/images/no-image.txt');
-            // imagedata = await response.text();
+            imagedata = "image-no-image";
+            if (get_FromStorage(imagedata)==null) {
+                const response = await fetch('./assets/images/no-image.txt');
+                save_ToStorage("image-no-image", text);
+            }
         }
 
         let keys = Object.keys(formData);    // key value from the submitted form
@@ -161,7 +163,7 @@ function initFormHandler() {
             save_ToStorage('recipes', newRecipes);
             // Save the current recipe object to localStorage
             save_ToStorage('currRecipe', recipeObject)
-            }
+        }
     });
 }
 
@@ -290,6 +292,7 @@ function unloadHandler() {
     // The image file
     let input = dropArea.querySelector("input");
     // The image file type
+    const imagePath = 'image-'+(Math.random() + 1).toString(36).substring(2);
     let file; 
 
     button.onclick = () => { input.click() }
@@ -333,15 +336,43 @@ function unloadHandler() {
     // If image file type matched, process the image
     if(validExtensions.includes(fileType)) { 
         let fileReader = new FileReader(); 
-        fileReader.onload = () => {
+        fileReader.onload = async () => {
             // The image file raw data 
             let fileURL = fileReader.result;
             // The image file name
             dragName.textContent = file.name;
 
+            // Create a temporary image so that we can compute the height of the downscaled image.
+            let image;
+            const imageLoadPromise = new Promise(resolve => {
+                image = new Image();
+                image.onload = resolve;
+                image.src = fileURL;
+            });
+
+            await imageLoadPromise;
+            console.log("image loaded")
+
+            let newWidth = 50;
+            let imageType = fileType;
+            let imageArguments = 0.7;
+            let oldWidth = image.width;
+            let oldHeight = image.height;
+            let newHeight = Math.floor(oldHeight / oldWidth * newWidth)
+    
+            // Create a temporary canvas to draw the downscaled image on.
+            let canvas = document.createElement("canvas");
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+    
+            // Draw the downscaled image on the canvas and return the new data URL.
+            let ctx = canvas.getContext("2d");
+            ctx.drawImage(image, 0, 0, newWidth, newHeight);
+            var newDataUrl = canvas.toDataURL(imageType, imageArguments);
+
             if (dropArea.querySelector("label")) {
                 dropArea.querySelector('[name="filename"').value = file.name;
-                dropArea.querySelector('[name="filedata"').file = fileURL;
+                dropArea.querySelector('[name="filedata"').file = newDataUrl;
             } else {
                 let label_1 = document.createElement('label');
                 label_1.htmlFor = "filename";
@@ -359,7 +390,8 @@ function unloadHandler() {
                 text_2.type = "text";
                 text_2.hidden = true;
                 text_2.name = "filedata";
-                text_2.value = fileURL;
+                // save_ToStorage(imagePath, newDataUrl);
+                text_2.value = newDataUrl;
                 dropArea.appendChild(label_2);
                 dropArea.appendChild(text_2);
             }
@@ -375,7 +407,7 @@ function unloadHandler() {
         dragText.textContent = "Drag & Drop to Upload File";
     }}
 }
-
+    
 
 /**
  * Adds the necesarry event handlers and function to load dinamicly the 
